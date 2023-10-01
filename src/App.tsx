@@ -1,34 +1,23 @@
-import axios from 'axios';
-
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 const App: React.FC = () => {
-  const getGoogleUrl = () => {
-    const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
-    const options = {
-      redirect_uri: import.meta.env.VITE_GOOGLE_REDIRECT_URI,
-      client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
-      access_type: "offline",
-      response_type: "code",
-      prompt: "consent",
-      scope: [
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email",
-      ].join(" "),
-    };
-
-    const qs = new URLSearchParams(options);
-
-    return `${rootUrl}?${qs.toString()}`;
-  }
-  
-  const getUserDetails = async () => {
-     const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/user/getDetails`,{ withCredentials: true });
-     console.log(response.data);
-  } 
-
+  const [isAdmin, setAdmin] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
-      <a href={getGoogleUrl()}>Sign in with Google 🚀</a>
-      <button onClick={() => getUserDetails()}> Get User Details </button>
+      {(isAdmin) ? (
+        <>
+          <h1>Admin</h1>
+          <Link to="/admin/login"> Login </Link><br />
+          <button onClick={() => {setAdmin(false);navigate("/");}}> No I am User </button>
+        </>
+      ) : (
+        <>
+          <h1>User</h1> 
+          <Link to="/user/login"> Login </Link><br />
+          <button onClick={() => {setAdmin(true);navigate("/");}}> No I am Admin </button>
+        </>
+      )}
     </>
   )
 };
