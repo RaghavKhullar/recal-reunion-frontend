@@ -1,6 +1,7 @@
 # recal-reunion-frontend
 
 ## Installation
+
 Clone the repo to your device.
 
 1. Make sure you have installed npm on your device
@@ -12,6 +13,7 @@ npm install
 ```
 
 3. Create .env file
+
 ```bash
 cp .env.example .env
 ```
