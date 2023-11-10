@@ -1,4 +1,4 @@
-import { getUserDetails } from "../utils/getAdminDetails";
+import { getUserDetails } from "../utils/getUserDetails";
 
 const UserHome: React.FC = () => {
 	return (
