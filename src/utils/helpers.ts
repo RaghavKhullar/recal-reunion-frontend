@@ -47,7 +47,6 @@ export const dataFetch = async ({
     }
     return response;
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

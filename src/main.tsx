@@ -8,7 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.tsx";
 import { AdminHome } from "./pages/AdminHome.tsx";
 import { AdminLogin } from "./pages/AdminLogin.tsx";
-import { Home } from "./pages/Home.tsx";
+import { Home } from "./pages/Home/Home.js";
 import { UserHome } from "./pages/UserHome.tsx";
 import { UserLogin } from "./pages/UserLogin.tsx";
 

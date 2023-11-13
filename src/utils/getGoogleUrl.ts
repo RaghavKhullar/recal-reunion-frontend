@@ -1,8 +1,7 @@
 import {
-	GOOGLE_ADMIN_ID,
 	GOOGLE_ADMIN_REDIRECT_URI,
 	GOOGLE_CLIENT_ID,
-	GOOGLE_CLIENT_REDIRECT_URI,
+	GOOGLE_USER_REDIRECT_URI,
 } from "../../config";
 
 export const getGoogleUrl = (isAdmin: boolean) => {
@@ -10,8 +9,8 @@ export const getGoogleUrl = (isAdmin: boolean) => {
 	const options = {
 		redirect_uri: isAdmin
 			? GOOGLE_ADMIN_REDIRECT_URI
-			: GOOGLE_CLIENT_REDIRECT_URI,
-		client_id: isAdmin ? GOOGLE_ADMIN_ID : GOOGLE_CLIENT_ID,
+			: GOOGLE_USER_REDIRECT_URI,
+		client_id: GOOGLE_CLIENT_ID,
 		access_type: "offline",
 		response_type: "code",
 		prompt: "consent",
