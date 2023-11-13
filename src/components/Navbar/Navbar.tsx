@@ -1,4 +1,4 @@
-import { Box, Group } from "@mantine/core";
+import { Box } from "@mantine/core";
 import ProfileSection from "../ProfileSection/ProfileSection";
 import { IconX } from "@tabler/icons-react";
 
