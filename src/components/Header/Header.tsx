@@ -5,6 +5,7 @@ import {
   IconUserCircle,
   IconTriangleInvertedFilled,
 } from "@tabler/icons-react";
+import { Link } from "react-router-dom";
 
 const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
   return (
@@ -12,7 +13,10 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
       <Box>Logo</Box>
       <Group gap={5}>
         <Group gap={40}>
-          <IconUserSearch size={35} />
+          <Link to="/search">
+            <IconUserSearch size={35} />
+          </Link>
+
           <IconBell size={35} />
           <IconUserCircle onClick={toggleNavbar} size={35} />
         </Group>

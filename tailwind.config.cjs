@@ -6,5 +6,11 @@ module.exports = {
     "./src/pages/**/*.tsx",
     "./index.html",
   ],
+  theme: {
+    fontFamily: {
+      bebus: "'Bebas Neue', sans-serif",
+      fira: "'Fira Sans', sans-serif",
+    },
+  },
   plugins: [],
 };
