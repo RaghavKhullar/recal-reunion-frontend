@@ -5,6 +5,7 @@ const App: React.FC = () => {
 	const navigate = useNavigate();
 	return (
 		<>
+			<button onClick={() => navigate("/home")}>Go to Home</button>
 			{isAdmin ? (
 				<>
 					<h1>Admin</h1>

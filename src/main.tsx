@@ -8,6 +8,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import App from "./App.tsx";
 import { AdminHome } from "./pages/AdminHome.tsx";
 import { AdminLogin } from "./pages/AdminLogin.tsx";
+import { Home } from "./pages/Home.tsx";
 import { UserHome } from "./pages/UserHome.tsx";
 import { UserLogin } from "./pages/UserLogin.tsx";
 
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<App />} />
+					<Route path="/home" element={<Home />} />
 					<Route path="/admin/login" element={<AdminLogin />} />
 					<Route path="/admin" element={<AdminHome />} />
 					<Route path="/user/login" element={<UserLogin />} />
