@@ -11,20 +11,22 @@
         -10px -10px 65px 0px rgba(0, 0, 0, 0.20);
     margin: 5%;
     background-color: #E0E8B7;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
-.card .card-header {
-    max-width:100%;
+.cardHeader {
+    max-width: 100%;
     height: auto;
     display: flex;
-    margin-bottom: 5%;
     flex-direction: column;
     border-radius: 20px 20px 0px 0px;
     border-bottom: 1px solid #000;
     background-color: rgba(255, 255, 255, 0.50);
 }
 
-.Head1 {
+.head1 {
     margin: 2%;
     background-color: transparent;
     color: #000;
@@ -36,7 +38,7 @@
     line-height: normal;
 }
 
-.Head2 {
+.head2 {
     margin: 2%;
     background-color: transparent;
     font-size: 1.6rem;
@@ -48,7 +50,7 @@
     line-height: normal;
 }
 
-.card .scrollable-content {
+.scrollableContent {
     width: 100%;
     height: auto;
     max-height: 25rem;
@@ -58,37 +60,36 @@
 }
 
 /* Hide the scrollbar */
-.scrollable-content::-webkit-scrollbar {
+.scrollableContent::-webkit-scrollbar {
     width: 0;
 }
 
 .arrow {
     display: flex;
-    justify-content: end;
+    position: absolute;
+    bottom: 2%;
+    right:3%;
+    font-size: 25px;
+    cursor: pointer;
 }
 
-.arrow .see-more{
-    display: flex;
-    justify-content:end;
-    
-}
 
 @media screen and (max-width: 700px) {
-    .Head1 {
+    .head1 {
         font-size: 1.4rem;
         /* Adjust for smaller screens */
     }
 
-    .Head2 {
+    .head2 {
         font-size: 1rem;
         /* Adjust for smaller screens */
     }
 
-    .card{
-        max-width:40%;
+    .card {
+        max-width: 40%;
     }
-    
-    .card .scrollable-content{
+
+    .scrollable-content {
         max-height: 20rem;
     }
 }

@@ -36,7 +36,7 @@
     z-index: 2;
 }
 
-.dummy {
+.strokeBatchName {
     position: absolute;
     z-index: 4;
     display: flex;
@@ -68,7 +68,7 @@
     font-size: 1.3rem;
     font-family: 'Fira Sans', sans-serif;
     text-align: center;
-    margin-left: 35%;
+    /* margin-left: 35%; */
 }
 
 .profile {
@@ -86,13 +86,11 @@
 }
 
 .internal {
-    width: 15vw;
-    height: 15vw;
     flex-shrink: 0;
     border: 3px solid #FFF;
-    background: url(../../assets/after.webp), lightgray -46.95px 0px / 132.357% 100% no-repeat;
+    background:  lightgray -46.95px 0px / 132.357% 100% no-repeat;
     background-size: cover;
-    margin-bottom: 8%;
+    margin-bottom: 7%;
 }
 
 .textAfter {
@@ -100,15 +98,6 @@
     font-size: 1.3rem;
     font-family: 'Fira Sans', sans-serif;
     text-align: center;
-    margin-left: 38%;
-}
-
-.before img,
-.after img {
-    position: absolute;
-    top: -1%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }
 
 .quote {

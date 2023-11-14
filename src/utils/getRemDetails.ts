@@ -32,10 +32,6 @@ export const fetchUser = async (_id: string) => {
 			`${BACKEND_URL}/user/getUser`,
 			{ withCredentials: true, params: { _id: _id } }
 		);
-
-		const userData = response.data.data;
-		const userImage = response.data.image;
-
 		return response;
 	} catch (error: any) {
 		return error.response;
