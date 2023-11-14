@@ -5,11 +5,31 @@ import {
   IconUserCircle,
   IconTriangleInvertedFilled,
 } from "@tabler/icons-react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handler = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handler);
+
+    return () => {
+      window.removeEventListener("scroll", handler);
+    };
+  }, [scrollY]);
+
   return (
-    <Group className="flex px-[5%] justify-between items-center w-full h-full">
+    <Group
+      className={
+        "flex px-[5%] justify-between items-center w-full h-full " +
+        (scrollY !== 0 ? "shadow-lg backdrop-blur-lg" : "")
+      }
+    >
       <Box>Logo</Box>
       <Group gap={5}>
         <Group gap={40}>

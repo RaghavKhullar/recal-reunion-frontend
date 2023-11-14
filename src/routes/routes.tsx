@@ -31,4 +31,5 @@ export const routes: RouteType[] = [
 		title: "Search",
 		description: "Search for your batchmates!",
 	},
+ 
 ];

@@ -106,27 +106,27 @@ const Home: React.FC = () => {
 					</div>}
 
 			</div>
+			{(remDetailsForMe.length !== 0 || remDetailsByMe.length !== 0) &&
+				<div className={style.background}>
+					<div className={style.dome}>
+						<div className={style.domeShape}></div>
+					</div>
+					<div className={style.cardBackground}>
+						{remDetailsForMe.length !== 0 && <Card
+							remDetails={remDetailsForMe.slice(0, Math.min(remDetailsForMe.length, 6))}
+							head1="Here’s what your friends think of you"
+							head2="Thoughts from your friends"
+							writtenRems={false}
+						/>}
 
-			<div className={style.background}>
-				<div className={style.dome}>
-					<div className={style.domeShape}></div>
-				</div>
-				<div className={style.cardBackground}>
-					{remDetailsForMe.length && <Card
-						remDetails={remDetailsForMe.slice(0,Math.min(remDetailsForMe.length,6))}
-						head1="Here’s what your friends think of you"
-						head2="Thoughts from your friends"
-						writtenRems={false}
-					/>}
-
-					{remDetailsByMe.length && <Card
-						remDetails={remDetailsByMe.slice(0,Math.min(remDetailsByMe.length,6))}
-						head1="Here’s what you think of them"
-						head2="Personal or Personalized?"
-						writtenRems={true}
-					/>}
-				</div>
-			</div>
+						{remDetailsByMe.length !== 0 && <Card
+							remDetails={remDetailsByMe.slice(0, Math.min(remDetailsByMe.length, 6))}
+							head1="Here’s what you think of them"
+							head2="Personal or Personalized?"
+							writtenRems={true}
+						/>}
+					</div>
+				</div>}
 		</>
 	);
 };
