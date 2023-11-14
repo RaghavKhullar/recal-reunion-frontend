@@ -1,8 +1,8 @@
-import { Landing, Home, Login, Search } from "../pages";
+import { Landing, Home, Login, Search, WriteRem } from "../pages";
 
 export const routes: RouteType[] = [
 	{
-		path: "",
+		path: "/",
 		element: <Landing />,
 		title: "Landing",
 		description: "Landing Page of App",
@@ -20,8 +20,14 @@ export const routes: RouteType[] = [
 		description: "Login Page of App",
 	},
 	{
-		path: "search",
+		path: "/search",
 		element: <Search />,
+		title: "Search",
+		description: "Search for your batchmates!",
+	},
+	{
+		path: "/writeRem/:id",
+		element: <WriteRem />,
 		title: "Search",
 		description: "Search for your batchmates!",
 	},

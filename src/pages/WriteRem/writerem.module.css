@@ -1,0 +1,33 @@
+
+
+.red{
+    color: red;
+}
+
+.remheading{
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3rem;
+}
+
+
+.coverRem{
+    padding: 2rem 8rem;
+}
+
+.textAreaHead{
+    font-size: 2rem;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.remBtn{
+    background-color: white;
+    padding: 0rem 2rem;
+    margin-left: auto;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    border-radius: 2rem;
+    border: 2px solid black;
+    margin-top: 4rem;
+    margin-left: auto;
+    margin-right: auto;
+}
