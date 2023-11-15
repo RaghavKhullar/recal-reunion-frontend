@@ -74,7 +74,7 @@ const Home: React.FC = () => {
 						{
 							userDetails && userDetails.oldRem && userDetails.oldRem.image &&
 							<div className={style.before}>
-								<img src={circle} />
+								<img className={style.anchorCircle} src={circle} />
 								<div className={style.internal}>
 									<img src={userDetails.oldRem.image} />
 								</div>
@@ -84,7 +84,7 @@ const Home: React.FC = () => {
 						{
 							userDetails && userDetails.image.length &&
 							<div className={style.after}>
-								<img src={circle} />
+								<img className={style.anchorCircle} src={circle} />
 								<div className={style.internal}>
 									<img src={userDetails.image} />
 								</div>
