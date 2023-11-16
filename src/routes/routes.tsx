@@ -28,7 +28,7 @@ export const routes: RouteType[] = [
 	{
 		path: "/writeRem/:id",
 		element: <WriteRem />,
-		title: "Search",
+		title: "Write Rem",
 		description: "Search for your batchmates!",
 	},
  

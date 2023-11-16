@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import circle from "../../assets/circle.svg";
 import down from "../../assets/down.svg";
 import up from "../../assets/up.svg";
-import Card from "../../Components/Card/Card";
+import { Card } from "../../components";
 import style from "./home.module.css";
 import {
 	getWrittenRemsByMe,
@@ -68,15 +68,15 @@ const Home: React.FC = () => {
 		<>
 			<div className={style.upper}>
 				<div className={style.batch}>
-					<div className={style.batchName}>Batch of ‘99</div>
+					<h1 className={style.batchName}>Batch of ‘99</h1>
 					<div className={style.strokeBatchName}>Batch of ‘99</div>
 					<div className={style.frame}>
 						{
-							userDetails && userDetails.oldRem && userDetails.oldRem.image &&
+							userDetails && userDetails.oldImagePath.length!==0 &&
 							<div className={style.before}>
 								<img className={style.anchorCircle} src={circle} />
 								<div className={style.internal}>
-									<img src={userDetails.oldRem.image} />
+									<img src={userDetails.oldImagePath} />
 								</div>
 								<p className={style.textBefore}>Before</p>
 							</div>

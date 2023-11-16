@@ -26,8 +26,7 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
   return (
     <Group
       className={
-        "flex px-[5%] justify-between items-center w-full h-full " +
-        (scrollY !== 0 ? "shadow-lg backdrop-blur-lg" : "")
+        "flex px-[5%] justify-between items-center w-full h-full  shadow-lg backdrop-blur-lg"
       }
     >
       <Box>Logo</Box>

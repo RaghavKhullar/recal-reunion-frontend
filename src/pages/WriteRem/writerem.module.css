@@ -1,25 +1,23 @@
-
-
-.red{
+.red {
     color: red;
 }
 
-.remheading{
+.remheading {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 3rem;
+    font-size: 4rem;
 }
 
 
-.coverRem{
+.coverRem {
     padding: 2rem 8rem;
 }
 
-.textAreaHead{
+.textAreaHead {
     font-size: 2rem;
     font-family: 'Bebas Neue', sans-serif;
 }
 
-.remBtn{
+.remBtn {
     background-color: white;
     padding: 0rem 2rem;
     margin-left: auto;

@@ -175,7 +175,7 @@ const Search = () => {
               <Text className="text-2xl font-bebus">Search for Friends</Text>
             </Center>
           ) : (
-            visibleFriends.map((friend) => <ProfileCard user={friend} />)
+            visibleFriends.map((friend) => <ProfileCard key={friend.id} user={friend} />)
           ))}
       </SimpleGrid>
       <Center
@@ -195,12 +195,18 @@ const Search = () => {
                   "bg-transparent w-full rounded-full text-3xl font-bebus border-[2px] border-black py-2 px-5 pl-20 h-[70px] placeholder:text-black placeholder:opacity-25",
                 section: "bg-transparent w-[100px] pr-4",
               }}
+              onKeyDown={e => {
+                if (e.code === "Enter") {
+                  fetchAllFriends(name)
+                }
+              }}
               leftSection={
                 <IconSearch
                   onClick={() => fetchAllFriends(name)}
                   opacity={0.7}
                   color="#000000"
                   size={40}
+                  cursor={"pointer"}
                 />
               }
               placeholder="SEARCH FOR FRIENDS"
@@ -247,7 +253,7 @@ const Search = () => {
                 value={sortMethod}
                 onChange={(value) => setSortMethod(value as any)}
               >
-                <Center className="w-full justify-start h-[75px]">
+                <Center className="w-full justify-start h-[75px] cursor-pointer">
                   <Radio
                     value="name-asc"
                     classNames={{
@@ -257,7 +263,7 @@ const Search = () => {
                     label="Name - Ascending"
                   />
                 </Center>
-                <Center className="w-full justify-start h-[75px]">
+                <Center className="w-full justify-start h-[75px] cursor-pointer">
                   <Radio
                     classNames={{
                       label: "text-2xl font-fira",

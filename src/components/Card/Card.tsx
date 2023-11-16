@@ -1,6 +1,5 @@
 import style from "./card.module.css"
 
-import img from "../../assets/arrow.svg";
 import RemAdapter from "../RemAdapter/RemAdapter";
 
 interface Rem {
