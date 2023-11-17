@@ -2,7 +2,7 @@ import Router from "./routes";
 import { MantineProvider } from "@mantine/core";
 import theme from "./utils/theme";
 import { Provider } from "react-redux";
-import { store, persistor } from "./store";
+import { store, persistor } from "./redux/store";
 import "./App.css";
 import { ErrorBoundary } from "react-error-boundary";
 import { FallbackUI } from "./components";

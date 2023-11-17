@@ -3,7 +3,7 @@ import { Image } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import defaultImage from "../../assets/defaultImage.png"
 
-import { fetchUser } from "../../utils/getRemDetails";
+// import { fetchUser } from "../../utils/getRemDetails";
 
 interface Rem {
 	_id: string;
@@ -21,8 +21,8 @@ const RemAdapter: React.FC<{ rem: Rem, writtenRems: boolean }> = ({ rem, written
 	const [userImage, setUserImage] = useState("");
 	const fetchUserData = async () => {
 		try {
-			const response = await fetchUser(writtenRems === true ? rem.to : rem.from);
-			setUserImage(response.data.image);
+			// const response = await fetchUser(writtenRems === true ? rem.to : rem.from);
+			// setUserImage(response.data.image);
 		} catch (error) {
 			console.error("Error fetching user image:", error);
 		}

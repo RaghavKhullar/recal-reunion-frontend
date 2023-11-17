@@ -5,11 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { getUser } from "../../utils/getUserDetails";
 import { Textarea, FileInput } from "@mantine/core";
 import { useEffect, useState } from "react";
-import { postRem } from "../../utils/getRemDetails";
 import remPin from "../../assets/remPin.svg";
 import uploadImage from "../../assets/uploadImage.svg";
 import graphic from "../../assets/writeRemGraphic1.svg";
-
+import { showNotification } from "../../helpers/helpers";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { useSelector } from "react-redux";
+import { writeRem } from "../../redux/actions";
+import { userSelector } from "../../redux/reducer/User/UserReducer";
 const WriteRem = () => {
     const { id } = useParams();
 
@@ -19,6 +22,8 @@ const WriteRem = () => {
     const [image, setImage] = useState(undefined);
     const [content, setContent] = useState<string>("");
     const [file, setFile] = useState<File | undefined>(undefined);
+    const dispatch = useAppDispatch();
+    const state = useSelector(userSelector);
 
     const getName = async () => {
         let res = await getUser(id);
@@ -28,7 +33,30 @@ const WriteRem = () => {
 
     useEffect(() => {
         getName();
-    }, [])
+    }, []);
+
+    const postRem = async (file: File | undefined, content: string, to: string | undefined) => {
+        if (content.length === 0) {
+            // showNotification()
+            return;
+        } else if (to === undefined || to === null) {
+
+        } else {
+            const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to }));
+            if (writeRem.fulfilled.match(writeRemDispatch)) {
+                if (writeRemDispatch.payload.status === 200) {
+                    showNotification("Success", "Rem written successfully", "success");
+                    navigate(`/user/` + id);
+                } else {
+                    showNotification("Error", "Some error occured", "error");
+                    navigate(`/home`);
+                }
+            } else {
+                showNotification("Error", "Error occured while writing rem", "error");
+                navigate(`/home`);
+            }
+        }
+    }
 
     return (
         <>  <img src={graphic} style={{ position: "absolute", left: "45%" }} />

@@ -4,65 +4,81 @@ import down from "../../assets/down.svg";
 import up from "../../assets/up.svg";
 import { Card } from "../../components";
 import style from "./home.module.css";
-import {
-	getWrittenRemsByMe,
-	getWrittenRemsForMe,
-	getUserDetails
-} from "../../utils/getRemDetails";
-import { showNotification } from "../../utils/helpers";
+import { showNotification } from "../../helpers/helpers";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { getCurrentUser, getRemsWrittenByMe, getRemsWrittenForMe } from "../../redux/actions";
+import { useNavigate } from "react-router-dom";
+import { userSelector } from "../../redux/reducer/User/UserReducer";
+import { useSelector } from "react-redux";
+import { BACKEND_URL } from "../../../config";
 
 const Home: React.FC = () => {
 	const [remDetailsForMe, setRemDetailsForMe] = useState<any[]>([]);
 	const [remDetailsByMe, setRemDetailsByMe] = useState<any[]>([]);
 	const [userDetails, setUserDetails] = useState<any>();
+	const state = useSelector(userSelector);
+	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 
 	const fetchWrittenRemsForMe = async () => {
-		try {
-			const response = await getWrittenRemsForMe();
-			if (response.status === 200) {
-				if (Array.isArray(response.data.data)) {
-					setRemDetailsForMe(response.data.data);
+		const getWrittenRemsByForDispatch = await dispatch(getRemsWrittenForMe());
+		if (getRemsWrittenForMe.fulfilled.match(getWrittenRemsByForDispatch)) {
+			if (getWrittenRemsByForDispatch.payload.status === 200) {
+				if (Array.isArray(getWrittenRemsByForDispatch.payload.data.data)) {
+					setRemDetailsForMe(getWrittenRemsByForDispatch.payload.data.data);
+				} else {
+					showNotification("Error", "Error fetching the rems", "error")
 				}
-			} else if (response.status !== 400) {
+			} else if (getWrittenRemsByForDispatch.payload.status !== 400) {
 				showNotification("Error", "Error fetching the rems", "error")
+			} else {
+				showNotification("Error", "Error occured while fetching rems", "error");
+				navigate('/login');
 			}
-		} catch (error) {
-			showNotification("Error", "Error occured while fetching rems", "error")
 		}
 	};
 
 	const fetchWrittenRemsByMe = async () => {
-		try {
-			const response = await getWrittenRemsByMe();
-			if (response.status === 200) {
-				if (Array.isArray(response.data.data)) {
-					setRemDetailsByMe(response.data.data);
+		const getWrittenRemsByMeDispatch = await dispatch(getRemsWrittenByMe());
+		if (getRemsWrittenByMe.fulfilled.match(getWrittenRemsByMeDispatch)) {
+			if (getWrittenRemsByMeDispatch.payload.status === 200) {
+				if (Array.isArray(getWrittenRemsByMeDispatch.payload.data.data)) {
+					setRemDetailsByMe(getWrittenRemsByMeDispatch.payload.data.data);
+				} else {
+					showNotification("Error", "Error fetching the rems", "error")
 				}
-			} else if (response.status !== 400) {
+			} else if (getWrittenRemsByMeDispatch.payload.status !== 400) {
 				showNotification("Error", "Error fetching the rems", "error")
+			} else {
+				showNotification("Error", "Error occured while fetching rems", "error");
+				navigate('/login');
 			}
-		} catch (error) {
-			showNotification("Error", "Error occured while fetching rems", "error")
 		}
 	};
 
 	const fetchUserDetails = async () => {
-		try {
-			const response = await getUserDetails();
-			if (response.status === 200) {
-				setUserDetails(response.data);
+		const loginDispatch = await dispatch(getCurrentUser());
+		if (getCurrentUser.fulfilled.match(loginDispatch)) {
+			if (loginDispatch.payload.status === 200) {
+				setUserDetails(loginDispatch.payload.data);
 			} else {
-				showNotification("Error", "User not found", "error")
+				showNotification("Error", "User not found", "error");
+				navigate('/login');
 			}
-		} catch (error) {
-			showNotification("Error", "Error occured while fetching user details", "error")
+		} else {
+			showNotification("Error", "Error occured while fetching user details", "error");
+			navigate('/login');
 		}
 	};
+
+	useEffect(() => {
+		fetchUserDetails();
+	}, []);
+
 	useEffect(() => {
 		fetchWrittenRemsForMe();
 		fetchWrittenRemsByMe();
-		fetchUserDetails();
-	}, []);
+	}, [state.loggedIn]);
 
 	return (
 		<>
@@ -72,21 +88,21 @@ const Home: React.FC = () => {
 					<div className={style.strokeBatchName}>Batch of ‘99</div>
 					<div className={style.frame}>
 						{
-							userDetails && userDetails.oldImagePath.length!==0 &&
+							userDetails && userDetails.oldRem && userDetails.oldRem.image && userDetails.oldRem.image.length !== 0 &&
 							<div className={style.before}>
 								<img className={style.anchorCircle} src={circle} />
 								<div className={style.internal}>
-									<img src={userDetails.oldImagePath} />
+									<img src={`${BACKEND_URL}/images/profiles/${userDetails.oldRem.image}`} />
 								</div>
 								<p className={style.textBefore}>Before</p>
 							</div>
 						}
 						{
-							userDetails && userDetails.image.length &&
-							<div className={style.after}>
+							userDetails && userDetails.user && userDetails.user.image && userDetails.user.image.length !== 0 &&
+							< div className={style.after}>
 								<img className={style.anchorCircle} src={circle} />
 								<div className={style.internal}>
-									<img src={userDetails.image} />
+									<img src={`${BACKEND_URL}/images/profiles/${userDetails.user.image}`} />
 								</div>
 								<p className={style.textBefore}>After</p>
 							</div>}
@@ -105,7 +121,7 @@ const Home: React.FC = () => {
 						<div style={{ fontSize: "6.5vw", color: "#411D76" }}>”</div>
 					</div>}
 
-			</div>
+			</div >
 			{(remDetailsForMe.length !== 0 || remDetailsByMe.length !== 0) &&
 				<div className={style.background}>
 					<div className={style.dome}>
@@ -126,7 +142,8 @@ const Home: React.FC = () => {
 							writtenRems={true}
 						/>}
 					</div>
-				</div>}
+				</div>
+			}
 		</>
 	);
 };
