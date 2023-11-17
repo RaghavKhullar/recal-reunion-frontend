@@ -1,4 +1,6 @@
 import { routes } from "./routes";
+import { userRoutes } from "./user.routes";
+import { ProtectedRoutes } from "../components";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { NotFoundPage } from "../pages";
 import { MetaDecoratedPage } from "../components";
@@ -20,6 +22,25 @@ const Router = () => {
 										description={route.description}
 										element={route.element}
 									/>
+								}
+							>
+								{route.children}
+							</Route>
+						);
+					})}
+					{userRoutes.map(route => {
+						return (
+							<Route
+								key={route.path}
+								path={route.path}
+								element={
+									<ProtectedRoutes type="user">
+										<MetaDecoratedPage
+											title={route.title}
+											description={route.description}
+											element={route.element}
+										/>
+									</ProtectedRoutes>
 								}
 							>
 								{route.children}

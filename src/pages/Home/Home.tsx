@@ -8,7 +8,7 @@ import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { getCurrentUser, getRemsWrittenByMe, getRemsWrittenForMe } from "../../redux/actions";
 import { useNavigate } from "react-router-dom";
-import { userSelector } from "../../redux/reducer/User/UserReducer";
+import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
 

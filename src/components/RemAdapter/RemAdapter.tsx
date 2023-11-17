@@ -33,7 +33,7 @@ const RemAdapter: React.FC<{ rem: Rem, writtenRems: boolean }> = ({ rem, written
 
 	return (
 		<div className={style.remField}>
-			<Image className={style.image} src={userImage} fallbackSrc={defaultImage} />
+			<Image className={style.image} src={userImage} fallbackSrc={defaultImage} draggable={false} />
 			<div className={style.rem}>{rem.content}</div>
 		</div>
 	);

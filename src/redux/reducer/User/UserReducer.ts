@@ -55,5 +55,5 @@ export const user = createSlice({
     }
 })
 
-export const userSelector = (state: { user: UserState }) => state.user;
+export const userSelector = (state: { user: UserState }) => state.user !== undefined ? state.user : initialState;
 export default user.reducer;

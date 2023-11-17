@@ -23,7 +23,6 @@ const WriteRem = () => {
     const [content, setContent] = useState<string>("");
     const [file, setFile] = useState<File | undefined>(undefined);
     const dispatch = useAppDispatch();
-    const state = useSelector(userSelector);
 
     const getName = async () => {
         let res = await getUser(id);
@@ -37,16 +36,19 @@ const WriteRem = () => {
 
     const postRem = async (file: File | undefined, content: string, to: string | undefined) => {
         if (content.length === 0) {
-            // showNotification()
+            showNotification("Warning", "Content of Rem can't be empty", "warning");
             return;
         } else if (to === undefined || to === null) {
-
+            showNotification("Warning", "Invalid user", "warning");
+            navigate('/home');
+            return;
         } else {
             const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to }));
             if (writeRem.fulfilled.match(writeRemDispatch)) {
                 if (writeRemDispatch.payload.status === 200) {
                     showNotification("Success", "Rem written successfully", "success");
-                    navigate(`/user/` + id);
+                    // Navigate to user profile once done
+                    navigate('/home')
                 } else {
                     showNotification("Error", "Some error occured", "error");
                     navigate(`/home`);
