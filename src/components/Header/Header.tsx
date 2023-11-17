@@ -7,6 +7,7 @@ import {
 } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.jpg";
 
 const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
   const [scrollY, setScrollY] = useState(0);
@@ -29,7 +30,7 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
         "flex px-[5%] justify-between items-center w-full h-full  shadow-lg backdrop-blur-lg"
       }
     >
-      <Box>Logo</Box>
+      <Box><img src={logo} alt="" draggable={false} /></Box>
       <Group gap={5}>
         <Group gap={40}>
           <Link to="/search">
