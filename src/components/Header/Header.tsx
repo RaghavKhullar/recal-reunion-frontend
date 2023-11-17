@@ -30,7 +30,10 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
         "flex px-[5%] justify-between items-center w-full h-full  shadow-lg backdrop-blur-lg"
       }
     >
-      <Box><img src={logo} alt="" draggable={false} /></Box>
+      <Box>
+        <Link to="/home">
+          <img src={logo} alt="" draggable={false} />
+        </Link></Box>
       <Group gap={5}>
         <Group gap={40}>
           <Link to="/search">

@@ -19,36 +19,10 @@ import {
   IconTriangleInvertedFilled,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { BACKEND_URL, FRONTEND_URL } from "../../../config";
-import { set } from "husky";
-const users = [
-  {
-    id: "1",
-    imageURL:
-      "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fH",
-    name: "John Doe",
-    socials: [
-      {
-        name: "X",
-        link: "https://instagram.com",
-      },
-      {
-        name: "LinkedIn",
-        link: "https://linkedin.com",
-      },
-      {
-        name: "Facebook",
-        link: "https://facebook.com",
-      },
-    ],
-  },
-];
-
-// create arrayw with 10 users
-for (let i = 0; i < 10; i++) {
-  users.push(users[0]);
-}
+import { useAppDispatch } from "../../redux/store/hooks";
+import { searchUser } from "../../redux/actions";
+import { BACKEND_URL } from "../../../config";
+import { showNotification } from "../../helpers/helpers";
 
 type Friend = {
   id: string;
@@ -73,37 +47,57 @@ const Search = () => {
   const [name, setName] = useState<string>("");
   const [visibleFriends, setVisibleFriends] = useState<Friend[]>([]);
 
+  const dispatch = useAppDispatch();
+
   const fetchAllFriends = async (name: string) => {
+    if (name.length >= 3) {
+      const regex = new RegExp(
+        "^[0-9a-zA-Z \b]+$"
+      );
+
+      if (!regex.test(name)) {
+        showNotification(
+          "Warning!",
+          "Special Characters not allowed",
+          "warning"
+        );
+        return;
+      }
+    } else {
+      showNotification(
+        "Warning!",
+        "Name should be atleast 3 characters :)",
+        "warning"
+      );
+      return;
+    }
+
     setError(null);
     setLoading(true);
-    const fetchFriends = async () => {
-      try {
-        const response = await axios.get(
-          `${BACKEND_URL}/user/searchUser?name=${name}`,
-          { withCredentials: true }
-        );
-        const data = await response.data;
-        const friends = data.map((friend: any) => {
+    const searchUserDispatch = await dispatch(searchUser(name));
+    if (searchUser.fulfilled.match(searchUserDispatch)) {
+      if (searchUserDispatch.payload.status === 200) {
+        const friends = searchUserDispatch.payload.data.data.map((friend: any) => {
           const socials = [];
 
-          if (friend.x) {
+          if (friend.x && friend.x.length !== 0) {
             socials.push({
               name: "X",
-              link: friend.x,
+              link: friend.x.includes("twitter.com") ? friend.x : "https://twitter.com/" + friend.x,
             });
           }
 
-          if (friend.linkedin) {
+          if (friend.linkedin && friend.linkedin.length !== 0) {
             socials.push({
               name: "LinkedIn",
-              link: friend.linkedin,
+              link: friend.linkedin.includes("linkedin.com") ? friend.linkedin : "https://linkedin.com/in/" + friend.linkedin,
             });
           }
 
-          if (friend.facebook) {
+          if (friend.facebook && friend.facebook.length !== 0) {
             socials.push({
               name: "Facebook",
-              link: friend.facebook,
+              link: friend.facebook.includes("facebook.com") ? friend.facebook : "https://facebook.com/" + friend.facebook,
             });
           }
 
@@ -111,19 +105,18 @@ const Search = () => {
             id: friend._id,
             name: friend.name,
             department: friend.department,
-            imageURL: BACKEND_URL + "/images/profiles/" + friend.imageURL,
+            // if friend.image is null we should display the default image, which will be handled by this case
+            imageURL: BACKEND_URL + "/images/profiles/" + friend.image,
             socials: socials,
           };
         });
         setFriends(friends);
         setVisibleFriends(friends);
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
       }
-    };
-    fetchFriends();
+    } else {
+      setError("Some error occured");
+    }
+    setLoading(false);
   };
 
   useEffect(() => {

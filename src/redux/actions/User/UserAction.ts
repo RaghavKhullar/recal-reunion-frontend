@@ -35,3 +35,20 @@ export const getUserFromId = createAsyncThunk<
 		return error.response;
 	}
 });
+
+export const searchUser = createAsyncThunk<
+	any,
+	String,
+	{ rejectValue: APIError }
+>("user/search", async (name: String, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.get(
+			`/user/searchUser`, {
+			withCredentials: true, params: { name: name }
+		}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});

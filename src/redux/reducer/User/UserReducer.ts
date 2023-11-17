@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUser, getUserFromId } from "../../actions";
+import { getCurrentUser, getUserFromId, searchUser } from "../../actions";
 
 export const initialState = {
     loggedIn: false,
@@ -52,6 +52,15 @@ export const user = createSlice({
             state.otherUser = { user: payload.data.user, oldRem: payload.data.oldRem, writtenByUser: payload.data.writtenByUser, writtenForUser: payload.data.writtenForUser };
         });
 
+        builder.addCase(searchUser.rejected, (state) => {
+            state.isFetchingSearch = false;
+        });
+        builder.addCase(searchUser.pending, (state) => {
+            state.isFetchingSearch = true;
+        });
+        builder.addCase(searchUser.fulfilled, (state) => {
+            state.isFetchingSearch = false;
+        });
     }
 })
 
