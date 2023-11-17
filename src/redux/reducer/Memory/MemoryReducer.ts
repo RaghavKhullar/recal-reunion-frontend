@@ -9,29 +9,23 @@ export const memory = createSlice({
     extraReducers: (builder) => {
 
         builder.addCase(getRemsWrittenByMe.rejected, (state) => {
-            state.currentUser.writtenByUser.isFetching = false;
-            state.currentUser.writtenByUser.rems = [];
+            state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: false, rems: [] } };
         });
         builder.addCase(getRemsWrittenByMe.pending, (state) => {
-            state.currentUser.writtenByUser.isFetching = true;
-            state.currentUser.writtenByUser.rems = [];
+            state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: true, rems: [] } };
         });
         builder.addCase(getRemsWrittenByMe.fulfilled, (state, { payload }) => {
-            state.currentUser.writtenByUser.isFetching = false;
-            state.currentUser.writtenByUser.rems = payload.data.data;
+            state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: false, rems: payload.data.data } };
         });
 
         builder.addCase(getRemsWrittenForMe.rejected, (state) => {
-            state.currentUser.writtenForUser.isFetching = false;
-            state.currentUser.writtenForUser.rems = [];
+            state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: false, rems: [] } }
         });
         builder.addCase(getRemsWrittenForMe.pending, (state) => {
-            state.currentUser.writtenForUser.isFetching = true;
-            state.currentUser.writtenForUser.rems = [];
+            state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: true, rems: [] } }
         });
         builder.addCase(getRemsWrittenForMe.fulfilled, (state, { payload }) => {
-            state.currentUser.writtenForUser.isFetching = false;
-            state.currentUser.writtenForUser.rems = payload.data.data;
+            state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: false, rems: payload.data.data } }
         });
     }
 });

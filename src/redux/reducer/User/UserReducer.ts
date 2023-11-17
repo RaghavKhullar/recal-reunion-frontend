@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUser, getUserFromId, searchUser } from "../../actions";
+import { getCurrentUser, getOtherUserFromId, searchUser, getOtherUserDetailsFromId } from "../../actions";
 
 export const initialState = {
     loggedIn: false,
@@ -38,18 +38,31 @@ export const user = createSlice({
             state.currentUser = { ...state.currentUser, user: payload.data.user, oldRem: payload.data.oldRem };
         });
 
-        builder.addCase(getUserFromId.rejected, (state) => {
+        builder.addCase(getOtherUserFromId.rejected, (state) => {
             state.isOtherUserFetched = false;
             state.isFetchingOtherUser = false;
         });
-        builder.addCase(getUserFromId.pending, (state) => {
+        builder.addCase(getOtherUserFromId.pending, (state) => {
             state.isOtherUserFetched = false;
             state.isFetchingOtherUser = true;
         });
-        builder.addCase(getUserFromId.fulfilled, (state, { payload }) => {
+        builder.addCase(getOtherUserFromId.fulfilled, (state, { payload }) => {
             state.isFetchingOtherUser = false;
             state.isOtherUserFetched = true;
-            state.otherUser = { user: payload.data.user, oldRem: payload.data.oldRem, writtenByUser: payload.data.writtenByUser, writtenForUser: payload.data.writtenForUser };
+            state.otherUser = { ...state.otherUser, user: payload.data.user, oldRem: payload.data.oldRem };
+        });
+
+        builder.addCase(getOtherUserDetailsFromId.rejected, (state) => {
+            state.isOtherUserFetched = false;
+            state.isFetchingOtherUser = false;
+        });
+        builder.addCase(getOtherUserDetailsFromId.pending, (state) => {
+            state.isOtherUserFetched = false;
+            state.isFetchingOtherUser = true;
+        });
+        builder.addCase(getOtherUserDetailsFromId.fulfilled, (state) => {
+            state.isFetchingOtherUser = false;
+            state.isOtherUserFetched = true;
         });
 
         builder.addCase(searchUser.rejected, (state) => {

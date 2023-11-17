@@ -2,7 +2,6 @@ import styles from "./writerem.module.css";
 import arrow from "../../assets/arrowRem.svg";
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { getUser } from "../../utils/getUserDetails";
 import { Textarea, FileInput } from "@mantine/core";
 import { useEffect, useState } from "react";
 import remPin from "../../assets/remPin.svg";
@@ -10,28 +9,44 @@ import uploadImage from "../../assets/uploadImage.svg";
 import graphic from "../../assets/writeRemGraphic1.svg";
 import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
-import { useSelector } from "react-redux";
 import { writeRem } from "../../redux/actions";
-import { userSelector } from "../../redux/reducer/User/UserReducer";
+import { getOtherUserDetailsFromId } from "../../redux/actions/User/UserAction";
+import { BACKEND_URL } from "../../../config";
 const WriteRem = () => {
     const { id } = useParams();
 
     const navigate = useNavigate();
 
     const [name, setName] = useState(null);
-    const [image, setImage] = useState(undefined);
+    const [image, setImage] = useState("");
     const [content, setContent] = useState<string>("");
     const [file, setFile] = useState<File | undefined>(undefined);
     const dispatch = useAppDispatch();
 
-    const getName = async () => {
-        let res = await getUser(id);
-        setName(res.data.data.name);
-        setImage(res.data.image);
+    const getDetails = async () => {
+        if (id === undefined) {
+            showNotification("Warning", "Invalid user", "warning");
+            navigate('/home');
+            return;
+        }
+        const getOtherUserDetailsFromIdDispatch = await dispatch(getOtherUserDetailsFromId(id));
+        if (getOtherUserDetailsFromId.fulfilled.match(getOtherUserDetailsFromIdDispatch)) {
+            if (getOtherUserDetailsFromIdDispatch.payload.status === 200) {
+                setName(getOtherUserDetailsFromIdDispatch.payload.data.user.name);
+                // This should be changed to default rem image or the existing rem image
+                setImage(getOtherUserDetailsFromIdDispatch.payload.data.user.image);
+            } else {
+                showNotification("Error", "Some error occured", "error");
+                navigate(`/home`);
+            }
+        } else {
+            showNotification("Error", "Error occured while fetching user details", "error");
+            navigate(`/home`);
+        }
     }
 
     useEffect(() => {
-        getName();
+        getDetails();
     }, []);
 
     const postRem = async (file: File | undefined, content: string, to: string | undefined) => {
@@ -70,7 +85,7 @@ const WriteRem = () => {
                     <div>
                         <div style={{ padding: "2rem", backgroundColor: "#A72343", marginTop: "2rem", boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.35)", width: "34rem", height: "34rem" }}>
                             <img src={remPin} style={{ position: "absolute", left: "8rem", top: "15rem", width: "8rem", maxHeight: "8rem" }} />
-                            <img src={file ? URL.createObjectURL(file) : image} style={{ maxWidth: "30rem", border: "0.2rem solid white", maxHeight: "30rem" }} />
+                            <img src={file ? URL.createObjectURL(file) : BACKEND_URL + '/images/profiles/' + image} style={{ maxWidth: "30rem", border: "0.2rem solid white", maxHeight: "30rem" }} />
                         </div>
 
                         <FileInput

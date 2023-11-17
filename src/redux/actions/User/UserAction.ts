@@ -19,11 +19,29 @@ export const getCurrentUser = createAsyncThunk<
 });
 
 // Use this when viewing other user's profile page
-export const getUserFromId = createAsyncThunk<
+export const getOtherUserFromId = createAsyncThunk<
 	any,
 	String,
 	{ rejectValue: APIError }
->("user/getUserFromId", async (_id: String, { rejectWithValue }) => {
+>("user/getOtherUserFromId", async (_id: String, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.get(
+			`/user/getUser`, {
+			withCredentials: true, params: { _id: _id }
+		}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});
+
+// This route is similar to above route, but this will be used on all other pages except profile page of the user
+export const getOtherUserDetailsFromId = createAsyncThunk<
+	any,
+	String,
+	{ rejectValue: APIError }
+>("user/getOtherUserDetailsFromId", async (_id: String, { rejectWithValue }) => {
 	try {
 		const response = await CustomAxios.get(
 			`/user/getUser`, {
