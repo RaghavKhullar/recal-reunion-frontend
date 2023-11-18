@@ -38,3 +38,8 @@ interface UserState {
 interface APIError {
 	message: string;
 }
+
+interface GetUserDetailsResponse {
+	user: IProfile;
+	oldRem?: OldRem
+}

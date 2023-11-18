@@ -12,6 +12,8 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { writeRem } from "../../redux/actions";
 import { getOtherUserDetailsFromId } from "../../redux/actions/User/UserAction";
 import { BACKEND_URL } from "../../../config";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../redux/reducer";
 const WriteRem = () => {
     const { id } = useParams();
 
@@ -21,10 +23,12 @@ const WriteRem = () => {
     const [image, setImage] = useState("");
     const [content, setContent] = useState<string>("");
     const [file, setFile] = useState<File | undefined>(undefined);
+
     const dispatch = useAppDispatch();
+    const userId = useSelector(userSelector).currentUser.user?._id;
 
     const getDetails = async () => {
-        if (id === undefined) {
+        if (id === undefined || id === userId) {
             showNotification("Warning", "Invalid user", "warning");
             navigate('/home');
             return;
@@ -76,10 +80,11 @@ const WriteRem = () => {
     }
 
     return (
-        <>  <img src={graphic} style={{ position: "absolute", left: "45%" }} />
+        <>
+            <img src={graphic} style={{ position: "absolute", left: "45%" }} />
             <div className={styles.coverRem}>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <img src={arrow} style={{ width: '3rem', paddingBottom: "0.3rem", cursor: "pointer" }} onClick={() => { navigate("/home") }} /> <h1 className={styles.remheading}>WRITE A REM ABOUT <span className={styles.red}>{name}</span></h1>
+                    <img src={arrow} style={{ width: '3rem', paddingBottom: "0.3rem", cursor: "pointer" }} onClick={() => { navigate("/user/" + id) }} /> <h1 className={styles.remheading}>WRITE A REM ABOUT <span className={styles.red}>{name}</span></h1>
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                     <div>

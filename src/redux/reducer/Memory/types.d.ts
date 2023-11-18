@@ -1,6 +1,8 @@
+// For all the rems written by user we just return the to user, whereas in rems written for user we return from user
 interface Rem {
-	to: IProfile;
-	from: IProfile;
+	id: string;
+	to?: IProfile;
+	from?: IProfile;
 	image: string | null;
 	content: string;
 }

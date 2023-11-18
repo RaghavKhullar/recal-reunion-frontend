@@ -2,18 +2,6 @@ import style from "./card.module.css"
 
 import RemAdapter from "../RemAdapter/RemAdapter";
 
-interface Rem {
-	_id: string;
-	from: string;
-	to: string;
-	content: string;
-
-	user: {
-		name: string;
-		image: string;
-	};
-}
-
 interface CardProps {
 	remDetails: Rem[];
 	head1: string;
@@ -29,8 +17,8 @@ const Card: React.FC<CardProps> = ({ remDetails, head1, head2, writtenRems }) =>
 				<h2 className={style.head2}>{head2}</h2>
 			</div>
 			<div className={style.scrollableContent}>
-				{remDetails.map((rem, i) => (
-					<RemAdapter key={rem._id} rem={rem} writtenRems={writtenRems} />
+				{remDetails.map((rem, i) => (rem !== null && rem !== undefined &&
+					<RemAdapter key={rem.id} rem={rem} writtenRems={writtenRems} />
 				))}
 			</div>
 			<div className={style.arrow}>

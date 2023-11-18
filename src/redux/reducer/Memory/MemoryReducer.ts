@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getRemsWrittenByMe, getRemsWrittenForMe } from "../../actions/index";
+import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe } from "../../actions/index";
 import { initialState } from "../User/UserReducer";
 
 export const memory = createSlice({
@@ -26,6 +26,16 @@ export const memory = createSlice({
         });
         builder.addCase(getRemsWrittenForMe.fulfilled, (state, { payload }) => {
             state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: false, rems: payload.data.data } }
+        });
+
+        builder.addCase(getPublicRemsOfUser.rejected, (state) => {
+            state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: [] }, writtenByUser: { isFetching: false, rems: [] } };
+        });
+        builder.addCase(getPublicRemsOfUser.pending, (state) => {
+            state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: true, rems: [] }, writtenByUser: { isFetching: true, rems: [] } };
+        });
+        builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {
+            state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: payload.data.writtenForUser }, writtenByUser: { isFetching: false, rems: payload.data.writtenByUser } };
         });
     }
 });

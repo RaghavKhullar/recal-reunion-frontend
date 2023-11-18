@@ -57,4 +57,23 @@ export const writeRem = createAsyncThunk<
 	}
 });
 
+export const getPublicRemsOfUser = createAsyncThunk<
+	any,
+	String,
+	{ rejectValue: APIError }
+>("memory/getPublicRemsOfUser", async (id: String, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.post(
+			`/memory/getuserrems`,
+			{ id: id },
+			{
+				withCredentials: true,
+			}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});
+
 

@@ -13,9 +13,9 @@ import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
 
 const Home: React.FC = () => {
-	const [remDetailsForMe, setRemDetailsForMe] = useState<any[]>([]);
-	const [remDetailsByMe, setRemDetailsByMe] = useState<any[]>([]);
-	const [userDetails, setUserDetails] = useState<any>();
+	const [remDetailsForMe, setRemDetailsForMe] = useState<Rem[]>([]);
+	const [remDetailsByMe, setRemDetailsByMe] = useState<Rem[]>([]);
+	const [userDetails, setUserDetails] = useState<GetUserDetailsResponse>();
 	const state = useSelector(userSelector);
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();

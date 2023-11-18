@@ -36,7 +36,7 @@ export const getOtherUserFromId = createAsyncThunk<
 	}
 });
 
-// This route is similar to above route, but this will be used on all other pages except profile page of the user
+// This route is similar to above route, but this will be used on all other pages except profile page of the user. Won't update the user in redux store
 export const getOtherUserDetailsFromId = createAsyncThunk<
 	any,
 	String,
