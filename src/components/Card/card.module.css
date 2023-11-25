@@ -1,90 +1,90 @@
 .card {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 10px 10px 65px 0px rgba(0, 0, 0, 0.20),
-        -10px -10px 65px 0px rgba(0, 0, 0, 0.20);
-    margin: 5%;
-    background-color: #E0E8B7;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow:
+    10px 10px 65px 0px rgba(0, 0, 0, 0.2),
+    -10px -10px 65px 0px rgba(0, 0, 0, 0.2);
+  margin: 5%;
+  background-color: #e0e8b7;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .cardHeader {
-    max-width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px 20px 0px 0px;
-    border-bottom: 1px solid #000;
-    background-color: rgba(255, 255, 255, 0.50);
+  max-width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 20px 0px 0px;
+  border-bottom: 1px solid #000;
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .head1 {
-    margin: 2%;
-    background-color: transparent;
-    color: #000;
-    border: none;
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  margin: 2%;
+  background-color: transparent;
+  color: #000;
+  border: none;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .head2 {
-    margin: 2%;
-    background-color: transparent;
-    font-size: 1.6rem;
-    border: none;
-    color: black;
-    font-family: 'Fira Sans', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  margin: 2%;
+  background-color: transparent;
+  font-size: 1.6rem;
+  border: none;
+  color: black;
+  font-family: "Fira Sans", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .scrollableContent {
-    width: 100%;
-    height: auto;
-    max-height: 25rem;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 10px;
+  width: 100%;
+  height: auto;
+  max-height: 25rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 10px;
 }
 
 /* Hide the scrollbar */
 .scrollableContent::-webkit-scrollbar {
-    width: 0;
+  width: 0;
 }
 
 .arrow {
-    display: flex;
-    position: absolute;
-    bottom: 2%;
-    right:3%;
-    font-size: 25px;
-    cursor: pointer;
+  display: flex;
+  position: absolute;
+  bottom: 2%;
+  right: 3%;
+  font-size: 25px;
+  cursor: pointer;
 }
 
-
 @media screen and (max-width: 700px) {
-    .head1 {
-        font-size: 1.4rem;
-        /* Adjust for smaller screens */
-    }
+  .head1 {
+    font-size: 1.4rem;
+    /* Adjust for smaller screens */
+  }
 
-    .head2 {
-        font-size: 1rem;
-        /* Adjust for smaller screens */
-    }
+  .head2 {
+    font-size: 1rem;
+    /* Adjust for smaller screens */
+  }
 
-    .card {
-        max-width: 40%;
-    }
+  .card {
+    max-width: 40%;
+  }
 
-    .scrollable-content {
-        max-height: 20rem;
-    }
+  .scrollable-content {
+    max-height: 20rem;
+  }
 }

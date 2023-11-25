@@ -12,23 +12,23 @@ import "@mantine/core/styles.css";
 import "@mantine/notifications/styles.css";
 
 const App = () => {
-	return (
-		<ErrorBoundary
-			FallbackComponent={FallbackUI}
-			onError={(error: Error) => {
-				console.error(error);
-			}}
-		>
-			<Provider store={store}>
-				<PersistGate loading={null} persistor={persistor}>
-					<MantineProvider theme={theme}>
-						<Notifications />
-						<Router />
-					</MantineProvider>
-				</PersistGate>
-			</Provider>
-		</ErrorBoundary>
-	);
+  return (
+    <ErrorBoundary
+      FallbackComponent={FallbackUI}
+      onError={(error: Error) => {
+        console.error(error);
+      }}
+    >
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MantineProvider theme={theme}>
+            <Notifications />
+            <Router />
+          </MantineProvider>
+        </PersistGate>
+      </Provider>
+    </ErrorBoundary>
+  );
 };
 
 export default App;

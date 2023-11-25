@@ -7,60 +7,60 @@ import { MetaDecoratedPage } from "../components";
 import AppWrapper from "../components/AppWrapper/AppWrapper";
 
 const Router = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<AppWrapper />}>
-					{routes.map((route) => {
-						return (
-							<Route
-								key={route.path}
-								path={route.path}
-								element={
-									<MetaDecoratedPage
-										title={route.title}
-										description={route.description}
-										element={route.element}
-									/>
-								}
-							>
-								{route.children}
-							</Route>
-						);
-					})}
-					{userRoutes.map(route => {
-						return (
-							<Route
-								key={route.path}
-								path={route.path}
-								element={
-									<ProtectedRoutes type="user">
-										<MetaDecoratedPage
-											title={route.title}
-											description={route.description}
-											element={route.element}
-										/>
-									</ProtectedRoutes>
-								}
-							>
-								{route.children}
-							</Route>
-						);
-					})}
-				</Route>
-				<Route
-					path="*"
-					element={
-						<MetaDecoratedPage
-							title="Not Found"
-							description="This is the not found page of App"
-							element={<NotFoundPage />}
-						/>
-					}
-				/>
-			</Routes>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<AppWrapper />}>
+          {routes.map((route) => {
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  <MetaDecoratedPage
+                    title={route.title}
+                    description={route.description}
+                    element={route.element}
+                  />
+                }
+              >
+                {route.children}
+              </Route>
+            );
+          })}
+          {userRoutes.map((route) => {
+            return (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={
+                  <ProtectedRoutes type="user">
+                    <MetaDecoratedPage
+                      title={route.title}
+                      description={route.description}
+                      element={route.element}
+                    />
+                  </ProtectedRoutes>
+                }
+              >
+                {route.children}
+              </Route>
+            );
+          })}
+        </Route>
+        <Route
+          path="*"
+          element={
+            <MetaDecoratedPage
+              title="Not Found"
+              description="This is the not found page of App"
+              element={<NotFoundPage />}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;

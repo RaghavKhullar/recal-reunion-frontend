@@ -3,19 +3,19 @@ import { Helmet } from "react-helmet";
 import { MetaDecoratedPageProps } from "./types";
 
 const MetaDecoratedPage: React.FC<MetaDecoratedPageProps> = ({
-	title,
-	description,
-	element,
+  title,
+  description,
+  element,
 }) => {
-	return (
-		<>
-			<Helmet>
-				<meta name="description" content={description} />
-				<title>{title} | REConnecT'99</title>
-			</Helmet>
-			{element}
-		</>
-	);
+  return (
+    <>
+      <Helmet>
+        <meta name="description" content={description} />
+        <title>{title} | REConnecT'99</title>
+      </Helmet>
+      {element}
+    </>
+  );
 };
 
 export default MetaDecoratedPage;

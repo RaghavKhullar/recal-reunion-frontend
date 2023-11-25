@@ -37,9 +37,12 @@ type Friend = {
   }[];
 };
 const ProfileCard = ({ user }: { user: Friend }) => {
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   return (
-    <Card className=" h-[260px] w-[250px] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer" onClick={()=>navigate('/user/'+user.id)}>
+    <Card
+      className=" h-[260px] w-[250px] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer"
+      onClick={() => navigate("/user/" + user.id)}
+    >
       <BackgroundImage
         className="h-[100%] w-[100%] overflow-hidden rounded-[10px] backdrop-brightness-0 flex flex-col justify-end"
         src={user.imageURL}

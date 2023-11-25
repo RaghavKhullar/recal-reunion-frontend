@@ -51,9 +51,7 @@ const Search = () => {
 
   const fetchAllFriends = async (name: string) => {
     if (name.length >= 3) {
-      const regex = new RegExp(
-        "^[0-9a-zA-Z \b]+$"
-      );
+      const regex = new RegExp("^[0-9a-zA-Z \b]+$");
 
       if (!regex.test(name)) {
         showNotification(
@@ -77,39 +75,47 @@ const Search = () => {
     const searchUserDispatch = await dispatch(searchUser(name));
     if (searchUser.fulfilled.match(searchUserDispatch)) {
       if (searchUserDispatch.payload.status === 200) {
-        const friends = searchUserDispatch.payload.data.data.map((friend: any) => {
-          const socials = [];
+        const friends = searchUserDispatch.payload.data.data.map(
+          (friend: any) => {
+            const socials = [];
 
-          if (friend.x && friend.x.length !== 0) {
-            socials.push({
-              name: "X",
-              link: friend.x.includes("twitter.com") ? friend.x : "https://twitter.com/" + friend.x,
-            });
+            if (friend.x && friend.x.length !== 0) {
+              socials.push({
+                name: "X",
+                link: friend.x.includes("twitter.com")
+                  ? friend.x
+                  : "https://twitter.com/" + friend.x,
+              });
+            }
+
+            if (friend.linkedin && friend.linkedin.length !== 0) {
+              socials.push({
+                name: "LinkedIn",
+                link: friend.linkedin.includes("linkedin.com")
+                  ? friend.linkedin
+                  : "https://linkedin.com/in/" + friend.linkedin,
+              });
+            }
+
+            if (friend.facebook && friend.facebook.length !== 0) {
+              socials.push({
+                name: "Facebook",
+                link: friend.facebook.includes("facebook.com")
+                  ? friend.facebook
+                  : "https://facebook.com/" + friend.facebook,
+              });
+            }
+
+            return {
+              id: friend._id,
+              name: friend.name,
+              department: friend.department,
+              // if friend.image is null we should display the default image, which will be handled by this case
+              imageURL: BACKEND_URL + "/images/profiles/" + friend.image,
+              socials: socials,
+            };
           }
-
-          if (friend.linkedin && friend.linkedin.length !== 0) {
-            socials.push({
-              name: "LinkedIn",
-              link: friend.linkedin.includes("linkedin.com") ? friend.linkedin : "https://linkedin.com/in/" + friend.linkedin,
-            });
-          }
-
-          if (friend.facebook && friend.facebook.length !== 0) {
-            socials.push({
-              name: "Facebook",
-              link: friend.facebook.includes("facebook.com") ? friend.facebook : "https://facebook.com/" + friend.facebook,
-            });
-          }
-
-          return {
-            id: friend._id,
-            name: friend.name,
-            department: friend.department,
-            // if friend.image is null we should display the default image, which will be handled by this case
-            imageURL: BACKEND_URL + "/images/profiles/" + friend.image,
-            socials: socials,
-          };
-        });
+        );
         setFriends(friends);
         setVisibleFriends(friends);
       }
@@ -168,7 +174,9 @@ const Search = () => {
               <Text className="text-2xl font-bebus">Search for Friends</Text>
             </Center>
           ) : (
-            visibleFriends.map((friend) => <ProfileCard key={friend.id} user={friend} />)
+            visibleFriends.map((friend) => (
+              <ProfileCard key={friend.id} user={friend} />
+            ))
           ))}
       </SimpleGrid>
       <Center
@@ -188,9 +196,9 @@ const Search = () => {
                   "bg-transparent w-full rounded-full text-3xl font-bebus border-[2px] border-black py-2 px-5 pl-20 h-[70px] placeholder:text-black placeholder:opacity-25",
                 section: "bg-transparent w-[100px] pr-4",
               }}
-              onKeyDown={e => {
+              onKeyDown={(e) => {
                 if (e.code === "Enter") {
-                  fetchAllFriends(name)
+                  fetchAllFriends(name);
                 }
               }}
               leftSection={

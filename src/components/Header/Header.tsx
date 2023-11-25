@@ -33,7 +33,8 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
       <Box>
         <Link to="/home">
           <img src={logo} alt="" draggable={false} />
-        </Link></Box>
+        </Link>
+      </Box>
       <Group gap={5}>
         <Group gap={40}>
           <Link to="/search">
