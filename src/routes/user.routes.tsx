@@ -5,6 +5,7 @@ import {
   RemsByMe,
   Search,
   WriteRem,
+  EditRem
 } from "../pages";
 import RemsByOthersForSomeone from "../pages/RemsByOthersForSomeone/RemsByOthersForSomeone";
 import RemsBySomeoneForOthers from "../pages/RemsBySomeoneForOthers/RemsBySomeoneForOthers";
@@ -57,5 +58,11 @@ export const userRoutes: RouteType[] = [
     element: <RemsByOthersForSomeone />,
     title: "Rems",
     description: "Read Rems!",
+  },
+  {
+    path: "/editRem/:id",
+    element: <EditRem />,
+    title: "Edit Rem",
+    description: "Search for your batchmates!",
   },
 ];

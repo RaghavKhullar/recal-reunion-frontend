@@ -1,9 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-  getPublicRemsOfUser,
-  getRemsWrittenByMe,
-  getRemsWrittenForMe,
-} from "../../actions/index";
+import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe, getRemOfPair } from "../../actions/index";
 import { initialState } from "../User/UserReducer";
 
 export const memory = createSlice({
@@ -50,30 +46,25 @@ export const memory = createSlice({
     });
 
     builder.addCase(getPublicRemsOfUser.rejected, (state) => {
-      state.otherUser = {
-        ...state.otherUser,
-        writtenForUser: { isFetching: false, rems: [] },
-        writtenByUser: { isFetching: false, rems: [] },
-      };
+      state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: [] }, writtenByUser: { isFetching: false, rems: [] } };
     });
     builder.addCase(getPublicRemsOfUser.pending, (state) => {
-      state.otherUser = {
-        ...state.otherUser,
-        writtenForUser: { isFetching: true, rems: [] },
-        writtenByUser: { isFetching: true, rems: [] },
-      };
+      state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: true, rems: [] }, writtenByUser: { isFetching: true, rems: [] } };
     });
     builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {
-      state.otherUser = {
-        ...state.otherUser,
-        writtenForUser: {
-          isFetching: false,
-          rems: payload.data.writtenForUser,
-        },
-        writtenByUser: { isFetching: false, rems: payload.data.writtenByUser },
-      };
+      state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: payload.data.writtenForUser }, writtenByUser: { isFetching: false, rems: payload.data.writtenByUser } };
     });
-  },
+
+    builder.addCase(getRemOfPair.rejected, (state) => {
+      state.isFetching = false;
+    });
+    builder.addCase(getRemOfPair.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(getRemOfPair.fulfilled, (state) => {
+      state.isFetching = false;
+    });
+  }
 });
 
 export default memory.reducer;

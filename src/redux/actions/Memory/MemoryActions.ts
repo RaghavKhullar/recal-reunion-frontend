@@ -71,3 +71,23 @@ export const getPublicRemsOfUser = createAsyncThunk<
     return error.response;
   }
 });
+
+// Don't update store for it
+export const getRemOfPair = createAsyncThunk<
+	any,
+	String,
+	{ rejectValue: APIError }
+>("memory/getRemOfPair", async (id: String, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.post(
+			`/memory/getremofpair`,
+			{ id: id },
+			{
+				withCredentials: true,
+			}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});
