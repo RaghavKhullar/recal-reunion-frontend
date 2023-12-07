@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 
-const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
+const Header = ({ toggleNavbar, toggleNotification }: { toggleNavbar: () => void, toggleNotification: () => void }) => {
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -41,8 +41,8 @@ const Header = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
             <IconUserSearch size={35} />
           </Link>
 
-          <IconBell size={35} />
-          <IconUserCircle onClick={toggleNavbar} size={35} />
+          <IconBell cursor="pointer" onClick={()=>{toggleNotification()}} size={35} />
+          <IconUserCircle cursor="pointer"onClick={toggleNavbar} size={35} />
         </Group>
         <IconTriangleInvertedFilled width={10} size={10} />
       </Group>

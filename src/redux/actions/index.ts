@@ -6,4 +6,4 @@ export {
   updateUserProfile,
 } from "./User/UserAction";
 
-export { getRemsWrittenByMe, getRemsWrittenForMe, writeRem, getPublicRemsOfUser,getRemOfPair } from "./Memory/MemoryActions";
+export { getRemsWrittenByMe, getRemsWrittenForMe, writeRem, getPublicRemsOfUser, getRemOfPair, changePrivacy } from "./Memory/MemoryActions";

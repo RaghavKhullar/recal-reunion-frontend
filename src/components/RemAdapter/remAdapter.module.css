@@ -31,22 +31,22 @@
 }
 
 .remField .rem {
-  display: flex;
-  width: calc(80%);
-  background: transparent;
-  height: auto;
-  flex-direction: column;
-  justify-content: center;
-  flex-shrink: 0;
-  color: #000;
-  font-family: "Fira Sans", sans-serif;
-  font-size: 1.3rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    display: flex;
+    width:calc(80%);
+    background: transparent;
+    height: auto;
+    flex-direction:column;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #000;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 700px) {

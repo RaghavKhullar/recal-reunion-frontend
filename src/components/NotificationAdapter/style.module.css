@@ -1,0 +1,77 @@
+.remField {
+    width: 94%;
+    height: 100%;
+    display: flex;
+    padding: 1rem 1rem 1rem 1rem;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    cursor: pointer;
+    margin: 1rem 2rem 1rem 2rem;
+    justify-content: space-between;
+}
+
+.remField:hover {
+    background-color: rgba(0, 0, 0, 0.07);
+    border-radius: 2%;
+    box-shadow: 10px 10px 65px 0px rgba(0, 0, 0, 0.15),
+        -10px -10px 65px 0px rgba(0, 0, 0, 0.15);
+}
+
+.image {
+    max-width: calc(100%);
+    height: 4.5rem;
+    object-fit: cover;
+}
+
+
+.remField .rem {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    width: calc(65%);
+    background: transparent;
+    max-height: calc(90%);
+    flex-shrink: 0;
+    color: #000;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
+}
+
+.button {
+    display: flex;
+    width: calc(20%)!important;
+    background: transparent;
+    height: auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: #000;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 1.3rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 700px) {
+    .remField .image {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    .remField .rem {
+        font-size: 1rem;
+        max-width: 20vw;
+    }
+
+}

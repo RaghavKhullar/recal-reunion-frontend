@@ -91,3 +91,25 @@ export const getRemOfPair = createAsyncThunk<
 		return error.response;
 	}
 });
+
+export const changePrivacy = createAsyncThunk<
+	any,
+	{
+		id: String,
+		privacy: Boolean
+	},
+	{ rejectValue: APIError }
+>("memory/changeRemPrivacy", async (body, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.post(
+			`/memory/changeprivacy`,
+			{ remId: body.id, privacy: !(body.privacy) },
+			{
+				withCredentials: true,
+			}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});

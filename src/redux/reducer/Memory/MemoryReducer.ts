@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe, getRemOfPair } from "../../actions/index";
+import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe, getRemOfPair, changePrivacy } from "../../actions/index";
 import { initialState } from "../User/UserReducer";
 
 export const memory = createSlice({
@@ -26,23 +26,26 @@ export const memory = createSlice({
       };
     });
 
+    builder.addCase(getRemsWrittenByMe.rejected, (state) => {
+      state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: false, rems: [] } };
+    });
+    builder.addCase(getRemsWrittenByMe.pending, (state) => {
+      state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: true, rems: [] } };
+    });
+    builder.addCase(getRemsWrittenByMe.fulfilled, (state, { payload }) => {
+      if (payload.status === 200)
+        state.currentUser = { ...state.currentUser, writtenByUser: { isFetching: false, rems: payload.data.data } };
+    });
+
     builder.addCase(getRemsWrittenForMe.rejected, (state) => {
-      state.currentUser = {
-        ...state.currentUser,
-        writtenForUser: { isFetching: false, rems: [] },
-      };
+      state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: false, rems: [] } }
     });
     builder.addCase(getRemsWrittenForMe.pending, (state) => {
-      state.currentUser = {
-        ...state.currentUser,
-        writtenForUser: { isFetching: true, rems: [] },
-      };
+      state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: true, rems: [] } }
     });
     builder.addCase(getRemsWrittenForMe.fulfilled, (state, { payload }) => {
-      state.currentUser = {
-        ...state.currentUser,
-        writtenForUser: { isFetching: false, rems: payload.data.data },
-      };
+      if (payload.status === 200)
+        state.currentUser = { ...state.currentUser, writtenForUser: { isFetching: false, rems: payload.data.data } }
     });
 
     builder.addCase(getPublicRemsOfUser.rejected, (state) => {
@@ -52,7 +55,8 @@ export const memory = createSlice({
       state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: true, rems: [] }, writtenByUser: { isFetching: true, rems: [] } };
     });
     builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {
-      state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: payload.data.writtenForUser }, writtenByUser: { isFetching: false, rems: payload.data.writtenByUser } };
+      if (payload.status === 200)
+        state.otherUser = { ...state.otherUser, writtenForUser: { isFetching: false, rems: payload.data.writtenForUser }, writtenByUser: { isFetching: false, rems: payload.data.writtenByUser } };
     });
 
     builder.addCase(getRemOfPair.rejected, (state) => {
@@ -63,6 +67,25 @@ export const memory = createSlice({
     });
     builder.addCase(getRemOfPair.fulfilled, (state) => {
       state.isFetching = false;
+    });
+
+    builder.addCase(changePrivacy.rejected, (state) => {
+      state.isFetching = false;
+    });
+    builder.addCase(changePrivacy.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(changePrivacy.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
+      if (payload.status === 200) {
+        state.currentUser.writtenForUser.rems.forEach((rem: Rem) => {
+          if (rem.id === payload.data.data._id) {
+            rem.isPrivate = payload.data.data.isPrivate;
+          }
+        }
+        )
+      }
+
     });
   }
 });

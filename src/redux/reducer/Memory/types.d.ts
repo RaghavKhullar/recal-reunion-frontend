@@ -1,10 +1,11 @@
 // For all the rems written by user we just return the to user, whereas in rems written for user we return from user
 interface Rem {
-  id: string;
-  to?: IProfile;
-  from?: IProfile;
-  image: string | null;
-  content: string;
+	id: string;
+	to?: IProfile;
+	from?: IProfile;
+	image: string | null;
+	isPrivate: boolean;
+	content: string;
 }
 
 interface MemoryState {

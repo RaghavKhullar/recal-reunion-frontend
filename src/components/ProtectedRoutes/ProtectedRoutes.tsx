@@ -8,15 +8,20 @@ import { showNotification } from "../../helpers/helpers";
 const ProtectedRoute = (props: any) => {
   const navigate = useNavigate();
   const { children, type } = props;
-  const { loggedIn, isFetching, isProfileUpdated } =
-    type === "user" ? useSelector(userSelector) : useSelector(adminSelector);
+  const {
+    loggedIn,
+    isFetching,
+    isProfileUpdated,
+  } =
+    type === "user"
+      ? useSelector(userSelector)
+      : useSelector(adminSelector);
   useEffect(() => {
     if (!isFetching) {
       if (loggedIn) {
         if (type == "user") {
           if (!isProfileUpdated) {
             // navigate to update profile
-            showNotification("Info", "Update your profile", "warning");
             return;
           }
         }
@@ -24,6 +29,10 @@ const ProtectedRoute = (props: any) => {
         showNotification("Warning", "You are not signed in!", "warning");
         navigate("/login");
       }
+    }
+    else {
+      showNotification("Warning", "You are not signed in!", "warning");
+      navigate("/login");
     }
   }, [loggedIn, isFetching, isProfileUpdated, children]);
 
