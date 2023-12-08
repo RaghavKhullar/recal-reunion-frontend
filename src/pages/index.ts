@@ -8,3 +8,4 @@ export { default as OtherUserProfile } from "./OtherUserProfile/OtherUserProfile
 export { default as MyRems } from "./MyRems/MyRems";
 export { default as RemsByMe } from "./RemsByMe/RemsByMe";
 export { default as EditRem } from "./EditRem/EditRem";
+export { default as ViewRem } from "./ViewRem/ViewRem";

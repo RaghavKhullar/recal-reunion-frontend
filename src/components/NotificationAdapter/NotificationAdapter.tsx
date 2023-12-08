@@ -13,7 +13,7 @@ const imageParentCss = {
     overflow: "hidden"
 }
 
-const NotificationAdapter = ({ rem }: { rem: Rem }) => {
+const NotificationAdapter = ({ rem, toggleNotification }: { rem: Rem, toggleNotification: () => void }) => {
     const navigate = useNavigate();
     const [isVisible, setIsVisible] = useState<boolean>(false);
     const [isFetching, setIsFetching] = useState<boolean>(false);
@@ -41,9 +41,12 @@ const NotificationAdapter = ({ rem }: { rem: Rem }) => {
         <>
             <div className={style.remField}>
                 <Link style={{ ...imageParentCss, width: "calc(10%)" }} to={'/user/' + rem.from?._id} className={style.imageParent}>
-                    <Image className={style.image} src={BACKEND_URL + '/images/profiles/' + (rem.from?.image)} draggable={false} />
+                    <Image className={style.image} src={BACKEND_URL + '/images/profiles/' + (rem.from?.image || "temp.png")} draggable={false} />
                 </Link>
-                <div onClick={() => navigate('/user/' + (rem.from?._id))} onMouseOver={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)} className={style.rem}><span>{rem.from?.name} wrote: </span> <br />"{rem.content}"</div>
+                <div onClick={() => {
+                    navigate('/viewRem/' + (rem.id));
+                    toggleNotification();
+                }} onMouseOver={() => setIsVisible(true)} onMouseLeave={() => setIsVisible(false)} className={style.rem}><span>{rem.from?.name} wrote: </span> <br />"{rem.content}"</div>
                 <div className={style.button}>
                     {isVisible === true ? <div style={{ ...imageParentCss, width: "50%" }}><Image className={style.image} src={BACKEND_URL + '/images/memory/' + (rem.image && rem.image.length > 0 ? rem.image : "temp.png")} draggable={false} /> </div> : <Button color="#A72343" onClick={changeRemPrivacy} disabled={isFetching}>{rem.isPrivate ? "Approve ?" : "Disapprove ?"}</Button>}
                 </div>

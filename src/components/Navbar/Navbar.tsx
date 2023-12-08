@@ -12,7 +12,7 @@ const Navbar = ({ isNavbarOpen, isNotificationOpen, toggleNavbar, toggleNotifica
           stroke={3}
           className="absolute top-[2%] right-[2%] z-50 cursor-pointer"
         />
-        <ProfileSection isUser={true} />
+        <ProfileSection isUser={true} toggleNavbar={toggleNavbar} toggleNotification={toggleNotification} />
       </>)}
       {isNotificationOpen === true && (<>
         <IconX
@@ -21,7 +21,7 @@ const Navbar = ({ isNavbarOpen, isNotificationOpen, toggleNavbar, toggleNotifica
           stroke={3}
           className="absolute top-[2%] right-[2%] z-50 cursor-pointer"
         />
-        <ProfileSection isUser={false} />
+        <ProfileSection isUser={false} toggleNavbar={toggleNavbar} toggleNotification={toggleNotification} />
       </>)}
 
     </Box>

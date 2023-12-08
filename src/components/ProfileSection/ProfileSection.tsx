@@ -1,6 +1,7 @@
-import { Box, Center, Container, Group, Image, Text } from "@mantine/core";
-import { useSelector } from "react-redux";
+import { Box, Center, Container, Group, Image, Text, SimpleGrid } from "@mantine/core";
+import NotificationAdapter from "../NotificationAdapter/NotificationAdapter";
 import { userSelector } from "../../redux/reducer";
+import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
 import {
   IconBrandFacebookFilled,
@@ -15,13 +16,9 @@ import {
 } from "@tabler/icons-react";
 import { useDisclosure } from "@mantine/hooks";
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
-
-
-import NotificationAdapter from "../NotificationAdapter/NotificationAdapter";
-import { SimpleGrid, Button } from "@mantine/core";
 import { useEffect, useState } from "react";
 
-const ProfileSection = ({ isUser }: { isUser: boolean }) => {
+const ProfileSection = ({ isUser, toggleNavbar, toggleNotification }: { isUser: boolean, toggleNavbar: () => void, toggleNotification: () => void }) => {
   const state = useSelector(userSelector);
   const [remsWrittenForMe, setWrittenRemsForMe] = useState<Rem[]>([]);
   const [opened, { open, close }] = useDisclosure(false);
@@ -174,7 +171,7 @@ const ProfileSection = ({ isUser }: { isUser: boolean }) => {
                 height: "15vh",
                 display: "flex"
               }}>
-                <NotificationAdapter rem={rem} />
+                <NotificationAdapter rem={rem} toggleNotification={toggleNotification} />
               </div>
             )
           })}

@@ -113,3 +113,22 @@ export const changePrivacy = createAsyncThunk<
 		return error.response;
 	}
 });
+
+export const getRemFromId = createAsyncThunk<
+	any,
+	String,
+	{ rejectValue: APIError }
+>("memory/fetchrem", async (id, { rejectWithValue }) => {
+	try {
+		const response = await CustomAxios.post(
+			`/memory/fetchrem`,
+			{ remId: id },
+			{
+				withCredentials: true,
+			}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
+});

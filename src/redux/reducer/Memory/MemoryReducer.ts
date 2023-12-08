@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe, getRemOfPair, changePrivacy } from "../../actions/index";
+import { getPublicRemsOfUser, getRemsWrittenByMe, getRemsWrittenForMe, getRemOfPair, changePrivacy, getRemFromId } from "../../actions/index";
 import { initialState } from "../User/UserReducer";
 
 export const memory = createSlice({
@@ -85,7 +85,16 @@ export const memory = createSlice({
         }
         )
       }
+    });
 
+    builder.addCase(getRemFromId.rejected, (state) => {
+      state.isFetching = false;
+    });
+    builder.addCase(getRemFromId.pending, (state) => {
+      state.isFetching = true;
+    });
+    builder.addCase(getRemFromId.fulfilled, (state, { payload }) => {
+      state.isFetching = false;
     });
   }
 });
