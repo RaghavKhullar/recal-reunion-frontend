@@ -7,20 +7,6 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { useEffect, useState } from "react";
 import { showNotification } from "../../helpers/helpers";
 
-const processRems = (rem: {
-  to: { image: string; name: string; _id: string };
-  content: string;
-  image: string;
-}) => ({
-  author: {
-    profilePicture: BACKEND_URL + "/images/profiles/" + rem.to?.image || "",
-    name: rem.to?.name || "",
-    link: "/user/" + rem.to?._id,
-  },
-  content: rem.content || "",
-  image: BACKEND_URL + "/images/memory/" + (rem.image || ""),
-});
-
 const RemsBySomeoneForOthers = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -66,7 +52,17 @@ const RemsBySomeoneForOthers = () => {
     );
   }
 
-  const rems = remDetailsForUser.map(processRems);
+  const rems = remDetailsForUser.map((rem) => {
+    return {
+      author: {
+        profilePicture: BACKEND_URL + "/images/profiles/" + rem.to?.image || "",
+        name: rem.to?.name || "",
+        link: "/user/" + rem.to?._id,
+      },
+      content: rem.content || "",
+      image: BACKEND_URL + "/images/memory/" + (rem.image || ""),
+    };
+  });
 
   return (
     <Center className="w-full h-full">

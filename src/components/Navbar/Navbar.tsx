@@ -11,7 +11,7 @@ const Navbar = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
         stroke={3}
         className="absolute top-[2%] right-[1%] z-50 cursor-pointer"
       />
-      <ProfileSection isUser={true} />
+      <ProfileSection />
     </Box>
   );
 };
