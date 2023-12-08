@@ -4,6 +4,7 @@ import {
   getOtherUserFromId,
   searchUser,
   getOtherUserDetailsFromId,
+  updateUserProfile,
 } from "../../actions";
 
 export const initialState = {
@@ -33,7 +34,6 @@ export const user = createSlice({
       state.isFetching = false;
     });
     builder.addCase(getCurrentUser.pending, (state) => {
-      state.loggedIn = false;
       state.isFetching = true;
     });
     builder.addCase(getCurrentUser.fulfilled, (state, { payload }) => {
@@ -43,6 +43,14 @@ export const user = createSlice({
         ...state.currentUser,
         user: payload.data.user,
         oldRem: payload.data.oldRem,
+      };
+    });
+
+    builder.addCase(updateUserProfile.fulfilled, (state, { payload }) => {
+      state.isProfileUpdated = true;
+      state.currentUser = {
+        ...state.currentUser,
+        user: payload.data,
       };
     });
 

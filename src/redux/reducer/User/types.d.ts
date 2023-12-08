@@ -7,8 +7,11 @@ interface OldRem {
 interface IProfile {
   _id: string;
   name: string;
+  aboutMe: string;
+  section: string;
+  phone: string;
   email: string;
-  dateOfBirth: Date;
+  dateOfBirth: string;
   department: string;
   image: string | null;
   linkedin: string | null;

@@ -5,3 +5,5 @@ export { default as Home } from "./Home/Home";
 export { default as Login } from "./Login/Login";
 export { default as WriteRem } from "./WriteRem/WriteRem";
 export { default as OtherUserProfile } from "./OtherUserProfile/OtherUserProfile";
+export { default as MyRems } from "./MyRems/MyRems";
+export { default as RemsByMe } from "./RemsByMe/RemsByMe";

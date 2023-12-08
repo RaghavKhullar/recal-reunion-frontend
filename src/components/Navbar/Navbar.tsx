@@ -9,7 +9,7 @@ const Navbar = ({ toggleNavbar }: { toggleNavbar: () => void }) => {
         onClick={toggleNavbar}
         size={35}
         stroke={3}
-        className="absolute top-[2%] right-[2%] z-50 cursor-pointer"
+        className="absolute top-[2%] right-[1%] z-50 cursor-pointer"
       />
       <ProfileSection isUser={true} />
     </Box>

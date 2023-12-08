@@ -1,0 +1,13 @@
+.updateProfileContainer {
+  border-radius: 20px !important;
+  border: 1px solid #afafaf !important;
+  background: linear-gradient(
+      321deg,
+      rgba(191, 191, 191, 0.06) 5.98%,
+      rgba(0, 0, 0, 0) 66.28%
+    ),
+    rgba(0, 0, 0, 0.06) !important;
+
+  box-shadow: -8px 4px 5px 0px rgba(0, 0, 0, 0.24) !important;
+  backdrop-filter: blur(26.5px) !important;
+}

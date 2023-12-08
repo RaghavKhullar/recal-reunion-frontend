@@ -1,6 +1,7 @@
 import style from "./card.module.css";
 
 import RemAdapter from "../RemAdapter/RemAdapter";
+import { Link } from "react-router-dom";
 
 interface CardProps {
   remDetails: Rem[];
@@ -31,7 +32,12 @@ const Card: React.FC<CardProps> = ({
         )}
       </div>
       <div className={style.arrow}>
-        <div className={style.seeMore}>See more -{">"}</div>
+        <Link
+          to={head1.endsWith("you") ? "/myRems" : "/remsByMe"}
+          className={style.seeMore}
+        >
+          See more -{">"}
+        </Link>
       </div>
     </div>
   );

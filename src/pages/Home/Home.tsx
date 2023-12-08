@@ -84,8 +84,10 @@ const Home: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    fetchWrittenRemsForMe();
-    fetchWrittenRemsByMe();
+    if (state.loggedIn && !state.isFetching) {
+      fetchWrittenRemsForMe();
+      fetchWrittenRemsByMe();
+    }
   }, [state.loggedIn]);
 
   return (

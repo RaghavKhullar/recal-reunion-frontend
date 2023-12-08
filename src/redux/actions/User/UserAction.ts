@@ -55,9 +55,9 @@ export const getOtherUserDetailsFromId = createAsyncThunk<
 
 export const searchUser = createAsyncThunk<
   any,
-  String,
+  string,
   { rejectValue: APIError }
->("user/search", async (name: String, { rejectWithValue }) => {
+>("user/search", async (name: string, { rejectWithValue }) => {
   try {
     const response = await CustomAxios.get(`/user/searchUser`, {
       withCredentials: true,
@@ -68,3 +68,20 @@ export const searchUser = createAsyncThunk<
     return error.response;
   }
 });
+
+export const updateUserProfile = createAsyncThunk(
+  "user/updateUserProfile",
+  async (form: FormData, { rejectWithValue }) => {
+    try {
+      const response = await CustomAxios.post(`/user/updateProfile`, form, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response;
+    } catch (error: any) {
+      return error.response;
+    }
+  }
+);
