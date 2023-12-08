@@ -85,42 +85,32 @@ const WriteRem = () => {
     getDetails();
   }, []);
 
-  const postRem = async (
-    file: File | undefined,
-    content: string,
-    to: string | undefined
-  ) => {
+  useEffect(() => {
+    getWrittenRemOfPair();
+    getDetails();
+  }, []);
+
+  const postRem = async (file: File | undefined, content: string, to: string | undefined) => {
     if (content.length === 0) {
       showNotification("Warning", "Content of Rem can't be empty", "warning");
       return;
     } else if (to === undefined || to === null) {
       showNotification("Warning", "Invalid user", "warning");
-      navigate("/home");
+      navigate('/home');
       return;
     } else {
-      const writeRemDispatch = await dispatch(
-        writeRem({ file: file, content: content, to: to })
-      );
+      const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to, isFileUpdated: true }));
       if (writeRem.fulfilled.match(writeRemDispatch)) {
         if (writeRemDispatch.payload.status === 200) {
           showNotification("Success", "Rem written successfully", "success");
-          // Navigate to user profile once done
-          navigate("/home");
+          navigate('/user/' + id)
         } else {
-          const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to }));
-          if (writeRem.fulfilled.match(writeRemDispatch)) {
-            if (writeRemDispatch.payload.status === 200) {
-              showNotification("Success", "Rem written successfully", "success");
-              navigate('/user/' + id)
-            } else {
-              showNotification("Error", "Some error occured", "error");
-              navigate(`/user/` + id);
-            }
-          } else {
-            showNotification("Error", "Error occured while writing rem", "error");
-            navigate(`/user/` + id);
-          }
+          showNotification("Error", "Some error occured", "error");
+          navigate(`/user/` + id);
         }
+      } else {
+        showNotification("Error", "Error occured while writing rem", "error");
+        navigate(`/user/` + id);
       }
     }
   }
@@ -159,54 +149,8 @@ const WriteRem = () => {
               input: { height: '25rem', width: "40rem", backgroundColor: "transparent", border: "3px solid #411D76", borderRadius: "10px", fontFamily: "'Fira Sans', sans-serif", fontSize: "1.5rem", overflowY: "auto" },
             }} />
             <button className={styles.remBtn} onClick={() => postRem(file, content, id)}>Submit</button>
-
           </div>
-
         </div>
-
-      </div>
-
-      <FileInput
-        accept="image/png,image/jpeg,image/jpg"
-        // @ts-ignore
-        onChange={(e) => setFile(e)}
-        // @ts-ignore
-        placeholder={<img src={uploadImage} />}
-        clearable
-        value={file}
-        style={{
-          marginTop: "2rem",
-          width: "10rem",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-        styles={{
-          input: { padding: 0 },
-        }}
-      />
-      <div style={{ textAlign: "center" }}>
-        <h2 className={styles.textAreaHead}> A Few words about me</h2>
-        <Textarea
-          onChange={(e) => setContent(e.target.value)}
-          styles={{
-            input: {
-              height: "25rem",
-              width: "40rem",
-              backgroundColor: "transparent",
-              border: "3px solid #411D76",
-              borderRadius: "10px",
-              fontFamily: "'Fira Sans', sans-serif",
-              fontSize: "1.5rem",
-              overflowY: "auto",
-            },
-          }}
-        />
-        <button
-          className={styles.remBtn}
-          onClick={() => postRem(file, content, id)}
-        >
-          Submit
-        </button>
       </div>
     </>
   );

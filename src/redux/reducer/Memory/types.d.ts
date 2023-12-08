@@ -14,7 +14,9 @@ interface MemoryState {
 }
 
 interface WriteRemBody {
-  file: File | undefined;
-  content: string;
-  to: string;
+	file: File | undefined;
+	content: string;
+	to: string;
+	// This will be true when writing rem for the first time, else while updating it will be false if no new file is updated
+	isFileUpdated: boolean;
 }

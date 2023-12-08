@@ -36,21 +36,21 @@ export const writeRem = createAsyncThunk<
   WriteRemBody,
   { rejectValue: APIError }
 >("memory/writeRem", async (body: WriteRemBody, { rejectWithValue }) => {
-  try {
-    const response = await CustomAxios.post(
-      `/memory/updaterem`,
-      { file: body.file, content: body.content, to: body.to },
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    return response;
-  } catch (error: any) {
-    return error.response;
-  }
+	try {
+		const response = await CustomAxios.post(
+			`/memory/updaterem`,
+			{ file: body.isFileUpdated === true ? body.file : undefined, content: body.content, to: body.to, isFileUpdated: body.isFileUpdated },
+			{
+				withCredentials: true,
+				headers: {
+					"Content-Type": "multipart/form-data",
+				},
+			}
+		);
+		return response;
+	} catch (error: any) {
+		return error.response;
+	}
 });
 
 export const getPublicRemsOfUser = createAsyncThunk<

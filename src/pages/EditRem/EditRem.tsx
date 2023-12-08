@@ -25,6 +25,7 @@ const EditRem = () => {
     const [file, setFile] = useState<File | undefined>(undefined);
     const dispatch = useAppDispatch();
     const userId = useSelector(userSelector).currentUser.user?._id;
+    const [isFileUpdated, setIsFileUpdated] = useState<boolean>(false);
 
     const getDetails = async () => {
         if (id === undefined || id === userId) {
@@ -67,7 +68,6 @@ const EditRem = () => {
                         const file = new File([blob], 'image.jpg', { type: blob.type });
                         setFile(file);
                     } catch (error) {
-                        console.log(error)
                         showNotification("Error", "Error occured while fetching rem image", "error");
                     }
                 }
@@ -98,7 +98,7 @@ const EditRem = () => {
             navigate('/home');
             return;
         } else {
-            const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to }));
+            const writeRemDispatch = await dispatch(writeRem({ file: file, content: content, to: to, isFileUpdated: isFileUpdated }));
             if (writeRem.fulfilled.match(writeRemDispatch)) {
                 if (writeRemDispatch.payload.status === 200) {
                     showNotification("Success", "Rem updated successfully", "success");
@@ -131,7 +131,15 @@ const EditRem = () => {
                         <FileInput
                             accept="image/png,image/jpeg,image/jpg"
                             // @ts-ignore
-                            onChange={(e) => setFile(e)}
+                            onChange={(e) => {
+                                setFile(e === null ? undefined : e);
+                                if (!isFileUpdated) {
+                                    // Send the file only when file is updated
+                                    setIsFileUpdated(true);
+                                }
+
+
+                            }}
                             // @ts-ignore
                             placeholder={<img src={uploadImage} />}
                             clearable
