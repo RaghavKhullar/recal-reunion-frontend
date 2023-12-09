@@ -1,7 +1,33 @@
+import { useSelector } from "react-redux";
 import { getGoogleUrl } from "../../utils/getGoogleUrl";
 import { Title, Text } from "@mantine/core";
+import { userSelector } from "../../redux/reducer";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getCurrentUser, logoutUser } from "../../redux/actions";
+import { useAppDispatch } from "../../redux/store/hooks";
 
 const UserLogin: React.FC = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { loggedIn } = useSelector(userSelector);
+
+  const fetchUserDetails = async () => {
+    const loginDispatch = await dispatch(getCurrentUser());
+    if (getCurrentUser.fulfilled.match(loginDispatch)) {
+      if (loginDispatch.payload.status === 200) {
+        navigate('/home');
+        return;
+      }
+    }
+    // if loggedIn in state is true, but actually user is not loggedin
+    await dispatch(logoutUser());
+  };
+  useEffect(() => {
+    if (loggedIn) {
+      fetchUserDetails();
+    }
+  }, [loggedIn])
   return (
     <>
       <div

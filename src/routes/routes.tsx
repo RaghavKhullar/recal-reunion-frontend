@@ -1,12 +1,6 @@
-import { Landing, Login } from "../pages";
+import {  Login } from "../pages";
 
 export const routes: RouteType[] = [
-  {
-    path: "/",
-    element: <Landing />,
-    title: "Landing",
-    description: "Landing Page of App",
-  },
   {
     path: "/login",
     element: <Login />,

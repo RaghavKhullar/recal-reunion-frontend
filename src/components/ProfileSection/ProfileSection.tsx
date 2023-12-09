@@ -10,7 +10,7 @@ import {
 import NotificationAdapter from "../NotificationAdapter/NotificationAdapter";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
-import { BACKEND_URL } from "../../../config";
+import { BACKEND_URL, FRONTEND_URL } from "../../../config";
 import {
   IconBrandFacebookFilled,
   IconBrandInstagram,
@@ -25,6 +25,10 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
 import { useEffect, useState } from "react";
+import { showNotification } from "../../helpers/helpers";
+import { useAppDispatch } from "../../redux/store/hooks";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../../redux/actions";
 
 const ProfileSection = ({
   isUser,
@@ -37,11 +41,36 @@ const ProfileSection = ({
 }) => {
   const state = useSelector(userSelector);
   const [remsWrittenForMe, setWrittenRemsForMe] = useState<Rem[]>([]);
+
   const [opened, { open, close }] = useDisclosure(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   if (!isUser) {
     useEffect(() => {
       setWrittenRemsForMe(state.currentUser.writtenForUser.rems);
     }, [state.currentUser.writtenForUser.rems]);
+  }
+
+  const logout = async () => {
+    const logoutDispatch = await dispatch(logoutUser());
+    if (logoutUser.fulfilled.match(logoutDispatch)) {
+      if (logoutDispatch.payload.status === 200) {
+        showNotification("Success", "Logged out successfully", "success")
+        navigate('/login');
+      } else {
+        showNotification("Error", "Some error occured", "error");
+        navigate(`/home`);
+      }
+    } else {
+      showNotification(
+        "Error",
+        "Error occured while fetching user details",
+        "error"
+      );
+      navigate(`/home`);
+    }
+    toggleNavbar();
   }
 
   const profileImage =
@@ -74,8 +103,11 @@ const ProfileSection = ({
                 onClick={() => open()}
                 size={30}
               />
-              <IconShare className="cursor-pointer" size={30} />
-              <IconLogout className="cursor-pointer" size={30} />
+              <IconShare className="cursor-pointer" onClick={() => {
+                navigator.clipboard.writeText(`${FRONTEND_URL}/user/${(state.currentUser.user?._id) || ""}|`);
+                showNotification("Success", "Link copied to clipboard", "success");
+              }} size={30} />
+              <IconLogout onClick={logout} className="cursor-pointer" size={30} />
             </Group>
             <Center className={"w-full z-10 -top-[20%] relative"}>
               <Center className="w-full max-w-[500px] z-10 flex-col justify-between">

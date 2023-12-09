@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userSelector, adminSelector } from "../../redux/reducer";
 import { showNotification } from "../../helpers/helpers";
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const ProtectedRoute = (props: any) => {
   const navigate = useNavigate();
@@ -22,6 +21,7 @@ const ProtectedRoute = (props: any) => {
       } else {
         showNotification("Warning", "You are not signed in!", "warning");
         navigate("/login");
+        return;
       }
     }
   }, [loggedIn, isFetching, isProfileUpdated, children]);

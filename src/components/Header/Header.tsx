@@ -8,6 +8,8 @@ import {
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../redux/reducer";
 
 const Header = ({
   toggleNavbar,
@@ -17,7 +19,7 @@ const Header = ({
   toggleNotification: () => void;
 }) => {
   const [scrollY, setScrollY] = useState(0);
-
+  const { loggedIn } = useSelector(userSelector);
   useEffect(() => {
     const handler = () => {
       setScrollY(window.scrollY);
@@ -41,23 +43,25 @@ const Header = ({
           <img src={logo} alt="" draggable={false} />
         </Link>
       </Box>
-      <Group gap={5}>
-        <Group gap={40}>
-          <Link to="/search">
-            <IconUserSearch size={35} />
-          </Link>
+      {loggedIn === true &&
+        <Group gap={5}>
+          <Group gap={40}>
+            <Link to="/search">
+              <IconUserSearch size={35} />
+            </Link>
 
-          <IconBell
-            cursor="pointer"
-            onClick={() => {
-              toggleNotification();
-            }}
-            size={35}
-          />
-          <IconUserCircle cursor="pointer" onClick={toggleNavbar} size={35} />
+            <IconBell
+              cursor="pointer"
+              onClick={() => {
+                toggleNotification();
+              }}
+              size={35}
+            />
+            <IconUserCircle cursor="pointer" onClick={toggleNavbar} size={35} />
+          </Group>
+          <IconTriangleInvertedFilled width={10} size={10} />
         </Group>
-        <IconTriangleInvertedFilled width={10} size={10} />
-      </Group>
+      }
     </Group>
   );
 };

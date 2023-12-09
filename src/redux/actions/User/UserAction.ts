@@ -65,3 +65,17 @@ export const updateUserProfile = createAsyncThunk(
     }
   }
 );
+
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await CustomAxios.get(`/user/logout`, {
+        withCredentials: true,
+      });
+      return response;
+    } catch (error: any) {
+      return error.response;
+    }
+  }
+);

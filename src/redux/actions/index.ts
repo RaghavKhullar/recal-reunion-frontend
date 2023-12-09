@@ -3,6 +3,7 @@ export {
   getOtherUserFromId,
   searchUser,
   updateUserProfile,
+  logoutUser
 } from "./User/UserAction";
 
 export {

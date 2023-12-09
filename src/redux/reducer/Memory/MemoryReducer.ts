@@ -54,10 +54,6 @@ export const memory = createSlice({
         };
     });
 
-    builder.addCase(getPublicRemsOfUser.rejected, (state) => {});
-    builder.addCase(getPublicRemsOfUser.pending, (state) => {});
-    builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {});
-
     builder.addCase(getRemOfPair.rejected, (state) => {
       state.isFetching = false;
     });
