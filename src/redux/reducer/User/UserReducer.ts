@@ -29,7 +29,6 @@ export const user = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     builder.addCase(updateUserProfile.fulfilled, (state, { payload }) => {
       state.isProfileUpdated = true;
       state.currentUser = {
@@ -49,7 +48,11 @@ export const user = createSlice({
       state.loggedIn = true;
       state.isFetching = false;
       if (payload.status === 200)
-        state.currentUser = { ...state.currentUser, user: payload.data.user, oldRem: payload.data.oldRem };
+        state.currentUser = {
+          ...state.currentUser,
+          user: payload.data.user,
+          oldRem: payload.data.oldRem,
+        };
     });
 
     builder.addCase(getOtherUserFromId.rejected, (state) => {
@@ -64,7 +67,11 @@ export const user = createSlice({
       state.isFetchingOtherUser = false;
       state.isOtherUserFetched = true;
       if (payload.status === 200)
-        state.otherUser = { ...state.otherUser, user: payload.data.user, oldRem: payload.data.oldRem };
+        state.otherUser = {
+          ...state.otherUser,
+          user: payload.data.user,
+          oldRem: payload.data.oldRem,
+        };
     });
 
     builder.addCase(getOtherUserDetailsFromId.rejected, (state) => {

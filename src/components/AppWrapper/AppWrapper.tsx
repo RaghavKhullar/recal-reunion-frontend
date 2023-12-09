@@ -6,7 +6,8 @@ import Navbar from "../Navbar/Navbar";
 
 const AppWrapper = () => {
   const [navbarOpened, { toggle: toggleNavbar }] = useDisclosure(false);
-  const [notificationOpened, { toggle: toggleNotification }] = useDisclosure(false);
+  const [notificationOpened, { toggle: toggleNotification }] =
+    useDisclosure(false);
   return (
     <AppShell
       classNames={{
@@ -24,10 +25,18 @@ const AppWrapper = () => {
       }}
     >
       <AppShell.Header>
-        <Header toggleNavbar={toggleNavbar} toggleNotification={toggleNotification} />
+        <Header
+          toggleNavbar={toggleNavbar}
+          toggleNotification={toggleNotification}
+        />
       </AppShell.Header>
       <AppShell.Aside>
-        <Navbar isNavbarOpen={navbarOpened} isNotificationOpen={notificationOpened} toggleNavbar={toggleNavbar} toggleNotification={toggleNotification} />
+        <Navbar
+          isNavbarOpen={navbarOpened}
+          isNotificationOpen={notificationOpened}
+          toggleNavbar={toggleNavbar}
+          toggleNotification={toggleNotification}
+        />
       </AppShell.Aside>
       <AppShell.Main>
         <Outlet />

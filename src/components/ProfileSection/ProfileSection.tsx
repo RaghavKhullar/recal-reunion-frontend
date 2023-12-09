@@ -1,4 +1,12 @@
-import { Box, Center, Container, Group, Image, Text, SimpleGrid } from "@mantine/core";
+import {
+  Box,
+  Center,
+  Container,
+  Group,
+  Image,
+  Text,
+  SimpleGrid,
+} from "@mantine/core";
 import NotificationAdapter from "../NotificationAdapter/NotificationAdapter";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
@@ -18,14 +26,22 @@ import { useDisclosure } from "@mantine/hooks";
 import UpdateProfile from "../UpdateProfile/UpdateProfile";
 import { useEffect, useState } from "react";
 
-const ProfileSection = ({ isUser, toggleNavbar, toggleNotification }: { isUser: boolean, toggleNavbar: () => void, toggleNotification: () => void }) => {
+const ProfileSection = ({
+  isUser,
+  toggleNavbar,
+  toggleNotification,
+}: {
+  isUser: boolean;
+  toggleNavbar: () => void;
+  toggleNotification: () => void;
+}) => {
   const state = useSelector(userSelector);
   const [remsWrittenForMe, setWrittenRemsForMe] = useState<Rem[]>([]);
   const [opened, { open, close }] = useDisclosure(false);
   if (!isUser) {
     useEffect(() => {
       setWrittenRemsForMe(state.currentUser.writtenForUser.rems);
-    }, [state.currentUser.writtenForUser.rems])
+    }, [state.currentUser.writtenForUser.rems]);
   }
 
   const profileImage =
@@ -33,7 +49,8 @@ const ProfileSection = ({ isUser, toggleNavbar, toggleNotification }: { isUser: 
   return (
     <>
       {isUser} ?
-      <><UpdateProfile opened={opened} close={close} />
+      <>
+        <UpdateProfile opened={opened} close={close} />
         <Container
           style={{
             borderRadius: "25px 0px 0px 25px",
@@ -156,24 +173,35 @@ const ProfileSection = ({ isUser, toggleNavbar, toggleNotification }: { isUser: 
         }}
         className="bg-[#e7e6b6] w-[45%] max-w-[600px] h-full m-0 p-0 overflow-y-hidden"
       >
-        <div style={{
-          height: "15vh",
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: '4vw',
-          textAlign: 'center',
-          paddingTop: "2.5vh"
-        }}> Approve the rems</div>
+        <div
+          style={{
+            height: "15vh",
+            fontFamily: "'Bebas Neue', sans-serif",
+            fontSize: "4vw",
+            textAlign: "center",
+            paddingTop: "2.5vh",
+          }}
+        >
+          {" "}
+          Approve the rems
+        </div>
         <div className="mt-[4vh] h-[80vh] w-[100%] overflow-y-auto scrollbar-hide">
           {remsWrittenForMe.map((rem: Rem, i: number) => {
             return (
-              <div key={i} style={{
-                width: "100%",
-                height: "15vh",
-                display: "flex"
-              }}>
-                <NotificationAdapter rem={rem} toggleNotification={toggleNotification} />
+              <div
+                key={i}
+                style={{
+                  width: "100%",
+                  height: "15vh",
+                  display: "flex",
+                }}
+              >
+                <NotificationAdapter
+                  rem={rem}
+                  toggleNotification={toggleNotification}
+                />
               </div>
-            )
+            );
           })}
         </div>
       </Container>

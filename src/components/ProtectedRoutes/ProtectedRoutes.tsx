@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { userSelector, adminSelector } from "../../redux/reducer";
@@ -8,14 +8,8 @@ import { showNotification } from "../../helpers/helpers";
 const ProtectedRoute = (props: any) => {
   const navigate = useNavigate();
   const { children, type } = props;
-  const {
-    loggedIn,
-    isFetching,
-    isProfileUpdated,
-  } =
-    type === "user"
-      ? useSelector(userSelector)
-      : useSelector(adminSelector);
+  const { loggedIn, isFetching, isProfileUpdated } =
+    type === "user" ? useSelector(userSelector) : useSelector(adminSelector);
   useEffect(() => {
     if (!isFetching) {
       if (loggedIn) {
@@ -29,10 +23,6 @@ const ProtectedRoute = (props: any) => {
         showNotification("Warning", "You are not signed in!", "warning");
         navigate("/login");
       }
-    }
-    else {
-      showNotification("Warning", "You are not signed in!", "warning");
-      navigate("/login");
     }
   }, [loggedIn, isFetching, isProfileUpdated, children]);
 

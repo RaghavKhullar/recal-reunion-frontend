@@ -6,7 +6,7 @@ import {
   Search,
   WriteRem,
   EditRem,
-  ViewRem
+  ViewRem,
 } from "../pages";
 import RemsByOthersForSomeone from "../pages/RemsByOthersForSomeone/RemsByOthersForSomeone";
 import RemsBySomeoneForOthers from "../pages/RemsBySomeoneForOthers/RemsBySomeoneForOthers";

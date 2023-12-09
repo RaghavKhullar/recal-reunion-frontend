@@ -36,21 +36,26 @@ export const writeRem = createAsyncThunk<
   WriteRemBody,
   { rejectValue: APIError }
 >("memory/writeRem", async (body: WriteRemBody, { rejectWithValue }) => {
-	try {
-		const response = await CustomAxios.post(
-			`/memory/updaterem`,
-			{ file: body.isFileUpdated === true ? body.file : undefined, content: body.content, to: body.to, isFileUpdated: body.isFileUpdated },
-			{
-				withCredentials: true,
-				headers: {
-					"Content-Type": "multipart/form-data",
-				},
-			}
-		);
-		return response;
-	} catch (error: any) {
-		return error.response;
-	}
+  try {
+    const response = await CustomAxios.post(
+      `/memory/updaterem`,
+      {
+        file: body.isFileUpdated === true ? body.file : undefined,
+        content: body.content,
+        to: body.to,
+        isFileUpdated: body.isFileUpdated,
+      },
+      {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 });
 
 export const getPublicRemsOfUser = createAsyncThunk<
@@ -74,61 +79,61 @@ export const getPublicRemsOfUser = createAsyncThunk<
 
 // Don't update store for it
 export const getRemOfPair = createAsyncThunk<
-	any,
-	String,
-	{ rejectValue: APIError }
+  any,
+  String,
+  { rejectValue: APIError }
 >("memory/getRemOfPair", async (id: String, { rejectWithValue }) => {
-	try {
-		const response = await CustomAxios.post(
-			`/memory/getremofpair`,
-			{ id: id },
-			{
-				withCredentials: true,
-			}
-		);
-		return response;
-	} catch (error: any) {
-		return error.response;
-	}
+  try {
+    const response = await CustomAxios.post(
+      `/memory/getremofpair`,
+      { id: id },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 });
 
 export const changePrivacy = createAsyncThunk<
-	any,
-	{
-		id: String,
-		privacy: Boolean
-	},
-	{ rejectValue: APIError }
+  any,
+  {
+    id: String;
+    privacy: Boolean;
+  },
+  { rejectValue: APIError }
 >("memory/changeRemPrivacy", async (body, { rejectWithValue }) => {
-	try {
-		const response = await CustomAxios.post(
-			`/memory/changeprivacy`,
-			{ remId: body.id, privacy: !(body.privacy) },
-			{
-				withCredentials: true,
-			}
-		);
-		return response;
-	} catch (error: any) {
-		return error.response;
-	}
+  try {
+    const response = await CustomAxios.post(
+      `/memory/changeprivacy`,
+      { remId: body.id, privacy: !body.privacy },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 });
 
 export const getRemFromId = createAsyncThunk<
-	any,
-	String,
-	{ rejectValue: APIError }
+  any,
+  String,
+  { rejectValue: APIError }
 >("memory/fetchrem", async (id, { rejectWithValue }) => {
-	try {
-		const response = await CustomAxios.post(
-			`/memory/fetchrem`,
-			{ remId: id },
-			{
-				withCredentials: true,
-			}
-		);
-		return response;
-	} catch (error: any) {
-		return error.response;
-	}
+  try {
+    const response = await CustomAxios.post(
+      `/memory/fetchrem`,
+      { remId: id },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
 });
