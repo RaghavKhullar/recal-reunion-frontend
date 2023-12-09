@@ -16,7 +16,7 @@ export const initialState = {
   currentUser: {
     writtenByUser: { isFetching: false, rems: [] },
     writtenForUser: { isFetching: false, rems: [] },
-  }
+  },
 } as UserState;
 
 export const user = createSlice({

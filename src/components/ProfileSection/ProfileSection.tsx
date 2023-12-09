@@ -45,10 +45,12 @@ const ProfileSection = ({
   }
 
   const profileImage =
-    BACKEND_URL + "/images/profiles/" + (state.currentUser.user?.image || "temp");
+    BACKEND_URL +
+    "/images/profiles/" +
+    (state.currentUser.user?.image || "temp");
   return (
     <>
-      {isUser === true ?
+      {isUser === true ? (
         <>
           <UpdateProfile opened={opened} close={close} />
           <Container
@@ -155,7 +157,7 @@ const ProfileSection = ({
             </Center>
           </Container>
         </>
-        :
+      ) : (
         <Container
           style={{
             borderRadius: "25px 0px 0px 25px",
@@ -194,7 +196,7 @@ const ProfileSection = ({
             })}
           </div>
         </Container>
-      }
+      )}
     </>
   );
 };

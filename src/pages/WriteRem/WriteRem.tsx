@@ -29,22 +29,16 @@ const WriteRem = () => {
   const getDetails = async () => {
     if (id === userId) {
       showNotification("Warning", "Cant'edit rem for yourself", "warning");
-      navigate('/home');
+      navigate("/home");
       return;
     }
     if (id === undefined) {
       showNotification("Warning", "Invalid User", "warning");
-      navigate('/home');
+      navigate("/home");
       return;
     }
-    const getOtherUserFromIdDispatch = await dispatch(
-      getOtherUserFromId(id)
-    );
-    if (
-      getOtherUserFromId.fulfilled.match(
-        getOtherUserFromIdDispatch
-      )
-    ) {
+    const getOtherUserFromIdDispatch = await dispatch(getOtherUserFromId(id));
+    if (getOtherUserFromId.fulfilled.match(getOtherUserFromIdDispatch)) {
       if (getOtherUserFromIdDispatch.payload.status === 200) {
         setName(getOtherUserFromIdDispatch.payload.data.user.name);
         // This should be changed to default rem image or the existing rem image
@@ -65,12 +59,12 @@ const WriteRem = () => {
 
   const getWrittenRemOfPair = async () => {
     if (id === userId) {
-      navigate('/home');
+      navigate("/home");
       return;
     }
     if (id === undefined) {
       showNotification("Warning", "Invalid User", "warning");
-      navigate('/home');
+      navigate("/home");
       return;
     }
 

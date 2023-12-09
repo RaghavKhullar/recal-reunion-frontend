@@ -17,16 +17,16 @@ const RemsByOthersForSomeone = () => {
     null
   );
   const state = useSelector(userSelector);
-  const [name, setName] = useState<string>("")
+  const [name, setName] = useState<string>("");
 
   useEffect(() => {
     if (id === state.currentUser?.user?._id) {
-      navigate('/myRems');
+      navigate("/myRems");
       return;
     }
     if (id === undefined) {
       showNotification("Warning", "Invalid User", "warning");
-      navigate('/home');
+      navigate("/home");
       return;
     }
 
@@ -76,7 +76,7 @@ const RemsByOthersForSomeone = () => {
     };
 
     fetchPublicRems(id);
-    fetchOtherUserDetails(id)
+    fetchOtherUserDetails(id);
   }, [id, state.currentUser.user?._id]);
 
   if (!remDetailsForUser) {
@@ -90,13 +90,14 @@ const RemsByOthersForSomeone = () => {
   const rems = remDetailsForUser.map((rem) => {
     return {
       author: {
-        profilePicture: BACKEND_URL + "/images/profiles/" + (rem.to?.image || "temp"),
+        profilePicture:
+          BACKEND_URL + "/images/profiles/" + (rem.to?.image || "temp"),
         name: rem.from?.name || "",
         link: "/user/" + rem.from?._id,
       },
       content: rem.content || "",
       image: BACKEND_URL + "/images/memory/" + (rem.image || "temp"),
-      id: rem.id
+      id: rem.id,
     };
   });
 

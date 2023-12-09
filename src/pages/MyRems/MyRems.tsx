@@ -33,13 +33,14 @@ const MyRems = () => {
 
   const rems = state.currentUser.writtenForUser.rems.map((rem) => ({
     author: {
-      profilePicture: BACKEND_URL + "/images/profiles/" + (rem.from?.image || "temp"),
+      profilePicture:
+        BACKEND_URL + "/images/profiles/" + (rem.from?.image || "temp"),
       name: rem.from?.name || "",
       link: "/user/" + rem.from?._id,
     },
     content: rem.content || "",
     image: BACKEND_URL + "/images/memory/" + (rem.image || "temp"),
-    id: rem.id
+    id: rem.id,
   }));
 
   return (

@@ -55,7 +55,11 @@ const RemCard = ({ author, content, image, id }: Rem) => {
           </Center>
         </BackgroundImage>
       </Card.Section>
-      <Card.Section className="p-5" style={{ cursor: "pointer" }} onClick={() => navigate('/viewRem/' + id)}>
+      <Card.Section
+        className="p-5"
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate("/viewRem/" + id)}
+      >
         <Text
           lineClamp={5}
           style={{

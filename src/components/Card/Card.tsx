@@ -18,7 +18,7 @@ const Card: React.FC<CardProps> = ({
   head2,
   writtenRems,
   isCurrentUser,
-  id = ""
+  id = "",
 }) => {
   return (
     <div className={style.card}>
@@ -37,7 +37,15 @@ const Card: React.FC<CardProps> = ({
       </div>
       <div className={style.arrow}>
         <Link
-          to={writtenRems ? (isCurrentUser ? "/remsByMe" : `/remsBy/${id}`) : (isCurrentUser ? "/myRems" : `/remsFor/${id}`)}
+          to={
+            writtenRems
+              ? isCurrentUser
+                ? "/remsByMe"
+                : `/remsBy/${id}`
+              : isCurrentUser
+                ? "/myRems"
+                : `/remsFor/${id}`
+          }
           className={style.seeMore}
         >
           See more -{">"}

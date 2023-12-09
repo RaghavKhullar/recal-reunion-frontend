@@ -14,7 +14,6 @@ export const memory = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     builder.addCase(getRemsWrittenByMe.rejected, (state) => {
       state.currentUser = {
         ...state.currentUser,
@@ -55,12 +54,9 @@ export const memory = createSlice({
         };
     });
 
-    builder.addCase(getPublicRemsOfUser.rejected, (state) => {
-    });
-    builder.addCase(getPublicRemsOfUser.pending, (state) => {
-    });
-    builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {
-    });
+    builder.addCase(getPublicRemsOfUser.rejected, (state) => {});
+    builder.addCase(getPublicRemsOfUser.pending, (state) => {});
+    builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {});
 
     builder.addCase(getRemOfPair.rejected, (state) => {
       state.isFetching = false;

@@ -83,7 +83,13 @@ const UpdateProfile = ({
       facebook: user?.facebook || "",
       x: user?.x || "",
       aboutMe: user?.aboutMe || "",
-      dateOfBirth: user?.dateOfBirth ? new Date(parseInt(user?.dateOfBirth.split("-")[2]), parseInt(user?.dateOfBirth.split("-")[1]) - 1, parseInt(user?.dateOfBirth.split("-")[0])) : new Date(),
+      dateOfBirth: user?.dateOfBirth
+        ? new Date(
+            parseInt(user?.dateOfBirth.split("-")[2]),
+            parseInt(user?.dateOfBirth.split("-")[1]) - 1,
+            parseInt(user?.dateOfBirth.split("-")[0])
+          )
+        : new Date(),
     },
   });
 
@@ -331,7 +337,9 @@ const UpdateProfile = ({
                 formData.append("x", form.values.x);
                 formData.append("aboutMe", form.values.aboutMe);
                 const date = form.values.dateOfBirth;
-                const dateOfBirth = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
+                const dateOfBirth = `${date.getDate()}-${
+                  date.getMonth() + 1
+                }-${date.getFullYear()}`;
                 formData.append("dateOfBirth", dateOfBirth);
                 if (form.values.newImageFile !== null)
                   formData.append("image", form.values.newImageFile);
