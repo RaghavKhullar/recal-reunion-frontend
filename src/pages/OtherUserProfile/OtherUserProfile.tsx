@@ -67,9 +67,13 @@ const OtherUserProfile: React.FC = () => {
   };
 
   useEffect(() => {
-    if (id === undefined || id === state.currentUser.user?._id) {
-      showNotification("Warning", "Invalid user", "warning");
-      navigate("/home");
+    if (id === state.currentUser?.user?._id) {
+      navigate('/home');
+      return;
+    }
+    if (id === undefined) {
+      showNotification("Warning", "Invalid User", "warning");
+      navigate('/home');
       return;
     }
     fetchOtherUserDetails(id);
@@ -129,41 +133,41 @@ const OtherUserProfile: React.FC = () => {
       </div>
       {((otherUserDetails !== undefined && remDetailsForUser.length !== 0) ||
         remDetailsByUser.length !== 0) && (
-        <div className={style.background}>
-          <div className={style.dome}>
-            <div className={style.domeShape}></div>
-          </div>
-          <div className={style.cardBackground}>
-            {remDetailsForUser.length !== 0 && (
-              <Card
-                remDetails={remDetailsForUser.slice(
-                  0,
-                  Math.min(remDetailsForUser.length, 6)
-                )}
-                head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
-                head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
-                writtenRems={false}
-                isCurrentUser={false}
-                id={id as string}
-              />
-            )}
+          <div className={style.background}>
+            <div className={style.dome}>
+              <div className={style.domeShape}></div>
+            </div>
+            <div className={style.cardBackground}>
+              {remDetailsForUser.length !== 0 && (
+                <Card
+                  remDetails={remDetailsForUser.slice(
+                    0,
+                    Math.min(remDetailsForUser.length, 6)
+                  )}
+                  head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
+                  head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
+                  writtenRems={false}
+                  isCurrentUser={false}
+                  id={id as string}
+                />
+              )}
 
-            {remDetailsByUser.length !== 0 && (
-              <Card
-                remDetails={remDetailsByUser.slice(
-                  0,
-                  Math.min(remDetailsByUser.length, 6)
-                )}
-                head1={`Here’s what ${otherUserDetails?.user.name} think of them`}
-                head2={`Personal or Personalized?`}
-                writtenRems={true}
-                isCurrentUser={false}
-                id={id as string}
-              />
-            )}
+              {remDetailsByUser.length !== 0 && (
+                <Card
+                  remDetails={remDetailsByUser.slice(
+                    0,
+                    Math.min(remDetailsByUser.length, 6)
+                  )}
+                  head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
+                  head2={`Personal or Personalized?`}
+                  writtenRems={true}
+                  isCurrentUser={false}
+                  id={id as string}
+                />
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </>
   );
 };

@@ -2,10 +2,12 @@ import { Center, Loader } from "@mantine/core";
 import { useNavigate, useParams } from "react-router-dom";
 import { BACKEND_URL } from "../../../config";
 import RemsDisplay from "../../components/RemsDisplay/RemsDisplay";
-import { getPublicRemsOfUser } from "../../redux/actions";
+import { getOtherUserFromId, getPublicRemsOfUser } from "../../redux/actions";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { useEffect, useState } from "react";
 import { showNotification } from "../../helpers/helpers";
+import { useSelector } from "react-redux";
+import { userSelector } from "../../redux/reducer";
 
 const RemsByOthersForSomeone = () => {
   const { id } = useParams<{ id: string }>();
@@ -14,8 +16,20 @@ const RemsByOthersForSomeone = () => {
   const [remDetailsForUser, setRemDetailsForUser] = useState<Rem[] | null>(
     null
   );
+  const state = useSelector(userSelector);
+  const [name, setName] = useState<string>("")
 
   useEffect(() => {
+    if (id === state.currentUser?.user?._id) {
+      navigate('/myRems');
+      return;
+    }
+    if (id === undefined) {
+      showNotification("Warning", "Invalid User", "warning");
+      navigate('/home');
+      return;
+    }
+
     const fetchPublicRems = async (id: string) => {
       const getPublicRemsOfUserDispatch = await dispatch(
         getPublicRemsOfUser(id)
@@ -41,8 +55,29 @@ const RemsByOthersForSomeone = () => {
         }
       }
     };
-    fetchPublicRems(id || "");
-  }, [id]);
+
+    const fetchOtherUserDetails = async (id: string) => {
+      const otherUserDetailsDispatch = await dispatch(getOtherUserFromId(id));
+      if (getOtherUserFromId.fulfilled.match(otherUserDetailsDispatch)) {
+        if (otherUserDetailsDispatch.payload.status === 200) {
+          setName(otherUserDetailsDispatch.payload.data.user.name);
+        } else {
+          showNotification("Error", "User not found", "error");
+          navigate("/login");
+        }
+      } else {
+        showNotification(
+          "Error",
+          "Error occured while fetching user details",
+          "error"
+        );
+        navigate("/login");
+      }
+    };
+
+    fetchPublicRems(id);
+    fetchOtherUserDetails(id)
+  }, [id, state.currentUser.user?._id]);
 
   if (!remDetailsForUser) {
     return (
@@ -57,7 +92,7 @@ const RemsByOthersForSomeone = () => {
       author: {
         profilePicture: BACKEND_URL + "/images/profiles/" + (rem.to?.image || "temp"),
         name: rem.from?.name || "",
-        link: "/user/" + rem.to?._id,
+        link: "/user/" + rem.from?._id,
       },
       content: rem.content || "",
       image: BACKEND_URL + "/images/memory/" + (rem.image || "temp"),
@@ -68,7 +103,7 @@ const RemsByOthersForSomeone = () => {
   return (
     <Center className="w-full h-full">
       <RemsDisplay
-        heading="Here’s what people think of them"
+        heading={"Here’s what people think of " + name}
         subheading="A collection of all the memories they've shared"
         rems={rems}
       />

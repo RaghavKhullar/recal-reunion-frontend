@@ -10,7 +10,7 @@ import graphic from "../../assets/writeRemGraphic1.svg";
 import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
 import { getRemOfPair, writeRem } from "../../redux/actions";
-import { getOtherUserDetailsFromId } from "../../redux/actions/User/UserAction";
+import { getOtherUserFromId } from "../../redux/actions/User/UserAction";
 import { BACKEND_URL } from "../../../config";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducer";
@@ -28,23 +28,27 @@ const EditRem = () => {
   const [isFileUpdated, setIsFileUpdated] = useState<boolean>(false);
 
   const getDetails = async () => {
-    if (id === undefined || id === userId) {
-      showNotification("Warning", "Invalid user", "warning");
-      navigate("/home");
+    if (id === userId) {
+      navigate('/home');
       return;
     }
-    const getOtherUserDetailsFromIdDispatch = await dispatch(
-      getOtherUserDetailsFromId(id)
+    if (id === undefined) {
+      showNotification("Warning", "Invalid User", "warning");
+      navigate('/home');
+      return;
+    }
+    const getOtherUserFromIdDispatch = await dispatch(
+      getOtherUserFromId(id)
     );
     if (
-      getOtherUserDetailsFromId.fulfilled.match(
-        getOtherUserDetailsFromIdDispatch
+      getOtherUserFromId.fulfilled.match(
+        getOtherUserFromIdDispatch
       )
     ) {
-      if (getOtherUserDetailsFromIdDispatch.payload.status === 200) {
-        setName(getOtherUserDetailsFromIdDispatch.payload.data.user.name);
+      if (getOtherUserFromIdDispatch.payload.status === 200) {
+        setName(getOtherUserFromIdDispatch.payload.data.user.name);
         // This should be changed to default rem image or the existing rem image
-        setImage(getOtherUserDetailsFromIdDispatch.payload.data.user.image);
+        setImage(getOtherUserFromIdDispatch.payload.data.user.image);
       } else {
         showNotification("Error", "Some error occured", "error");
         navigate(`/home`);
@@ -60,9 +64,14 @@ const EditRem = () => {
   };
 
   const getWrittenRemOfPair = async () => {
-    if (id === undefined || id === userId) {
-      showNotification("Warning", "Invalid user", "warning");
-      navigate("/home");
+    if (id === userId) {
+      showNotification("Warning", "Cant'edit rem for yourself", "warning");
+      navigate('/home');
+      return;
+    }
+    if (id === undefined) {
+      showNotification("Warning", "Invalid User", "warning");
+      navigate('/home');
       return;
     }
 
@@ -77,8 +86,8 @@ const EditRem = () => {
           try {
             const response = await fetch(
               BACKEND_URL +
-                "/images/memory/" +
-                getRemOfPairDispatch.payload.data.data.image,
+              "/images/memory/" +
+              getRemOfPairDispatch.payload.data.data.image,
               { method: "get", mode: "cors" }
             );
             const blob = await response.blob();
@@ -202,8 +211,8 @@ const EditRem = () => {
                   file
                     ? URL.createObjectURL(file)
                     : BACKEND_URL +
-                      "/images/profiles/" +
-                      (image && image.length > 0 ? image : "temp")
+                    "/images/profiles/" +
+                    (image && image.length > 0 ? image : "temp")
                 }
                 style={{
                   maxWidth: "30rem",

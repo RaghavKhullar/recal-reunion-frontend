@@ -2,7 +2,6 @@ export {
   getCurrentUser,
   getOtherUserFromId,
   searchUser,
-  getOtherUserDetailsFromId,
   updateUserProfile,
 } from "./User/UserAction";
 

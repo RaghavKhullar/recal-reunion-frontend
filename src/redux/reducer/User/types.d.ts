@@ -35,7 +35,6 @@ interface UserState {
   isFetchingOtherUser: boolean;
   isOtherUserFetched: boolean;
   currentUser: IUser;
-  otherUser: IUser;
 }
 
 interface APIError {

@@ -56,32 +56,10 @@ export const memory = createSlice({
     });
 
     builder.addCase(getPublicRemsOfUser.rejected, (state) => {
-      state.otherUser = {
-        ...state.otherUser,
-        writtenForUser: { isFetching: false, rems: [] },
-        writtenByUser: { isFetching: false, rems: [] },
-      };
     });
     builder.addCase(getPublicRemsOfUser.pending, (state) => {
-      state.otherUser = {
-        ...state.otherUser,
-        writtenForUser: { isFetching: true, rems: [] },
-        writtenByUser: { isFetching: true, rems: [] },
-      };
     });
     builder.addCase(getPublicRemsOfUser.fulfilled, (state, { payload }) => {
-      if (payload.status === 200)
-        state.otherUser = {
-          ...state.otherUser,
-          writtenForUser: {
-            isFetching: false,
-            rems: payload.data.writtenForUser,
-          },
-          writtenByUser: {
-            isFetching: false,
-            rems: payload.data.writtenByUser,
-          },
-        };
     });
 
     builder.addCase(getRemOfPair.rejected, (state) => {

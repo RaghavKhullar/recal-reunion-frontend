@@ -3,7 +3,6 @@ import {
   getCurrentUser,
   getOtherUserFromId,
   searchUser,
-  getOtherUserDetailsFromId,
   updateUserProfile,
 } from "../../actions";
 
@@ -17,11 +16,7 @@ export const initialState = {
   currentUser: {
     writtenByUser: { isFetching: false, rems: [] },
     writtenForUser: { isFetching: false, rems: [] },
-  },
-  otherUser: {
-    writtenByUser: { isFetching: false, rems: [] },
-    writtenForUser: { isFetching: false, rems: [] },
-  },
+  }
 } as UserState;
 
 export const user = createSlice({
@@ -64,25 +59,6 @@ export const user = createSlice({
       state.isFetchingOtherUser = true;
     });
     builder.addCase(getOtherUserFromId.fulfilled, (state, { payload }) => {
-      state.isFetchingOtherUser = false;
-      state.isOtherUserFetched = true;
-      if (payload.status === 200)
-        state.otherUser = {
-          ...state.otherUser,
-          user: payload.data.user,
-          oldRem: payload.data.oldRem,
-        };
-    });
-
-    builder.addCase(getOtherUserDetailsFromId.rejected, (state) => {
-      state.isOtherUserFetched = false;
-      state.isFetchingOtherUser = false;
-    });
-    builder.addCase(getOtherUserDetailsFromId.pending, (state) => {
-      state.isOtherUserFetched = false;
-      state.isFetchingOtherUser = true;
-    });
-    builder.addCase(getOtherUserDetailsFromId.fulfilled, (state) => {
       state.isFetchingOtherUser = false;
       state.isOtherUserFetched = true;
     });
