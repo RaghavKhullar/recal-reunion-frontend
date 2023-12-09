@@ -11,6 +11,7 @@ export type Rem = {
   };
   content: string;
   image: string;
+  id: string;
 };
 
 const RemsByMe = () => {
@@ -31,18 +32,19 @@ const RemsByMe = () => {
 
   const rems = state.currentUser.writtenByUser.rems.map((rem) => ({
     author: {
-      profilePicture: BACKEND_URL + "/images/profiles/" + rem.to?.image || "",
+      profilePicture: BACKEND_URL + "/images/profiles/" + (rem.to?.image || "temp"),
       name: rem.to?.name || "",
       link: "/user/" + rem.to?._id,
     },
     content: rem.content || "",
-    image: BACKEND_URL + "/images/memory/" + (rem.image || ""),
+    image: BACKEND_URL + "/images/memory/" + (rem.image || "temp"),
+    id: rem.id
   }));
 
   return (
     <Center className="w-full h-full">
       <RemsDisplay
-        heading="Here’s what you think of them"
+        heading="Here’s what you think of others"
         subheading="A collection of all the memories you’ve shared"
         rems={rems}
       />

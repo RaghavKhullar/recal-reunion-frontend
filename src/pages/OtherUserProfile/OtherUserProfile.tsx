@@ -143,6 +143,8 @@ const OtherUserProfile: React.FC = () => {
                 head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
                 head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
                 writtenRems={false}
+                isCurrentUser={false}
+                id={id as string}
               />
             )}
 
@@ -155,6 +157,8 @@ const OtherUserProfile: React.FC = () => {
                 head1={`Here’s what ${otherUserDetails?.user.name} think of them`}
                 head2={`Personal or Personalized?`}
                 writtenRems={true}
+                isCurrentUser={false}
+                id={id as string}
               />
             )}
           </div>

@@ -55,12 +55,13 @@ const RemsBySomeoneForOthers = () => {
   const rems = remDetailsForUser.map((rem) => {
     return {
       author: {
-        profilePicture: BACKEND_URL + "/images/profiles/" + rem.to?.image || "",
+        profilePicture: BACKEND_URL + "/images/profiles/" + (rem.to?.image || "temp"),
         name: rem.to?.name || "",
         link: "/user/" + rem.to?._id,
       },
       content: rem.content || "",
-      image: BACKEND_URL + "/images/memory/" + (rem.image || ""),
+      image: BACKEND_URL + "/images/memory/" + (rem.image || "temp"),
+      id: rem.id
     };
   });
 

@@ -8,6 +8,8 @@ interface CardProps {
   head1: string;
   head2: string;
   writtenRems: boolean;
+  isCurrentUser: boolean;
+  id?: string;
 }
 
 const Card: React.FC<CardProps> = ({
@@ -15,6 +17,8 @@ const Card: React.FC<CardProps> = ({
   head1,
   head2,
   writtenRems,
+  isCurrentUser,
+  id = ""
 }) => {
   return (
     <div className={style.card}>
@@ -33,7 +37,7 @@ const Card: React.FC<CardProps> = ({
       </div>
       <div className={style.arrow}>
         <Link
-          to={head1.endsWith("you") ? "/myRems" : "/remsByMe"}
+          to={writtenRems ? (isCurrentUser ? "/remsByMe" : `/remsBy/${id}`) : (isCurrentUser ? "/myRems" : `/remsFor/${id}`)}
           className={style.seeMore}
         >
           See more -{">"}

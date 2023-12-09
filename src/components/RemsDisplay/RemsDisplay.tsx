@@ -8,9 +8,10 @@ import {
   Text,
 } from "@mantine/core";
 import { Rem } from "../../pages/MyRems/MyRems";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const RemCard = ({ author, content, image }: Rem) => {
+const RemCard = ({ author, content, image, id }: Rem) => {
+  const navigate = useNavigate();
   return (
     <Card
       style={{
@@ -54,7 +55,7 @@ const RemCard = ({ author, content, image }: Rem) => {
           </Center>
         </BackgroundImage>
       </Card.Section>
-      <Card.Section className="p-5">
+      <Card.Section className="p-5" style={{ cursor: "pointer" }} onClick={() => navigate('/viewRem/' + id)}>
         <Text
           lineClamp={5}
           style={{

@@ -156,6 +156,7 @@ const Home: React.FC = () => {
                 head1="Here’s what your friends think of you"
                 head2="Thoughts from your friends"
                 writtenRems={false}
+                isCurrentUser={true}
               />
             )}
 
@@ -168,6 +169,7 @@ const Home: React.FC = () => {
                 head1="Here’s what you think of them"
                 head2="Personal or Personalized?"
                 writtenRems={true}
+                isCurrentUser={true}
               />
             )}
           </div>

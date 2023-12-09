@@ -83,7 +83,7 @@ const UpdateProfile = ({
       facebook: user?.facebook || "",
       x: user?.x || "",
       aboutMe: user?.aboutMe || "",
-      dateOfBirth: user?.dateOfBirth ? new Date(user?.dateOfBirth) : new Date(),
+      dateOfBirth: user?.dateOfBirth ? new Date(parseInt(user?.dateOfBirth.split("-")[2]), parseInt(user?.dateOfBirth.split("-")[1]) - 1, parseInt(user?.dateOfBirth.split("-")[0])) : new Date(),
     },
   });
 
@@ -147,7 +147,7 @@ const UpdateProfile = ({
               className="h-[25vh] w-[25vh] rounded-full border-black border-[1px] flex flex-col justify-end items-center overflow-hidden"
               src={
                 form.values.newImageFile === null
-                  ? BACKEND_URL + "/images/profiles/" + user?.image
+                  ? BACKEND_URL + "/images/profiles/" + (user?.image || "temp")
                   : URL.createObjectURL(form.values.newImageFile)
               }
             >
@@ -331,7 +331,7 @@ const UpdateProfile = ({
                 formData.append("x", form.values.x);
                 formData.append("aboutMe", form.values.aboutMe);
                 const date = form.values.dateOfBirth;
-                const dateOfBirth = `${date.getDate()}-${date.getMonth()}-${date.getFullYear()}`;
+                const dateOfBirth = `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`;
                 formData.append("dateOfBirth", dateOfBirth);
                 if (form.values.newImageFile !== null)
                   formData.append("image", form.values.newImageFile);
