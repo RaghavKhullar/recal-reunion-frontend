@@ -19,8 +19,9 @@ const ProtectedRoute = (props: any) => {
           }
         }
       } else {
-        showNotification("Warning", "You are not signed in!", "warning");
-        navigate("/login");
+        if (type === "user")
+          navigate("/login");
+        else navigate('/admin/login')
         return;
       }
     }

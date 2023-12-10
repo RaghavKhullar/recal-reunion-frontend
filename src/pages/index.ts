@@ -8,3 +8,5 @@ export { default as MyRems } from "./MyRems/MyRems";
 export { default as RemsByMe } from "./RemsByMe/RemsByMe";
 export { default as EditRem } from "./EditRem/EditRem";
 export { default as ViewRem } from "./ViewRem/ViewRem";
+export { default as AdminLogin } from "./Admin/Login/Login";
+export { default as AdminDashboard } from "./Admin/Dashboard/Dashboard";

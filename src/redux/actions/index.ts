@@ -15,3 +15,5 @@ export {
   changePrivacy,
   getRemFromId,
 } from "./Memory/MemoryActions";
+
+export { addNewUser, editEmail, addAdmin, addOldRem, getAdminDetails, logoutAdmin, deleteOldRem } from "./Admin/AdminAction";

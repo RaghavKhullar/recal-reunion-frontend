@@ -78,14 +78,14 @@ export const user = createSlice({
     builder.addCase(logoutUser.rejected, (state) => {
       state.loggedIn = false;
       state.isFetching = false;
-      state.isProfileUpdated = false,
-        state.isFetchingSearch = false,
-        state.isFetchingOtherUser = false,
-        state.isOtherUserFetched = false,
-        state.currentUser = {
-          writtenByUser: { isFetching: false, rems: [] },
-          writtenForUser: { isFetching: false, rems: [] },
-        }
+      state.isProfileUpdated = false;
+      state.isFetchingSearch = false;
+      state.isFetchingOtherUser = false;
+      state.isOtherUserFetched = false;
+      state.currentUser = {
+        writtenByUser: { isFetching: false, rems: [] },
+        writtenForUser: { isFetching: false, rems: [] },
+      }
     });
     builder.addCase(logoutUser.pending, (state) => {
       state.isFetching = true;
@@ -93,14 +93,14 @@ export const user = createSlice({
     builder.addCase(logoutUser.fulfilled, (state) => {
       state.loggedIn = false;
       state.isFetching = false;
-      state.isProfileUpdated = false,
-        state.isFetchingSearch = false,
-        state.isFetchingOtherUser = false,
-        state.isOtherUserFetched = false,
-        state.currentUser = {
-          writtenByUser: { isFetching: false, rems: [] },
-          writtenForUser: { isFetching: false, rems: [] },
-        }
+      state.isProfileUpdated = false;
+      state.isFetchingSearch = false;
+      state.isFetchingOtherUser = false;
+      state.isOtherUserFetched = false;
+      state.currentUser = {
+        writtenByUser: { isFetching: false, rems: [] },
+        writtenForUser: { isFetching: false, rems: [] },
+      }
     });
   },
 });
