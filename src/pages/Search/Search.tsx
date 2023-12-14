@@ -153,10 +153,10 @@ const Search = () => {
   }, [activeTab]);
 
   return (
-    <Box className="h-full w-full px-[5%] flex flex-row">
+    <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
       <SimpleGrid
         cols={3}
-        className="h-[95%] w-[60%] overflow-y-auto scrollbar-hide"
+        className="h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide"
       >
         {loading && (
           <Center className="w-full h-full">
@@ -165,13 +165,13 @@ const Search = () => {
         )}
         {error && (
           <Center className="w-full h-full">
-            <Text className="text-2xl font-bebus">Some Error Occured</Text>
+            <Text className="text-xl sm:text-2xl font-bebus">Some Error Occured</Text>
           </Center>
         )}
         {visibleFriends &&
           (visibleFriends.length === 0 && !loading ? (
-            <Center className="w-full h-full">
-              <Text className="text-2xl font-bebus">Search for Friends</Text>
+            <Center className="w-full h-full pl-10">
+              <p className="pl-44 text-3xl sm:text-2xl font-bebus">Search for Friends</p>
             </Center>
           ) : (
             visibleFriends.map((friend) => (
@@ -183,17 +183,17 @@ const Search = () => {
         style={{
           boxShadow: "-8px 8px 40px 0px rgba(0, 0, 0, 0.20)",
         }}
-        className="flex h-[95%] w-[40%] rounded-[20px] border-[1px] border-opacity-40 border-black"
+        className="flex h-[100%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
       >
         <Center className="h-[90%] w-[90%] flex flex-col">
-          <Center className="w-full h-[20%] items-start">
+          <Center className="w-full h-[20%] mb-8 items-start">
             <TextInput
               value={name}
               onChange={(event) => setName(event.currentTarget.value)}
               classNames={{
                 root: "w-full",
                 input:
-                  "bg-transparent w-full rounded-full text-3xl font-bebus border-[2px] border-black py-2 px-5 pl-20 h-[70px] placeholder:text-black placeholder:opacity-25",
+                  "bg-transparent w-full rounded-full text-xl sm:text-3xl font-bebus border-[2px] border-black py-2 px-2 pl-16 h-[70px] placeholder:text-black placeholder:opacity-25",
                 section: "bg-transparent w-[100px] pr-4",
               }}
               onKeyDown={(e) => {
@@ -258,7 +258,7 @@ const Search = () => {
                   <Radio
                     value="name-asc"
                     classNames={{
-                      label: "text-2xl font-fira",
+                      label: "text-xl sm:text-2xl font-fira",
                       body: "flex flex-row items-center",
                     }}
                     label="Name - Ascending"
@@ -267,7 +267,7 @@ const Search = () => {
                 <Center className="w-full justify-start h-[75px] cursor-pointer">
                   <Radio
                     classNames={{
-                      label: "text-2xl font-fira",
+                      label: "text-xl sm:text-2xl font-fira",
                       body: "flex flex-row items-center",
                     }}
                     value="name-desc"
