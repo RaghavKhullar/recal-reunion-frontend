@@ -155,8 +155,7 @@ const Search = () => {
   return (
     <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
       <SimpleGrid
-        cols={3}
-        className="h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide"
+        className="grid-cols-1 lg:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide"
       >
         {loading && (
           <Center className="w-full h-full">
