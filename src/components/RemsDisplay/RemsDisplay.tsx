@@ -15,25 +15,25 @@ const RemCard = ({ author, content, image, id }: Rem) => {
   return (
     <Card
       style={{
-        minWidth: "300px",
-        minHeight: "500px",
+        minWidth: "180px",
+        minHeight: "200px",
         borderRadius: "16px",
         background: "#EBD18D",
         boxShadow: "20px 20px 80px 0px rgba(0, 0, 0, 0.20)",
       }}
     >
-      <Card.Section className="h-[300px]">
-        <BackgroundImage src={image} className="h-[300px]">
+      <Card.Section className="h-[190px]  sm:h-[300px] overflow-hidden">
+        <BackgroundImage src={image} className="w-full h-[190px] sm:w-full sm:h-[300px]">
           <Center
             style={{
               background:
                 "linear-gradient(180deg, #000 -42.73%, rgba(0, 0, 0, 0.00) 100%)",
             }}
-            className="w-full px-5 pt-5 h-full items-start  justify-between"
+            className="w-full px-4 sm:px-5 pt-2 sm:pt-5 h-full items-start  justify-between"
           >
-            <Center className="gap-3">
+            <Center className="gap-1 sm:gap-3">
               <img
-                className="w-[40px] h-[40px] rounded-full"
+                className="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px] rounded-full"
                 src={author?.profilePicture}
                 alt={author?.name}
               />
@@ -41,7 +41,7 @@ const RemCard = ({ author, content, image, id }: Rem) => {
                 {author?.name}
               </Text>
             </Center>
-            <Center className="h-[40px]">
+            <Center className="h-[20px] sm:h-[40px]">
               <Button
                 to={author?.link as string}
                 component={Link}
@@ -56,21 +56,13 @@ const RemCard = ({ author, content, image, id }: Rem) => {
         </BackgroundImage>
       </Card.Section>
       <Card.Section
-        className="p-5"
+        className="p-3 w-[190px] sm:w-full"
         style={{ cursor: "pointer" }}
         onClick={() => navigate("/viewRem/" + id)}
       >
         <Text
           lineClamp={5}
-          style={{
-            color: "#000",
-            fontFamily: "Fira Sans",
-            fontSize: "16px",
-            fontStyle: "normal",
-            fontWeight: "400",
-            lineHeight: "23px",
-            letterSpacing: "0.5px",
-          }}
+          className=" text-black font-fira-sans text-base font-normal leading-[23px] tracking-[0.5px]"
         >
           {content}
         </Text>
@@ -89,34 +81,20 @@ const RemsDisplay = ({
   rems: Rem[];
 }) => {
   return (
-    <Box className="w-full h-full max-w-[1500px] overflow-y-auto overflow-x-visible scrollbar-hide px-60 pb-20">
+    <Box className="w-full h-full max-w-[1500px] overflow-y-auto overflow-x-visible scrollbar-hide px-2 sm:px-60 pb-20">
       <Box className="w-full h-[20%] overflow-x-visible">
         <Text
-          style={{
-            color: "#000",
-            fontFamily: "Bebas Neue",
-            fontSize: "80px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "normal",
-          }}
+          className="text-black font-bebas-neue text-3xl sm:text-4xl xl:text-6xl font-normal text-center"
         >
           {heading}
         </Text>
         <Text
-          style={{
-            color: "#000",
-            fontFamily: "Fira Sans",
-            fontSize: "22px",
-            fontStyle: "normal",
-            fontWeight: 400,
-            lineHeight: "normal",
-          }}
+          className="text-black font-fira-sans text-[1rem] sm:text-base font-normal text-center"
         >
           {subheading}
         </Text>
       </Box>
-      <SimpleGrid className="w-full overflow-x-visible" cols={3}>
+      <SimpleGrid className="grid-cols-2 sm:grid-cols-3 w-full overflow-x-visible">
         {rems.map((rem, i) => (
           <RemCard key={i} {...rem} />
         ))}
