@@ -104,8 +104,10 @@ const RemsByOthersForSomeone = () => {
   return (
     <Center className="w-full h-full">
       <RemsDisplay
-        heading={"Here’s what people think of " + name}
-        subheading="A collection of all the memories they've shared"
+        heading={"Here’s what others wrote for " + name}
+        subheading={
+          "A collection of all the memories people shared with " + name
+        }
         rems={rems}
       />
     </Center>

@@ -16,9 +16,11 @@ const imageParentCss = {
 const NotificationAdapter = ({
   rem,
   toggleNotification,
+  isMobile,
 }: {
   rem: Rem;
   toggleNotification: () => void;
+  isMobile: boolean | undefined;
 }) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -47,7 +49,6 @@ const NotificationAdapter = ({
     }
     setIsFetching(false);
   };
-
   return (
     <>
       <div className={style.remField}>
@@ -73,7 +74,7 @@ const NotificationAdapter = ({
           }}
           onMouseOver={() => setIsVisible(true)}
           onMouseLeave={() => setIsVisible(false)}
-          className={style.rem}
+          className={style.rem + ` text-${isMobile ? "md" : "lg"}`}
         >
           <span>{rem.from?.name} wrote: </span> <br />"{rem.content}"
         </div>
@@ -95,6 +96,7 @@ const NotificationAdapter = ({
               color="#A72343"
               onClick={changeRemPrivacy}
               disabled={isFetching}
+              className="text-xs"
             >
               {rem.isPrivate ? "Approve ?" : "Disapprove ?"}
             </Button>

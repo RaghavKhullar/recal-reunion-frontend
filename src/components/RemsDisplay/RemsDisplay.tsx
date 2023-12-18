@@ -23,7 +23,10 @@ const RemCard = ({ author, content, image, id }: Rem) => {
       }}
     >
       <Card.Section className="h-[190px]  sm:h-[300px] overflow-hidden">
-        <BackgroundImage src={image} className="w-full h-[190px] sm:w-full sm:h-[300px]">
+        <BackgroundImage
+          src={image}
+          className="w-full h-[190px] sm:w-full sm:h-[300px]"
+        >
           <Center
             style={{
               background:
@@ -37,7 +40,7 @@ const RemCard = ({ author, content, image, id }: Rem) => {
                 src={author?.profilePicture}
                 alt={author?.name}
               />
-              <Text className=" font-bebus tracking-wider text-white">
+              <Text className=" font-bebus tracking-wider text-white text-elipsis">
                 {author?.name}
               </Text>
             </Center>
@@ -83,14 +86,10 @@ const RemsDisplay = ({
   return (
     <Box className="w-full h-full max-w-[1500px] overflow-y-auto overflow-x-visible scrollbar-hide px-2 sm:px-60 pb-20">
       <Box className="w-full h-[20%] overflow-x-visible">
-        <Text
-          className="text-black font-bebas-neue text-3xl sm:text-4xl xl:text-6xl font-normal text-center"
-        >
+        <Text className="text-black font-bebas-neue text-3xl sm:text-4xl xl:text-6xl font-normal text-center">
           {heading}
         </Text>
-        <Text
-          className="text-black font-fira-sans text-[1rem] sm:text-base font-normal text-center"
-        >
+        <Text className="text-black font-fira-sans text-[1rem] sm:text-base font-normal text-center">
           {subheading}
         </Text>
       </Box>

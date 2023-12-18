@@ -3,7 +3,7 @@ export {
   getOtherUserFromId,
   searchUser,
   updateUserProfile,
-  logoutUser
+  logoutUser,
 } from "./User/UserAction";
 
 export {
@@ -16,4 +16,12 @@ export {
   getRemFromId,
 } from "./Memory/MemoryActions";
 
-export { addNewUser, editEmail, addAdmin, addOldRem, getAdminDetails, logoutAdmin, deleteOldRem } from "./Admin/AdminAction";
+export {
+  addNewUser,
+  editEmail,
+  addAdmin,
+  addOldRem,
+  getAdminDetails,
+  logoutAdmin,
+  deleteOldRem,
+} from "./Admin/AdminAction";

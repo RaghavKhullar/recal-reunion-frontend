@@ -2,9 +2,9 @@
   width: 94%;
   height: 100%;
   display: flex;
-  padding: 1rem 1rem 1rem 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
   align-items: center;
-  gap: 1.5rem;
+  /* gap: 1.5rem; */
   flex-shrink: 0;
   cursor: pointer;
   margin: 1rem 2rem 1rem 2rem;
@@ -28,13 +28,12 @@
 .remField .rem {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  width: calc(65%);
+  width: calc(53%);
   background: transparent;
   max-height: calc(90%);
   flex-shrink: 0;
   color: #000;
   font-family: "Fira Sans", sans-serif;
-  font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -45,7 +44,7 @@
 
 .button {
   display: flex;
-  width: calc(20%) !important;
+  width: calc(24%) !important;
   background: transparent;
   height: auto;
   flex-direction: column;
@@ -54,7 +53,6 @@
   flex-shrink: 0;
   color: #000;
   font-family: "Fira Sans", sans-serif;
-  font-size: 1.3rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -63,14 +61,15 @@
   text-overflow: ellipsis;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .remField .image {
     width: 3rem;
     height: 3rem;
   }
+}
 
-  .remField .rem {
-    font-size: 1rem;
-    max-width: 20vw;
+@media screen and (max-width: 320px) {
+  .remField {
+    margin: 1rem 2rem 1rem 0.4rem;
   }
 }

@@ -19,9 +19,8 @@ const ProtectedRoute = (props: any) => {
           }
         }
       } else {
-        if (type === "user")
-          navigate("/login");
-        else navigate('/admin/login')
+        if (type === "user") navigate("/login");
+        else navigate("/admin/login");
         return;
       }
     }

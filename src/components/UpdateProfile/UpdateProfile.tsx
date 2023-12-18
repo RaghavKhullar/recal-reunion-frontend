@@ -13,6 +13,7 @@ import {
 } from "@mantine/core";
 import classes from "./styles.module.css";
 import { useState } from "react";
+import { useMediaQuery } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducer";
@@ -51,12 +52,12 @@ const UpdateProfile = ({
   close: () => void;
   opened: boolean;
 }) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const [activeTab, setActiveTab] = useState<string | null>("first");
   const {
     currentUser: { user },
   } = useSelector(userSelector);
   const dispatch = useAppDispatch();
-
   const form = useForm<{
     name: string;
     department: string;
@@ -99,7 +100,9 @@ const UpdateProfile = ({
         inner: "flex justify-center items-center",
         root: "flex justify-center items-center",
         content:
-          "w-[60vw] flex-none h-[70vh] max-w-[600px] " +
+          (!isMobile
+            ? "w-[60vw] flex-none h-[70vh] max-w-[600px] "
+            : "flex-none h-[70vh] max-w-[600px] ") +
           classes.updateProfileContainer,
         body: "w-full h-full",
       }}

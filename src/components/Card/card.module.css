@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
   .head1 {
     font-size: 1.4rem;
     /* Adjust for smaller screens */
@@ -81,7 +81,7 @@
   }
 
   .card {
-    max-width: 40%;
+    max-width: 90%;
   }
 
   .scrollable-content {

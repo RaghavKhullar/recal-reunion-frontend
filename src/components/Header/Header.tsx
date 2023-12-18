@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducer";
+import { useMediaQuery } from "@mantine/hooks";
 
 const Header = ({
   toggleNavbar,
@@ -31,23 +32,30 @@ const Header = ({
       window.removeEventListener("scroll", handler);
     };
   }, [scrollY]);
+  const isMobile = useMediaQuery("(max-width: 600px)");
+  const isSmallMobile = useMediaQuery("(max-width: 325px)");
 
   return (
     <Group
       className={
-        "flex px-[5%] justify-between items-center w-full h-full  shadow-lg backdrop-blur-lg"
+        "flex px-[5%] justify-between items-center w-full h-auto  shadow-lg backdrop-blur-lg"
       }
     >
       <Box>
         <Link to="/home">
-          <img src={logo} alt="" draggable={false} />
+          <img
+            src={logo}
+            style={isSmallMobile ? { maxWidth: "90px" } : {}}
+            alt=""
+            draggable={false}
+          />
         </Link>
       </Box>
-      {loggedIn === true &&
+      {loggedIn === true && (
         <Group gap={5}>
-          <Group gap={40}>
+          <Group gap={isMobile ? (isSmallMobile ? 25 : 30) : 40}>
             <Link to="/search">
-              <IconUserSearch size={35} />
+              <IconUserSearch size={isSmallMobile ? 25 : 35} />
             </Link>
 
             <IconBell
@@ -55,13 +63,17 @@ const Header = ({
               onClick={() => {
                 toggleNotification();
               }}
-              size={35}
+              size={isSmallMobile ? 25 : 35}
             />
-            <IconUserCircle cursor="pointer" onClick={toggleNavbar} size={35} />
+            <IconUserCircle
+              cursor="pointer"
+              onClick={toggleNavbar}
+              size={isSmallMobile ? 25 : 35}
+            />
           </Group>
           <IconTriangleInvertedFilled width={10} size={10} />
         </Group>
-      }
+      )}
     </Group>
   );
 };

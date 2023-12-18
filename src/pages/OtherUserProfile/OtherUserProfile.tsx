@@ -84,8 +84,10 @@ const OtherUserProfile: React.FC = () => {
     <>
       <div className={style.upper}>
         <div className={style.batch}>
-          <h1 className={style.batchName}>Batch of ‘99</h1>
-          <div className={style.strokeBatchName}>Batch of ‘99</div>
+          <div className={style.batchName}>
+            Batch of ‘99
+            <div className={style.strokeBatchName}>Batch of ‘99</div>
+          </div>
           <div className={style.frame}>
             {otherUserDetails &&
               otherUserDetails.oldRem &&
@@ -94,9 +96,11 @@ const OtherUserProfile: React.FC = () => {
                 <div className={style.before}>
                   <img className={style.anchorCircle} src={circle} />
                   <div className={style.internal}>
-                    <img
-                      src={`${BACKEND_URL}/images/profiles/${otherUserDetails.oldRem.image}`}
-                    />
+                    <div>
+                      <img
+                        src={`${BACKEND_URL}/images/profiles/${otherUserDetails.oldRem.image}`}
+                      />
+                    </div>
                   </div>
                   <p className={style.textBefore}>Before</p>
                 </div>
@@ -108,9 +112,11 @@ const OtherUserProfile: React.FC = () => {
                 <div className={style.after}>
                   <img className={style.anchorCircle} src={circle} />
                   <div className={style.internal}>
-                    <img
-                      src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
-                    />
+                    <div>
+                      <img
+                        src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
+                      />
+                    </div>
                   </div>
                   <p className={style.textBefore}>After</p>
                 </div>
@@ -122,7 +128,7 @@ const OtherUserProfile: React.FC = () => {
             <div style={{ fontSize: "6.5vw", color: "#411D76" }}>“</div>
             <div style={{ display: "flex", flexDirection: "column" }}>
               <img className={style.up} src={up} />
-              <div style={{ textAlign: "center", fontSize: "1.5vw" }}>
+              <div style={{ textAlign: "center" }}>
                 {otherUserDetails.oldRem.content}
               </div>
               <img className={style.dowm} src={down} />
@@ -159,7 +165,7 @@ const OtherUserProfile: React.FC = () => {
                   Math.min(remDetailsByUser.length, 6)
                 )}
                 head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
-                head2={`Personal or Personalized?`}
+                head2={`Memories written by ${otherUserDetails?.user.name}`}
                 writtenRems={true}
                 isCurrentUser={false}
                 id={id as string}

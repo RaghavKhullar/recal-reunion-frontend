@@ -1,6 +1,6 @@
 interface AdminState {
-    loggedIn: boolean;
-    isFetching: boolean;
-    name: string;
-    isProfileUpdated: boolean;
+  loggedIn: boolean;
+  isFetching: boolean;
+  name: string;
+  isProfileUpdated: boolean;
 }

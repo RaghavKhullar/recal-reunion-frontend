@@ -23,6 +23,7 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { searchUser } from "../../redux/actions";
 import { BACKEND_URL } from "../../../config";
 import { showNotification } from "../../helpers/helpers";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Friend = {
   id: string;
@@ -151,12 +152,11 @@ const Search = () => {
   useEffect(() => {
     setVisibleFriends([...friends]);
   }, [activeTab]);
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
     <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
-      <SimpleGrid
-        className="grid-cols-2 xl:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide"
-      >
+      <SimpleGrid className="grid-cols-2 xl:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide">
         {loading && (
           <Center className="w-full h-full">
             <Loader />
@@ -164,19 +164,21 @@ const Search = () => {
         )}
         {error && (
           <Center className="w-full h-full">
-            <Text className="text-xl sm:text-2xl font-bebus">Some Error Occured</Text>
+            <Text className="text-xl sm:text-2xl font-bebus">
+              Some Error Occured
+            </Text>
           </Center>
         )}
         {visibleFriends &&
           (visibleFriends.length === 0 && !loading ? (
             <Center className="w-full h-full pl-10">
-              <p className="pl-44 text-3xl sm:text-2xl font-bebus">Search for Friends</p>
+              <p className="pl-44 text-3xl sm:text-2xl font-bebus">
+                Search for Friends
+              </p>
             </Center>
           ) : (
             visibleFriends.map((friend) => (
-
-                <ProfileCard key={friend.id} user={friend} />
-
+              <ProfileCard key={friend.id} user={friend} />
             ))
           ))}
       </SimpleGrid>
@@ -184,7 +186,7 @@ const Search = () => {
         style={{
           boxShadow: "-8px 8px 40px 0px rgba(0, 0, 0, 0.20)",
         }}
-        className="flex h-[90%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
+        className="flex h-[100%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
       >
         <Center className="h-[90%] w-[90%] flex flex-col">
           <Center className="w-full h-[20%] mb-8 items-start">
@@ -219,7 +221,7 @@ const Search = () => {
             onChange={(value) =>
               setActiveTab(value === "sort" ? "sort" : "filter")
             }
-            className="w-full h-[80%]"
+            className="w-full h-[50%]"
             variant="unstyled"
             defaultValue="sort"
           >
@@ -255,7 +257,12 @@ const Search = () => {
                 value={sortMethod}
                 onChange={(value) => setSortMethod(value as any)}
               >
-                <Center className="w-full justify-start h-[75px] cursor-pointer">
+                <Center
+                  className={
+                    `w-full justify-start cursor-pointer` +
+                    (isMobile ? "" : " h-[75px]")
+                  }
+                >
                   <Radio
                     value="name-asc"
                     classNames={{
@@ -265,7 +272,12 @@ const Search = () => {
                     label="Name - Ascending"
                   />
                 </Center>
-                <Center className="w-full justify-start h-[75px] cursor-pointer">
+                <Center
+                  className={
+                    `w-full justify-start cursor-pointer` +
+                    (isMobile ? "" : " h-[75px]")
+                  }
+                >
                   <Radio
                     classNames={{
                       label: "text-xl sm:text-2xl font-fira",
@@ -287,7 +299,8 @@ const Search = () => {
                   onChange={(value) => setFilterDepartment(value as any)}
                   classNames={{
                     wrapper: "rounded-full px-5 py-3 border-[2px] border-black",
-                    input: "text-[1.25rem] sm:text-3xl font-fira placeholder:text-black",
+                    input:
+                      "text-[1.25rem] sm:text-3xl font-fira placeholder:text-black",
                     section: "text-black pr-4",
                     dropdown:
                       "rounded-b-lg translate-y-3 border-[2px] border-black bg-[#e7e6b6]",
@@ -303,6 +316,9 @@ const Search = () => {
                 />
               </SimpleGrid>
             </Tabs.Panel>
+            <Center>
+              <Button onClick={() => fetchAllFriends(name)}>Search</Button>
+            </Center>
           </Tabs>
         </Center>
       </Center>
