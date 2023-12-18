@@ -40,7 +40,7 @@ const ProfileCard = ({ user }: { user: Friend }) => {
   const navigate = useNavigate();
   return (
     <Card
-      className=" h-[260px] w-[250px] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer"
+      className=" h-[165px] w-[165px] lg:h-[250px] sm:w-[250px] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer"
       onClick={() => navigate("/user/" + user.id)}
     >
       <BackgroundImage
