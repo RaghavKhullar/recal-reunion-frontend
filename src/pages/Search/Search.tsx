@@ -51,6 +51,21 @@ const Search = () => {
   const dispatch = useAppDispatch();
 
   const fetchAllFriends = async (name: string) => {
+    // eslint-disable-next-line no-control-regex
+
+    if (name !== "") {
+      // eslint-disable-next-line no-control-regex
+      const regex = new RegExp("^[0-9a-zA-Z \b]+$");
+
+      if (!regex.test(name)) {
+        showNotification(
+          "Warning!",
+          "Special Characters not allowed",
+          "warning"
+        );
+        return;
+      }
+    }
     setError(null);
     setLoading(true);
     const searchUserDispatch = await dispatch(searchUser(name));
