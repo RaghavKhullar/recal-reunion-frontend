@@ -1,12 +1,13 @@
-import { Group, Box } from "@mantine/core";
+import { Group, ActionIcon, Center } from "@mantine/core";
 import {
   IconUserSearch,
   IconBell,
   IconUserCircle,
   IconTriangleInvertedFilled,
+  IconCircleArrowLeft,
 } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.jpg";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducer";
@@ -19,6 +20,7 @@ const Header = ({
   toggleNavbar: () => void;
   toggleNotification: () => void;
 }) => {
+  const navigate = useNavigate();
   const [scrollY, setScrollY] = useState(0);
   const { loggedIn } = useSelector(userSelector);
   useEffect(() => {
@@ -41,7 +43,7 @@ const Header = ({
         "flex px-[5%] justify-between items-center w-full h-auto  shadow-lg backdrop-blur-lg"
       }
     >
-      <Box>
+      <Center className="flex-row gap-3">
         <Link to="/home">
           <img
             src={logo}
@@ -50,7 +52,11 @@ const Header = ({
             draggable={false}
           />
         </Link>
-      </Box>
+
+        <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
+          <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 35} />
+        </ActionIcon>
+      </Center>
       {loggedIn === true && (
         <Group gap={5}>
           <Group gap={isMobile ? (isSmallMobile ? 25 : 30) : 40}>
