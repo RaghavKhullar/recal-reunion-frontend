@@ -129,102 +129,80 @@ const WriteRem = () => {
 
   return (
     <>
-      <img src={graphic} style={{ position: "absolute", left: "45%" }} />
-      <div className={styles.coverRem}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img
-            src={arrow}
-            style={{
-              width: "3rem",
-              paddingBottom: "0.3rem",
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              navigate("/user/" + id);
-            }}
-          />{" "}
-          <h1 className={styles.remheading}>
-            WRITE A REM ABOUT <span className={styles.red}>{name}</span>
-          </h1>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <div
+      <div className={styles.parent}>
+        <div className={styles.coverRem}>
+          <div style={{ display: "flex", alignItems: "center", gap: "35px" }}>
+            <img
+              src={arrow}
               style={{
-                padding: "2rem",
-                backgroundColor: "#A72343",
-                marginTop: "2rem",
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
-                width: "34rem",
-                height: "34rem",
+                width: "3rem",
+                paddingBottom: "0.3rem",
+                cursor: "pointer",
               }}
-            >
-              <img
-                src={remPin}
-                style={{
-                  position: "absolute",
-                  left: "8rem",
-                  top: "15rem",
-                  width: "8rem",
-                  maxHeight: "8rem",
-                }}
-              />
-              <img
-                src={
-                  file
-                    ? URL.createObjectURL(file)
-                    : BACKEND_URL + "/images/profiles/" + image
-                }
-                style={{
-                  maxWidth: "30rem",
-                  border: "0.2rem solid white",
-                  maxHeight: "30rem",
+              onClick={() => {
+                navigate("/home");
+              }}
+            />{" "}
+            <h1 className={styles.remheading}>
+              WRITE A REM ABOUT <span className={styles.red}>{name}</span>
+            </h1>
+          </div>
+          <div className={styles.remPinParent}>
+            <div className={styles.remProfileImage}>
+              <div className={styles.remImage}>
+                <div className={styles.pinOverlay}>
+                  <img src={remPin} className={styles.remPinImage} />
+                </div>
+                <div className={styles.profilePicOverlay}>
+                  <img
+                    src={
+                      file
+                        ? URL.createObjectURL(file)
+                        : BACKEND_URL +
+                          "/images/profiles/" +
+                          (image && image.length > 0 ? image : "temp")
+                    }
+                    className={styles.remProfileImage}
+                  />
+                </div>
+              </div>
+              <FileInput
+                accept="image/png,image/jpeg,image/jpg"
+                // @ts-ignore
+                onChange={(e) => setFile(e)}
+                // @ts-ignore
+                placeholder={<img src={uploadImage} />}
+                clearable
+                value={file}
+                styles={{
+                  input: { padding: 0 },
                 }}
               />
             </div>
-
-            <FileInput
-              accept="image/png,image/jpeg,image/jpg"
-              // @ts-ignore
-              onChange={(e) => setFile(e)}
-              // @ts-ignore
-              placeholder={<img src={uploadImage} />}
-              clearable
-              value={file}
+            <img src={graphic} className={styles.arrow} />
+            <div
               style={{
-                marginTop: "2rem",
-                width: "10rem",
-                marginLeft: "auto",
-                marginRight: "auto",
+                textAlign: "center",
+                display: "flex",
+                flexDirection: "column",
+                gap:"10px"
               }}
-              styles={{
-                input: { padding: 0 },
-              }}
-            />
-          </div>
-          <div style={{ textAlign: "center" }}>
-            <h2 className={styles.textAreaHead}> A Few words about me</h2>
-            <Textarea
-              onChange={(e) => setContent(e.target.value)}
-              styles={{
-                input: {
-                  height: "25rem",
-                  width: "40rem",
-                  backgroundColor: "transparent",
-                  border: "3px solid #411D76",
-                  borderRadius: "10px",
-                  fontFamily: "'Fira Sans', sans-serif",
-                  fontSize: "1.5rem",
-                  overflowY: "auto",
-                },
-              }}
-            />
-            <button
-              className={styles.remBtn}
-              onClick={() => postRem(file, content, id)}
             >
-              Submit
-            </button>
+              <h2 className={styles.textAreaHead}> A Few words about me</h2>
+              <Textarea
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
+                classNames={{
+                  input: styles.remContent,
+                }}
+              />
+              <button
+                className={styles.remBtn}
+                onClick={() => postRem(file, content, id)}
+              >
+                Submit
+              </button>
+            </div>
           </div>
         </div>
       </div>

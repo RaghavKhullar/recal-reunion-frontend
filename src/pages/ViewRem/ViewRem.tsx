@@ -69,79 +69,49 @@ const ViewRem = () => {
 
   return (
     <>
-      <img src={graphic} style={{ position: "absolute", left: "45%" }} />
-      <div className={styles.coverRem}>
-        <div style={{ display: "flex", alignItems: "center" }}>
-          <img
-            src={arrow}
-            style={{
-              width: "3rem",
-              paddingBottom: "0.3rem",
-              cursor: "pointer",
-            }}
-            onClick={() => {
-              navigate("/home");
-            }}
-          />{" "}
-          <h1 className={styles.remheading}>
-            VIEW A REM ABOUT <span className={styles.red}>{toName}</span>
-          </h1>
-        </div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <div
+      <div className={styles.parent}>
+        <div className={styles.coverRem}>
+          <div style={{ display: "flex", alignItems: "center",gap:"35px" }}>
+            <img
+              src={arrow}
               style={{
-                padding: "2rem",
-                backgroundColor: "#A72343",
-                marginTop: "2rem",
-                boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.35)",
-                width: "34rem",
-                height: "34rem",
+                width: "3rem",
+                paddingBottom: "0.3rem",
+                cursor: "pointer",
               }}
-            >
-              <img
-                src={remPin}
-                style={{
-                  position: "absolute",
-                  left: "8rem",
-                  top: "15rem",
-                  width: "8rem",
-                  maxHeight: "8rem",
-                }}
-              />
-              <img
-                src={
-                  BACKEND_URL +
-                  "/images/memory/" +
-                  (image && image.length > 0 ? image : "temp")
-                }
-                style={{
-                  maxWidth: "30rem",
-                  border: "0.2rem solid white",
-                  maxHeight: "30rem",
-                }}
-              />
-            </div>
+              onClick={() => {
+                navigate("/home");
+              }}
+            />{" "}
+            <h1 className={styles.remheading}>
+              VIEW A REM ABOUT <span className={styles.red}>{toName}</span>
+            </h1>
           </div>
-          <div style={{ textAlign: "center" }}>
-            <h2 className={styles.textAreaHead}>
-              {" "}
-              A Few words from {fromName}
-            </h2>
-            <div
-              style={{
-                height: "32rem",
-                width: "40rem",
-                backgroundColor: "transparent",
-                border: "3px solid #411D76",
-                borderRadius: "10px",
-                fontFamily: "'Fira Sans', sans-serif",
-                fontSize: "1.5rem",
-                overflowY: "auto",
-                textAlign: "left",
-              }}
-            >
-              {content}
+          <div className={styles.remPinParent}>
+            <div className={styles.remProfileImage}>
+              <div className={styles.remImage}>
+                <div className={styles.pinOverlay}>
+                  <img src={remPin} className={styles.remPinImage} />
+                </div>
+                <div className={styles.profilePicOverlay}>
+                  <img
+                    src={
+                      BACKEND_URL +
+                      "/images/memory/" +
+                      (image && image.length > 0 ? image : "temp")
+                    }
+                    className={styles.remProfileImage}
+                  />
+                </div>
+              </div>
+            </div>
+            <img src={graphic} className={styles.arrow} />
+            <div style={{ textAlign: "center" }}>
+              <h2 className={styles.textAreaHead}>
+                {" "}
+                A Few words from {fromName}
+              </h2>
+              <div className={styles.remContent}>{content}</div>
             </div>
           </div>
         </div>
