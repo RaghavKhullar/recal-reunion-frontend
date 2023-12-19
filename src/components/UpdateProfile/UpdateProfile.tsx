@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import classes from "./styles.module.css";
 import { useState } from "react";
-import { useMediaQuery } from '@mantine/hooks';
+import { useMediaQuery } from "@mantine/hooks";
 import { useForm } from "@mantine/form";
 import { useSelector } from "react-redux";
 import { userSelector } from "../../redux/reducer";
@@ -52,7 +52,7 @@ const UpdateProfile = ({
   close: () => void;
   opened: boolean;
 }) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery("(max-width: 600px)");
   const [activeTab, setActiveTab] = useState<string | null>("first");
   const {
     currentUser: { user },
@@ -86,10 +86,10 @@ const UpdateProfile = ({
       aboutMe: user?.aboutMe || "",
       dateOfBirth: user?.dateOfBirth
         ? new Date(
-          parseInt(user?.dateOfBirth.split("-")[2]),
-          parseInt(user?.dateOfBirth.split("-")[1]) - 1,
-          parseInt(user?.dateOfBirth.split("-")[0])
-        )
+            parseInt(user?.dateOfBirth.split("-")[2]),
+            parseInt(user?.dateOfBirth.split("-")[1]) - 1,
+            parseInt(user?.dateOfBirth.split("-")[0])
+          )
         : new Date(),
     },
   });
@@ -100,8 +100,10 @@ const UpdateProfile = ({
         inner: "flex justify-center items-center",
         root: "flex justify-center items-center",
         content:
-          (!isMobile ? "w-[60vw] flex-none h-[70vh] max-w-[600px] " : "flex-none h-[70vh] max-w-[600px] ") +
-            classes.updateProfileContainer,
+          (!isMobile
+            ? "w-[60vw] flex-none h-[70vh] max-w-[600px] "
+            : "flex-none h-[70vh] max-w-[600px] ") +
+          classes.updateProfileContainer,
         body: "w-full h-full",
       }}
       opened={opened}
@@ -338,8 +340,9 @@ const UpdateProfile = ({
                 formData.append("x", form.values.x);
                 formData.append("aboutMe", form.values.aboutMe);
                 const date = form.values.dateOfBirth;
-                const dateOfBirth = `${date.getDate()}-${date.getMonth() + 1
-                  }-${date.getFullYear()}`;
+                const dateOfBirth = `${date.getDate()}-${
+                  date.getMonth() + 1
+                }-${date.getFullYear()}`;
                 formData.append("dateOfBirth", dateOfBirth);
                 if (form.values.newImageFile !== null)
                   formData.append("image", form.values.newImageFile);

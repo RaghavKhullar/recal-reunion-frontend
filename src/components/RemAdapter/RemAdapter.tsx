@@ -27,7 +27,12 @@ const RemAdapter: React.FC<{ rem: Rem; writtenRems: boolean }> = ({
         draggable={false}
       />
       <div onClick={() => navigate("/viewRem/" + rem.id)} className={style.rem}>
-      <span>{(writtenRems === true ? "For "+rem.to?.name +":": rem.from?.name+" wrote:")} </span> <br />"{rem.content}"
+        <span>
+          {writtenRems === true
+            ? "For " + rem.to?.name + ":"
+            : rem.from?.name + " wrote:"}{" "}
+        </span>{" "}
+        <br />"{rem.content}"
       </div>
     </div>
   );

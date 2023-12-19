@@ -16,7 +16,7 @@ const imageParentCss = {
 const NotificationAdapter = ({
   rem,
   toggleNotification,
-  isMobile
+  isMobile,
 }: {
   rem: Rem;
   toggleNotification: () => void;

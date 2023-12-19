@@ -152,13 +152,11 @@ const Search = () => {
   useEffect(() => {
     setVisibleFriends([...friends]);
   }, [activeTab]);
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
     <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
-      <SimpleGrid
-        className="grid-cols-2 xl:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide"
-      >
+      <SimpleGrid className="grid-cols-2 xl:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide">
         {loading && (
           <Center className="w-full h-full">
             <Loader />
@@ -166,19 +164,21 @@ const Search = () => {
         )}
         {error && (
           <Center className="w-full h-full">
-            <Text className="text-xl sm:text-2xl font-bebus">Some Error Occured</Text>
+            <Text className="text-xl sm:text-2xl font-bebus">
+              Some Error Occured
+            </Text>
           </Center>
         )}
         {visibleFriends &&
           (visibleFriends.length === 0 && !loading ? (
             <Center className="w-full h-full pl-10">
-              <p className="pl-44 text-3xl sm:text-2xl font-bebus">Search for Friends</p>
+              <p className="pl-44 text-3xl sm:text-2xl font-bebus">
+                Search for Friends
+              </p>
             </Center>
           ) : (
             visibleFriends.map((friend) => (
-
               <ProfileCard key={friend.id} user={friend} />
-
             ))
           ))}
       </SimpleGrid>
@@ -257,7 +257,12 @@ const Search = () => {
                 value={sortMethod}
                 onChange={(value) => setSortMethod(value as any)}
               >
-                <Center className={`w-full justify-start cursor-pointer` + (isMobile ? "" : " h-[75px]")}>
+                <Center
+                  className={
+                    `w-full justify-start cursor-pointer` +
+                    (isMobile ? "" : " h-[75px]")
+                  }
+                >
                   <Radio
                     value="name-asc"
                     classNames={{
@@ -267,7 +272,12 @@ const Search = () => {
                     label="Name - Ascending"
                   />
                 </Center>
-                <Center className={`w-full justify-start cursor-pointer` + (isMobile ? "" : " h-[75px]")}>
+                <Center
+                  className={
+                    `w-full justify-start cursor-pointer` +
+                    (isMobile ? "" : " h-[75px]")
+                  }
+                >
                   <Radio
                     classNames={{
                       label: "text-xl sm:text-2xl font-fira",
@@ -289,7 +299,8 @@ const Search = () => {
                   onChange={(value) => setFilterDepartment(value as any)}
                   classNames={{
                     wrapper: "rounded-full px-5 py-3 border-[2px] border-black",
-                    input: "text-[1.25rem] sm:text-3xl font-fira placeholder:text-black",
+                    input:
+                      "text-[1.25rem] sm:text-3xl font-fira placeholder:text-black",
                     section: "text-black pr-4",
                     dropdown:
                       "rounded-b-lg translate-y-3 border-[2px] border-black bg-[#e7e6b6]",

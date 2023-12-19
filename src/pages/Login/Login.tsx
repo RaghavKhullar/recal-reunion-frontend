@@ -16,7 +16,7 @@ const UserLogin: React.FC = () => {
     const loginDispatch = await dispatch(getCurrentUser());
     if (getCurrentUser.fulfilled.match(loginDispatch)) {
       if (loginDispatch.payload.status === 200) {
-        navigate('/home');
+        navigate("/home");
         return;
       }
     }
@@ -27,7 +27,7 @@ const UserLogin: React.FC = () => {
     if (loggedIn) {
       fetchUserDetails();
     }
-  }, [loggedIn])
+  }, [loggedIn]);
   return (
     <>
       <div

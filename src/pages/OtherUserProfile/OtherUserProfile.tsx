@@ -84,7 +84,8 @@ const OtherUserProfile: React.FC = () => {
     <>
       <div className={style.upper}>
         <div className={style.batch}>
-          <div className={style.batchName}>Batch of ‘99
+          <div className={style.batchName}>
+            Batch of ‘99
             <div className={style.strokeBatchName}>Batch of ‘99</div>
           </div>
           <div className={style.frame}>
@@ -138,41 +139,41 @@ const OtherUserProfile: React.FC = () => {
       </div>
       {((otherUserDetails !== undefined && remDetailsForUser.length !== 0) ||
         remDetailsByUser.length !== 0) && (
-          <div className={style.background}>
-            <div className={style.dome}>
-              <div className={style.domeShape}></div>
-            </div>
-            <div className={style.cardBackground}>
-              {remDetailsForUser.length !== 0 && (
-                <Card
-                  remDetails={remDetailsForUser.slice(
-                    0,
-                    Math.min(remDetailsForUser.length, 6)
-                  )}
-                  head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
-                  head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
-                  writtenRems={false}
-                  isCurrentUser={false}
-                  id={id as string}
-                />
-              )}
-
-              {remDetailsByUser.length !== 0 && (
-                <Card
-                  remDetails={remDetailsByUser.slice(
-                    0,
-                    Math.min(remDetailsByUser.length, 6)
-                  )}
-                  head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
-                  head2={`Memories written by ${otherUserDetails?.user.name}`}
-                  writtenRems={true}
-                  isCurrentUser={false}
-                  id={id as string}
-                />
-              )}
-            </div>
+        <div className={style.background}>
+          <div className={style.dome}>
+            <div className={style.domeShape}></div>
           </div>
-        )}
+          <div className={style.cardBackground}>
+            {remDetailsForUser.length !== 0 && (
+              <Card
+                remDetails={remDetailsForUser.slice(
+                  0,
+                  Math.min(remDetailsForUser.length, 6)
+                )}
+                head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
+                head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
+                writtenRems={false}
+                isCurrentUser={false}
+                id={id as string}
+              />
+            )}
+
+            {remDetailsByUser.length !== 0 && (
+              <Card
+                remDetails={remDetailsByUser.slice(
+                  0,
+                  Math.min(remDetailsByUser.length, 6)
+                )}
+                head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
+                head2={`Memories written by ${otherUserDetails?.user.name}`}
+                writtenRems={true}
+                isCurrentUser={false}
+                id={id as string}
+              />
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };

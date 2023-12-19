@@ -39,7 +39,7 @@ const ProfileSection = ({
   toggleNavbar: () => void;
   toggleNotification: () => void;
 }) => {
-  const isMobile = useMediaQuery('(max-width: 600px)');
+  const isMobile = useMediaQuery("(max-width: 600px)");
 
   const state = useSelector(userSelector);
   const [remsWrittenForMe, setWrittenRemsForMe] = useState<Rem[]>([]);
@@ -58,8 +58,8 @@ const ProfileSection = ({
     const logoutDispatch = await dispatch(logoutUser());
     if (logoutUser.fulfilled.match(logoutDispatch)) {
       if (logoutDispatch.payload.status === 200) {
-        showNotification("Success", "Logged out successfully", "success")
-        navigate('/login');
+        showNotification("Success", "Logged out successfully", "success");
+        navigate("/login");
       } else {
         showNotification("Error", "Some error occured", "error");
         navigate(`/home`);
@@ -73,7 +73,7 @@ const ProfileSection = ({
       navigate(`/home`);
     }
     toggleNavbar();
-  }
+  };
 
   const profileImage =
     BACKEND_URL +
@@ -88,7 +88,9 @@ const ProfileSection = ({
             style={{
               borderRadius: "25px 0px 0px 25px",
             }}
-            className={`bg-[#e7e6b6] ${isMobile ? "w-[100%]" : "w-[45%] max-w-[600px]"} h-full m-0 p-0 overflow-y-hidden`}
+            className={`bg-[#e7e6b6] ${
+              isMobile ? "w-[100%]" : "w-[45%] max-w-[600px]"
+            } h-full m-0 p-0 overflow-y-hidden`}
           >
             <Box className="w-full border-b-black border-b-[1px] overflow-hidden h-[26%]">
               <Image
@@ -105,11 +107,25 @@ const ProfileSection = ({
                 onClick={() => open()}
                 size={30}
               />
-              <IconShare className="cursor-pointer" onClick={() => {
-                navigator.clipboard.writeText(`${FRONTEND_URL}/user/${(state.currentUser.user?._id) || ""}|`);
-                showNotification("Success", "Link copied to clipboard", "success");
-              }} size={30} />
-              <IconLogout onClick={logout} className="cursor-pointer" size={30} />
+              <IconShare
+                className="cursor-pointer"
+                onClick={() => {
+                  navigator.clipboard.writeText(
+                    `${FRONTEND_URL}/user/${state.currentUser.user?._id || ""}|`
+                  );
+                  showNotification(
+                    "Success",
+                    "Link copied to clipboard",
+                    "success"
+                  );
+                }}
+                size={30}
+              />
+              <IconLogout
+                onClick={logout}
+                className="cursor-pointer"
+                size={30}
+              />
             </Group>
             <Center className={"w-full z-10 -top-[20%] relative"}>
               <Center className="w-full max-w-[500px] z-10 flex-col justify-between">
@@ -196,7 +212,9 @@ const ProfileSection = ({
           style={{
             borderRadius: "25px 0px 0px 25px",
           }}
-          className={`bg-[#e7e6b6] ${isMobile ? "w-[100%]" : "w-[45%]"} h-full m-0 p-0 overflow-y-hidden`}
+          className={`bg-[#e7e6b6] ${
+            isMobile ? "w-[100%]" : "w-[45%]"
+          } h-full m-0 p-0 overflow-y-hidden`}
         >
           <div
             style={{

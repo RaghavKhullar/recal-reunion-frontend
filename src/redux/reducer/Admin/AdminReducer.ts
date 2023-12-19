@@ -5,7 +5,7 @@ const initialState = {
   loggedIn: false,
   isFetching: false,
   name: "",
-  isProfileUpdated: false
+  isProfileUpdated: false,
 } as AdminState;
 
 export const admin = createSlice({
@@ -13,7 +13,6 @@ export const admin = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-
     builder.addCase(getAdminDetails.rejected, (state) => {
       state.isFetching = false;
       state.loggedIn = false;
@@ -23,8 +22,13 @@ export const admin = createSlice({
     });
     builder.addCase(getAdminDetails.fulfilled, (state, { payload }) => {
       state.isFetching = false;
-      if (payload.status === 200) { state.loggedIn = true; state.name = payload.data.data.name; }
-      else { state.loggedIn = false; state.name = ""; }
+      if (payload.status === 200) {
+        state.loggedIn = true;
+        state.name = payload.data.data.name;
+      } else {
+        state.loggedIn = false;
+        state.name = "";
+      }
     });
 
     builder.addCase(logoutAdmin.rejected, (state) => {

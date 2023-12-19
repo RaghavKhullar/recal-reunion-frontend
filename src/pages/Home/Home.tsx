@@ -94,7 +94,8 @@ const Home: React.FC = () => {
     <>
       <div className={style.upper}>
         <div className={style.batch}>
-          <div className={style.batchName}>Batch of ‘99
+          <div className={style.batchName}>
+            Batch of ‘99
             <div className={style.strokeBatchName}>Batch of ‘99</div>
           </div>
           <div className={style.frame}>

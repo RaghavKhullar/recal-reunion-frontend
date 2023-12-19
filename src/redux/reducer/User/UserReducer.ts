@@ -4,7 +4,7 @@ import {
   getOtherUserFromId,
   searchUser,
   updateUserProfile,
-  logoutUser
+  logoutUser,
 } from "../../actions";
 
 export const initialState = {
@@ -85,7 +85,7 @@ export const user = createSlice({
       state.currentUser = {
         writtenByUser: { isFetching: false, rems: [] },
         writtenForUser: { isFetching: false, rems: [] },
-      }
+      };
     });
     builder.addCase(logoutUser.pending, (state) => {
       state.isFetching = true;
@@ -100,7 +100,7 @@ export const user = createSlice({
       state.currentUser = {
         writtenByUser: { isFetching: false, rems: [] },
         writtenForUser: { isFetching: false, rems: [] },
-      }
+      };
     });
   },
 });
