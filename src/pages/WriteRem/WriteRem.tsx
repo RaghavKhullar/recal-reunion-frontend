@@ -185,7 +185,7 @@ const WriteRem = () => {
                 textAlign: "center",
                 display: "flex",
                 flexDirection: "column",
-                gap:"10px"
+                gap: "10px",
               }}
             >
               <h2 className={styles.textAreaHead}> A Few words about me</h2>

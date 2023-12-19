@@ -6,7 +6,7 @@
   font-family: "Bebas Neue", sans-serif;
   font-size: 4rem;
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     font-size: 2rem;
   }
 }
@@ -16,14 +16,13 @@
   justify-content: space-between;
   gap: 10px;
 
-
   padding: 15px;
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     padding: 5px;
   }
 
-  @media screen and (max-width:1320px) {
+  @media screen and (max-width: 1320px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,7 +30,7 @@
 }
 
 .remProfileImage {
-  @media screen and (max-width:1320px) {
+  @media screen and (max-width: 1320px) {
     transform: scale(0.85);
   }
 }
@@ -41,15 +40,16 @@
   flex-direction: column;
   gap: 50px;
 
-  @media screen and (max-width:1320px) {
+  @media screen and (max-width: 1320px) {
     display: flex;
     flex-direction: column;
     height: 80vh;
   }
 
-  @media screen and (max-width:560px) {}
+  @media screen and (max-width: 560px) {
+  }
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -94,7 +94,7 @@
 
 .profilePicOverlay {
   padding: 8%;
-  background-color: #A72343;
+  background-color: #a72343;
   margin-top: 2rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.35);
   border: 0.2rem solid white;
@@ -113,16 +113,16 @@
   height: 55vh;
   width: 30vw;
   background-color: transparent;
-  border: 3px solid #411D76;
+  border: 3px solid #411d76;
   border-radius: 10px;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: "Fira Sans", sans-serif;
   font-size: 1.5rem;
   overflow-y: auto;
   text-align: left;
 
   padding: 10px;
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     width: 60vw;
     font-size: 1.3rem;
   }
@@ -135,7 +135,7 @@
   justify-content: center;
   align-items: center;
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     overflow-y: scroll;
   }
 }
@@ -143,7 +143,7 @@
 .arrow {
   width: 15%;
 
-  @media screen and (max-width:560px) {
+  @media screen and (max-width: 560px) {
     width: 45%;
   }
 }

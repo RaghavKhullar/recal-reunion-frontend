@@ -105,6 +105,9 @@
   border: 3px solid #fff;
   background: lightgray -46.95px 0px / 132.357% 100% no-repeat;
   background-size: cover;
+  max-width: calc(100%);
+  max-height: calc(100%);
+  display: flex;
 }
 
 .textAfter {

@@ -71,7 +71,7 @@ const ViewRem = () => {
     <>
       <div className={styles.parent}>
         <div className={styles.coverRem}>
-          <div style={{ display: "flex", alignItems: "center",gap:"35px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "35px" }}>
             <img
               src={arrow}
               style={{
