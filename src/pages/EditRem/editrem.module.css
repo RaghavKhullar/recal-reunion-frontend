@@ -120,8 +120,8 @@
   background-color: transparent !important;
   border: 3px solid #411D76 !important  ;
   border-radius: 10px !important;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 1.5rem;
+  font-family: 'Fira Sans', sans-serif !important;
+  font-size: 1.5rem !important;
   overflow-y: auto;
   text-align: left;
 
