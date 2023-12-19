@@ -116,9 +116,9 @@
 .remContent {
   height: 55vh !important;
   width: 30vw !important;
-  background-color: transparent;
-  border: 3px solid #411D76;
-  border-radius: 10px;
+  background-color: transparent !important;
+  border: 3px solid #411D76 !important;
+  border-radius: 10px !important;
   font-family: 'Fira Sans', sans-serif;
   font-size: 1.5rem;
   overflow-y: auto;
