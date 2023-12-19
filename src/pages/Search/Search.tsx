@@ -23,6 +23,7 @@ import { useAppDispatch } from "../../redux/store/hooks";
 import { searchUser } from "../../redux/actions";
 import { BACKEND_URL } from "../../../config";
 import { showNotification } from "../../helpers/helpers";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Friend = {
   id: string;
@@ -151,6 +152,7 @@ const Search = () => {
   useEffect(() => {
     setVisibleFriends([...friends]);
   }, [activeTab]);
+  const isMobile = useMediaQuery('(max-width: 600px)');
 
   return (
     <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
@@ -175,7 +177,7 @@ const Search = () => {
           ) : (
             visibleFriends.map((friend) => (
 
-                <ProfileCard key={friend.id} user={friend} />
+              <ProfileCard key={friend.id} user={friend} />
 
             ))
           ))}
@@ -184,7 +186,7 @@ const Search = () => {
         style={{
           boxShadow: "-8px 8px 40px 0px rgba(0, 0, 0, 0.20)",
         }}
-        className="flex h-[90%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
+        className="flex h-[100%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
       >
         <Center className="h-[90%] w-[90%] flex flex-col">
           <Center className="w-full h-[20%] mb-8 items-start">
@@ -219,7 +221,7 @@ const Search = () => {
             onChange={(value) =>
               setActiveTab(value === "sort" ? "sort" : "filter")
             }
-            className="w-full h-[80%]"
+            className="w-full h-[50%]"
             variant="unstyled"
             defaultValue="sort"
           >
@@ -255,7 +257,7 @@ const Search = () => {
                 value={sortMethod}
                 onChange={(value) => setSortMethod(value as any)}
               >
-                <Center className="w-full justify-start h-[75px] cursor-pointer">
+                <Center className={`w-full justify-start cursor-pointer` + (isMobile ? "" : " h-[75px]")}>
                   <Radio
                     value="name-asc"
                     classNames={{
@@ -265,7 +267,7 @@ const Search = () => {
                     label="Name - Ascending"
                   />
                 </Center>
-                <Center className="w-full justify-start h-[75px] cursor-pointer">
+                <Center className={`w-full justify-start cursor-pointer` + (isMobile ? "" : " h-[75px]")}>
                   <Radio
                     classNames={{
                       label: "text-xl sm:text-2xl font-fira",
@@ -303,6 +305,9 @@ const Search = () => {
                 />
               </SimpleGrid>
             </Tabs.Panel>
+            <Center>
+              <Button onClick={() => fetchAllFriends(name)}>Search</Button>
+            </Center>
           </Tabs>
         </Center>
       </Center>

@@ -158,7 +158,7 @@ const Home: React.FC = () => {
                   0,
                   Math.min(remDetailsForMe.length, 6)
                 )}
-                head1="Here’s what your friends think of you"
+                head1="Here’s what your friends wrote about you"
                 head2="Thoughts from your friends"
                 writtenRems={false}
                 isCurrentUser={true}
@@ -171,8 +171,8 @@ const Home: React.FC = () => {
                   0,
                   Math.min(remDetailsByMe.length, 6)
                 )}
-                head1="Here’s what you think of them"
-                head2="Personal or Personalized?"
+                head1="Here’s what you think of your friends"
+                head2="Memories written by you"
                 writtenRems={true}
                 isCurrentUser={true}
               />

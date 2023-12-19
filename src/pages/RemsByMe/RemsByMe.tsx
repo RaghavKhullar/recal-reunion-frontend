@@ -45,7 +45,7 @@ const RemsByMe = () => {
   return (
     <Center className="w-full h-full">
       <RemsDisplay
-        heading="Here’s what you think of others"
+        heading="Here’s what you wrote for others"
         subheading="A collection of all the memories you’ve shared"
         rems={rems}
       />

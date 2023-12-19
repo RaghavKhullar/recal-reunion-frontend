@@ -164,7 +164,7 @@ const OtherUserProfile: React.FC = () => {
                     Math.min(remDetailsByUser.length, 6)
                   )}
                   head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
-                  head2={`Personal or Personalized?`}
+                  head2={`Memories written by ${otherUserDetails?.user.name}`}
                   writtenRems={true}
                   isCurrentUser={false}
                   id={id as string}

@@ -37,7 +37,7 @@ const RemCard = ({ author, content, image, id }: Rem) => {
                 src={author?.profilePicture}
                 alt={author?.name}
               />
-              <Text className=" font-bebus tracking-wider text-white">
+              <Text className=" font-bebus tracking-wider text-white text-elipsis">
                 {author?.name}
               </Text>
             </Center>

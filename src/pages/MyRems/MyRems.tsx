@@ -46,8 +46,8 @@ const MyRems = () => {
   return (
     <Center className="w-full h-full">
       <RemsDisplay
-        heading="Here's what we think of you"
-        subheading="A collection of thoughts and memories from your friends and by your friends"
+        heading="Here's what your friends wrote for you"
+        subheading="A collection of thoughts and memories by your friends"
         rems={rems}
       />
     </Center>
