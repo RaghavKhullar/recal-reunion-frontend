@@ -51,26 +51,6 @@ const Search = () => {
   const dispatch = useAppDispatch();
 
   const fetchAllFriends = async (name: string) => {
-    if (name.length >= 3) {
-      const regex = new RegExp("^[0-9a-zA-Z \b]+$");
-
-      if (!regex.test(name)) {
-        showNotification(
-          "Warning!",
-          "Special Characters not allowed",
-          "warning"
-        );
-        return;
-      }
-    } else {
-      showNotification(
-        "Warning!",
-        "Name should be atleast 3 characters :)",
-        "warning"
-      );
-      return;
-    }
-
     setError(null);
     setLoading(true);
     const searchUserDispatch = await dispatch(searchUser(name));
@@ -274,7 +254,7 @@ const Search = () => {
                 </Center>
                 <Center
                   className={
-                    `w-full justify-start cursor-pointer` +
+                    "w-full justify-start cursor-pointer" +
                     (isMobile ? "" : " h-[75px]")
                   }
                 >
@@ -317,7 +297,12 @@ const Search = () => {
               </SimpleGrid>
             </Tabs.Panel>
             <Center>
-              <Button onClick={() => fetchAllFriends(name)}>Search</Button>
+              <Button
+                className="bg-black text-white border-2 border-black font-bebus text-2xl h-[45px] px-4 py-2 rounded-full w-[150px]"
+                onClick={() => fetchAllFriends(name)}
+              >
+                Search
+              </Button>
             </Center>
           </Tabs>
         </Center>
