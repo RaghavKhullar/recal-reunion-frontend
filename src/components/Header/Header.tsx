@@ -35,15 +35,18 @@ const Header = ({
     };
   }, [scrollY]);
   const isMobile = useMediaQuery("(max-width: 600px)");
-  const isSmallMobile = useMediaQuery("(max-width: 325px)");
+  const isSmallMobile = useMediaQuery("(max-width: 380px)");
 
   return (
     <Group
       className={
-        "flex px-[5%] justify-between items-center w-full h-auto  shadow-lg backdrop-blur-lg"
+        "flex px-[5%] justify-between items-center w-full h-auto shadow-lg backdrop-blur-lg"
       }
     >
       <Center className="flex-row gap-3">
+        {loggedIn === true && <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
+          <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
+        </ActionIcon>}
         <Link to="/home">
           <img
             src={logo}
@@ -52,16 +55,12 @@ const Header = ({
             draggable={false}
           />
         </Link>
-
-        <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
-          <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 35} />
-        </ActionIcon>
       </Center>
       {loggedIn === true && (
         <Group gap={5}>
           <Group gap={isMobile ? (isSmallMobile ? 25 : 30) : 40}>
             <Link to="/search">
-              <IconUserSearch size={isSmallMobile ? 25 : 35} />
+              <IconUserSearch size={isSmallMobile ? 30 : 35} />
             </Link>
 
             <IconBell
@@ -69,15 +68,14 @@ const Header = ({
               onClick={() => {
                 toggleNotification();
               }}
-              size={isSmallMobile ? 25 : 35}
+              size={isSmallMobile ? 30 : 35}
             />
             <IconUserCircle
               cursor="pointer"
               onClick={toggleNavbar}
-              size={isSmallMobile ? 25 : 35}
+              size={isSmallMobile ? 30 : 35}
             />
           </Group>
-          <IconTriangleInvertedFilled width={10} size={10} />
         </Group>
       )}
     </Group>
