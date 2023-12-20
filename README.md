@@ -1,27 +1,34 @@
-# recal-reunion-frontend
+# App - Client
 
-## Installation
+## Installation and Setup
 
-Clone the repo to your device.
+Clone the repository to your local device and
 
-1. Make sure you have installed npm on your device
-
-2. Install the node modules:
+1. Install the required node modules:
 
 ```bash
-npm install
+yarn install
 ```
 
-3. Create .env file
+2.
 
 ```bash
-cp .env.example .env
+cp config.example.ts config.ts
 ```
 
-4. Start the server in developer mode:
+and make any necessary changes.
+
+3. Start the Vite Development Server in developer mode:
 
 ```bash
-npm run dev
+yarn dev
 ```
 
-The vite server should be ruuning at your local host port 3000.
+The server should be running at your 127.0.0.1 port 3000 (or the port specified in `config.ts`).
+
+## Resources
+
+[React](https://reactjs.org/) \
+[Mantine UI](https://mantine.dev/) \
+[React-Redux](https://react-redux.js.org/) \
+[Tailwind-CSS](https://tailwindcss.com/)

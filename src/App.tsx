@@ -1,43 +1,35 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-const App: React.FC = () => {
-	const [isAdmin, setAdmin] = useState(false);
-	const navigate = useNavigate();
-	return (
-		<>
-			{isAdmin ? (
-				<>
-					<h1>Admin</h1>
-					<Link to="/admin/login"> Login </Link>
-					<br />
-					<button
-						onClick={() => {
-							setAdmin(false);
-							navigate("/");
-						}}
-					>
-						{" "}
-						No I am User{" "}
-					</button>
-				</>
-			) : (
-				<>
-					<h1>User</h1>
-					<Link to="/user/login"> Login </Link>
-					<br />
-					<button
-						onClick={() => {
-							setAdmin(true);
-							navigate("/");
-						}}
-					>
-						{" "}
-						No I am Admin{" "}
-					</button>
-				</>
-			)}
-		</>
-	);
+import Router from "./routes";
+import { MantineProvider } from "@mantine/core";
+import theme from "./utils/theme";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store";
+import "./App.css";
+import { ErrorBoundary } from "react-error-boundary";
+import { FallbackUI } from "./components";
+import { Notifications } from "@mantine/notifications";
+import { PersistGate } from "redux-persist/integration/react";
+import "@mantine/core/styles.css";
+import "@mantine/notifications/styles.css";
+import "@mantine/dates/styles.css";
+
+const App = () => {
+  return (
+    <ErrorBoundary
+      FallbackComponent={FallbackUI}
+      onError={(error: Error) => {
+        console.error(error);
+      }}
+    >
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <MantineProvider theme={theme}>
+            <Notifications />
+            <Router />
+          </MantineProvider>
+        </PersistGate>
+      </Provider>
+    </ErrorBoundary>
+  );
 };
 
 export default App;

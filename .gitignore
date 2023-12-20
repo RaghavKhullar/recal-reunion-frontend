@@ -1,5 +1,6 @@
-/node_modules
+node_modules/
+dist/
+config.ts
+yarn-error.log
+yarn.lock
 .env
-package-lock.json
-yarn-error.log*
-dist
