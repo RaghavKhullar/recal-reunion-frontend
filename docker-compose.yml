@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+    server:
+        container_name: recal_frontend_23
+        image: recal_frontend_23:prod
+        build:
+            context: .
+            target: prod
+        ports:
+            - 3000:80
+        restart: always
