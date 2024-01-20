@@ -120,7 +120,7 @@ const OtherUserProfile: React.FC = () => {
                   <div className={style.internal}>
                     <div>
                       <img
-                        src={`${BACKEND_URL}/images/profiles/${otherUserDetails.oldRem.image}`}
+                        src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
                       />
                     </div>
                   </div>

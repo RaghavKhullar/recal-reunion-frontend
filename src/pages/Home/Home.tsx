@@ -108,7 +108,7 @@ const Home: React.FC = () => {
                   <div className={style.internal}>
                     <div>
                       <img
-                        src={`${BACKEND_URL}/images/profiles/${userDetails.oldRem.image}`}
+                        src={`${BACKEND_URL}/images/memory/${userDetails.oldRem.image}`}
                       />
                     </div>
                   </div>
