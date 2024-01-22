@@ -40,7 +40,7 @@ const ProfileCard = ({ user }: { user: Friend }) => {
   const navigate = useNavigate();
   return (
     <Card
-      className=" h-[44vmin] w-[44vmin] lg:h-[32vmin] sm:w-[32vmin] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer"
+      className=" h-[44vmin] w-[44vmin] lg:h-[32vmin] sm:w-[32vmin] rounded-[19px] p-[10px] bg-[#A72343] cursor-pointer mt-[20px] mr-[15px] ml-[15px]"
       onClick={() => navigate("/user/" + user.id)}
     >
       <BackgroundImage
@@ -49,7 +49,7 @@ const ProfileCard = ({ user }: { user: Friend }) => {
         radius="sm"
       >
         <Box className="h-[100%] pl-2 pb-2 w-[100%] flex flex-col justify-end bg-black bg-opacity-40">
-          <Text className="text-3xl font-bebus text-white text-elipsis">
+          <Text truncate="end" className="text-3xl font-bebus text-white">
             {user.name.toUpperCase()}
           </Text>
           <Group>

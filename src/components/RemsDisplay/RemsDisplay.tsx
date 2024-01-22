@@ -4,43 +4,48 @@ import {
   Button,
   Card,
   Center,
+  Flex,
   SimpleGrid,
   Text,
 } from "@mantine/core";
 import { Rem } from "../../pages/MyRems/MyRems";
 import { Link, useNavigate } from "react-router-dom";
+import { useMediaQuery } from "@mantine/hooks";
 
 const RemCard = ({ author, content, image, id }: Rem) => {
+  const isMobile = useMediaQuery("max-width:600px");
   const navigate = useNavigate();
   return (
     <Card
       style={{
         minWidth: "180px",
-        minHeight: "200px",
+        width: isMobile ? "70vw" : "30vh",
+        minHeight: "20vh",
         borderRadius: "16px",
         background: "#EBD18D",
         boxShadow: "20px 20px 80px 0px rgba(0, 0, 0, 0.20)",
+        margin: "20px 20px"
       }}
     >
-      <Card.Section className="h-[190px]  sm:h-[300px] overflow-hidden">
+      <Card.Section className="h-[19vh] sm:h-[30vh] overflow-hidden">
         <BackgroundImage
           src={image}
-          className="w-full h-[190px] sm:w-full sm:h-[300px]"
+          className="w-full h-[19vh] sm:w-full sm:h-[30vh]"
         >
           <Center
             style={{
               background:
                 "linear-gradient(180deg, #000 -42.73%, rgba(0, 0, 0, 0.00) 100%)",
             }}
-            className="w-full px-4 sm:px-5 pt-2 sm:pt-5 h-full items-start  justify-between"
+            className="w-full px-2 sm:px-3 pt-2 sm:pt-5 h-full items-start  justify-between"
           >
-            <Center className="gap-1 sm:gap-3">
+            <Center className="gap-1 sm:gap-3 w-[80%]">
               <img
                 className="w-[20px] h-[20px] sm:w-[40px] sm:h-[40px] rounded-full"
                 src={author?.profilePicture}
                 alt={author?.name}
               />
-              <Text className=" font-bebus tracking-wider text-white text-elipsis">
+              <Text truncate="end" className=" font-bebus tracking-wider text-white">
                 {author?.name}
               </Text>
             </Center>
@@ -59,7 +64,7 @@ const RemCard = ({ author, content, image, id }: Rem) => {
         </BackgroundImage>
       </Card.Section>
       <Card.Section
-        className="p-3 w-[190px] sm:w-full"
+        className="p-3 w-[30vw] sm:w-full"
         style={{ cursor: "pointer" }}
         onClick={() => navigate("/viewRem/" + id)}
       >
@@ -84,8 +89,8 @@ const RemsDisplay = ({
   rems: Rem[];
 }) => {
   return (
-    <Box className="w-full h-full max-w-[1500px] overflow-y-auto overflow-x-visible scrollbar-hide px-2 sm:px-60 pb-20">
-      <Box className="w-full h-[20%] overflow-x-visible">
+    <Box className="w-full h-full overflow-y-auto overflow-x-visible scrollbar-hide px-10 pb-20 pt-10">
+      <Box className="w-full h-[20%] overflow-x-visible mb-5">
         <Text className="text-black font-bebas-neue text-3xl sm:text-4xl xl:text-6xl font-normal text-center">
           {heading}
         </Text>
@@ -93,11 +98,11 @@ const RemsDisplay = ({
           {subheading}
         </Text>
       </Box>
-      <SimpleGrid className="grid-cols-2 sm:grid-cols-3 w-full overflow-x-visible">
+      <Flex className="flex-wrap justify-evenly w-full overflow-x-visible">
         {rems.map((rem, i) => (
           <RemCard key={i} {...rem} />
         ))}
-      </SimpleGrid>
+      </Flex>
     </Box>
   );
 };

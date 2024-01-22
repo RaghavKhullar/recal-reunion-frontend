@@ -43,7 +43,7 @@ const Header = ({
         "flex px-[5%] justify-between items-center w-full h-auto shadow-lg backdrop-blur-lg"
       }
     >
-      <Center className="flex-row gap-3">
+      <Center className="flex-row gap-3 max-h-[10vh]">
         {loggedIn === true && <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
           <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
         </ActionIcon>}
@@ -51,6 +51,7 @@ const Header = ({
           <img
             src={logo}
             style={isSmallMobile ? { maxWidth: "90px" } : {}}
+            className="max-h-[10vh]"
             alt=""
             draggable={false}
           />

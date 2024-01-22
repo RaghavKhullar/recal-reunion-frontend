@@ -86,10 +86,10 @@ const UpdateProfile = ({
       aboutMe: user?.aboutMe || "",
       dateOfBirth: user?.dateOfBirth
         ? new Date(
-            parseInt(user?.dateOfBirth.split("-")[2]),
-            parseInt(user?.dateOfBirth.split("-")[1]) - 1,
-            parseInt(user?.dateOfBirth.split("-")[0])
-          )
+          parseInt(user?.dateOfBirth.split("-")[2]),
+          parseInt(user?.dateOfBirth.split("-")[1]) - 1,
+          parseInt(user?.dateOfBirth.split("-")[0])
+        )
         : new Date(),
     },
   });
@@ -209,7 +209,7 @@ const UpdateProfile = ({
                 <IconTriangleInvertedFilled size={20} color="#000000" />
               }
               label="Department"
-              data={["CSE", "ECE", "EEE", "ME", "CE", "CHE", "MME", "PE"]}
+              data={["ARCH", "CHEM", "CIV", "CSE", "EEE", "ECE", "ICE", "MECH", "META", "PROD"]}
               {...form.getInputProps("department")}
             />
             <Select
@@ -340,9 +340,8 @@ const UpdateProfile = ({
                 formData.append("x", form.values.x);
                 formData.append("aboutMe", form.values.aboutMe);
                 const date = form.values.dateOfBirth;
-                const dateOfBirth = `${date.getDate()}-${
-                  date.getMonth() + 1
-                }-${date.getFullYear()}`;
+                const dateOfBirth = `${date.getDate()}-${date.getMonth() + 1
+                  }-${date.getFullYear()}`;
                 formData.append("dateOfBirth", dateOfBirth);
                 if (form.values.newImageFile !== null)
                   formData.append("image", form.values.newImageFile);

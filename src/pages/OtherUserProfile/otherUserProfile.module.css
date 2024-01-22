@@ -28,7 +28,7 @@
 
 .strokeBatchName {
   position: absolute;
-  z-index: 4;
+  z-index: 2;
   display: flex;
   max-width: 100%;
   height: auto;
@@ -51,7 +51,7 @@
   align-items: center;
   gap: 10%;
   top: 10%;
-  z-index: 2;
+  z-index: 4;
 }
 
 .frame .before {
