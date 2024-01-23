@@ -35,13 +35,13 @@ export const getOtherUserFromId = createAsyncThunk<
 
 export const searchUser = createAsyncThunk<
   any,
-  string,
+  { name: string, dept: string },
   { rejectValue: APIError }
->("user/search", async (name: string, { rejectWithValue }) => {
+>("user/search", async (body, { rejectWithValue }) => {
   try {
     const response = await CustomAxios.get(`/user/searchUser`, {
       withCredentials: true,
-      params: { name: name },
+      params: { name: body.name, dept: body.dept },
     });
     return response;
   } catch (error: any) {

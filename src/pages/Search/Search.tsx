@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Center,
+  Flex,
   Group,
   Loader,
   Radio,
@@ -65,10 +66,13 @@ const Search = () => {
         );
         return;
       }
+    } else if (filterDepartment == null) {
+      showNotification("Warning", "Enter name or select department", "warning");
+      return;
     }
     setError(null);
     setLoading(true);
-    const searchUserDispatch = await dispatch(searchUser(name));
+    const searchUserDispatch = await dispatch(searchUser({ name: name, dept: filterDepartment || "" }));
     if (searchUser.fulfilled.match(searchUserDispatch)) {
       if (searchUserDispatch.payload.status === 200) {
         const friends = searchUserDispatch.payload.data.data.map(
@@ -114,9 +118,12 @@ const Search = () => {
         );
         setFriends(friends);
         setVisibleFriends(friends);
+      } else {
+        showNotification("Error", searchUserDispatch.payload.data.message, "error");
       }
     } else {
       setError("Some error occured");
+      return;
     }
     setLoading(false);
   };
@@ -150,8 +157,8 @@ const Search = () => {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
   return (
-    <Box className="h-full w-full px-[5%] flex flex-col-reverse sm:flex-row">
-      <SimpleGrid className="grid-cols-2 xl:grid-cols-3 h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide">
+    <Box className="h-full w-full px-[2%] flex flex-col-reverse sm:flex-row">
+      <Flex className="h-full w-full sm:h-[95%] sm:w-[60%] overflow-y-auto scrollbar-hide flex-wrap">
         {loading && (
           <Center className="w-full h-full">
             <Loader />
@@ -176,12 +183,12 @@ const Search = () => {
               <ProfileCard key={friend.id} user={friend} />
             ))
           ))}
-      </SimpleGrid>
+      </Flex>
       <Center
         style={{
           boxShadow: "-8px 8px 40px 0px rgba(0, 0, 0, 0.20)",
         }}
-        className="flex h-[100%] w-full sm:h-[95%] sm:w-[40%] mb-4 mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
+        className="flex h-[115%] w-full sm:h-[95%] sm:w-[40%] mb-2 mt-2 sm:mb-4 sm:mt-4 rounded-[20px] border-[1px] border-opacity-40 border-black"
       >
         <Center className="h-[90%] w-[90%] flex flex-col">
           <Center className="w-full h-[20%] mb-8 items-start">
@@ -291,7 +298,7 @@ const Search = () => {
               <SimpleGrid cols={1}>
                 <Select
                   value={filterDepartment}
-                  onChange={(value) => setFilterDepartment(value as any)}
+                  onChange={(value) => setFilterDepartment((value == "None" ? null : value))}
                   classNames={{
                     wrapper: "rounded-full px-5 py-3 border-[2px] border-black",
                     input:
@@ -307,7 +314,7 @@ const Search = () => {
                     <IconTriangleInvertedFilled size={20} color="#000000" />
                   }
                   placeholder="Department"
-                  data={["CSE", "ECE", "EEE", "ME", "CE", "CHE", "MME", "PE"]}
+                  data={["None", "ARCH", "CHEM", "CIV", "CSE", "EEE", "ECE", "ICE", "MECH", "META", "PROD"]}
                 />
               </SimpleGrid>
             </Tabs.Panel>
