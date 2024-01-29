@@ -6,13 +6,45 @@ import { Card } from "../../components";
 import style from "./otherUserProfile.module.css";
 import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
-import { getOtherUserFromId, getPublicRemsOfUser, getRemOfPair } from "../../redux/actions";
+import {
+  getOtherUserFromId,
+  getPublicRemsOfUser,
+  getRemOfPair,
+} from "../../redux/actions";
 import { useNavigate, useParams } from "react-router-dom";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
-import { Button, Center } from "@mantine/core";
-
+import { Button, Center, Modal } from "@mantine/core";
+import { useDisclosure } from "@mantine/hooks";
+// @ts-ignore
+import { MapInteractionCSS } from "react-map-interaction";
+const ImageModal = ({
+  url,
+  opened,
+  close,
+  setImgUrl,
+}: {
+  url: string;
+  opened: boolean;
+  close: () => void;
+  setImgUrl: (url: string) => void;
+}) => {
+  return (
+    <Modal
+      centered
+      opened={opened && url.length > 0}
+      onClose={() => {
+        setImgUrl("");
+        close();
+      }}
+    >
+      <MapInteractionCSS>
+        <img src={url} />
+      </MapInteractionCSS>
+    </Modal>
+  );
+};
 const OtherUserProfile: React.FC = () => {
   const [remDetailsForUser, setRemDetailsForUser] = useState<Rem[]>([]);
   const [remDetailsByUser, setRemDetailsByUser] = useState<Rem[]>([]);
@@ -21,10 +53,12 @@ const OtherUserProfile: React.FC = () => {
   const state = useSelector(userSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [remExistBetweenPair, setRemExistBetweenPair] = useState<boolean>(false);
+  const [remExistBetweenPair, setRemExistBetweenPair] =
+    useState<boolean>(false);
   const { id } = useParams();
   const [remId, setRemId] = useState<String>("");
-
+  const [opened, { open, close }] = useDisclosure(false);
+  const [imgUrl, setImgUrl] = useState<string>("");
   const fetchPublicRems = async (id: string) => {
     const getPublicRemsOfUserDispatch = await dispatch(getPublicRemsOfUser(id));
     if (getPublicRemsOfUser.fulfilled.match(getPublicRemsOfUserDispatch)) {
@@ -72,7 +106,7 @@ const OtherUserProfile: React.FC = () => {
     const getRemOfPairDispatch = await dispatch(getRemOfPair(id));
     if (getRemOfPair.fulfilled.match(getRemOfPairDispatch)) {
       if (getRemOfPairDispatch.payload.status === 200) {
-        setRemId(getRemOfPairDispatch.payload.data.data._id)
+        setRemId(getRemOfPairDispatch.payload.data.data._id);
         setRemExistBetweenPair(true);
       } else if (getRemOfPairDispatch.payload.status !== 400) {
         setRemExistBetweenPair(false);
@@ -121,6 +155,17 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setImgUrl(
+                            `${BACKEND_URL}/images/memory/${
+                              otherUserDetails.oldRem
+                                ? otherUserDetails.oldRem.image
+                                : "default.jpg"
+                            }`
+                          );
+                          open();
+                        }}
                       />
                     </div>
                   </div>
@@ -137,6 +182,13 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setImgUrl(
+                            `${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`
+                          );
+                          open();
+                        }}
                       />
                     </div>
                   </div>
@@ -146,14 +198,19 @@ const OtherUserProfile: React.FC = () => {
           </div>
         </div>
 
-
         <div className={style.quote}>
           <Center className="w-full absolute z-[5] justify-evenly -top-10">
-            {remExistBetweenPair && remId !== "" && <Button color="#a72343" component="a" href={'/viewRem/' + remId}>
-              View Rem
-            </Button>}
+            {remExistBetweenPair && remId !== "" && (
+              <Button color="#a72343" component="a" href={"/viewRem/" + remId}>
+                View Rem
+              </Button>
+            )}
 
-            <Button color="#a72343" component="a" href={(remExistBetweenPair ? '/editRem/' : '/writeRem/') + id}>
+            <Button
+              color="#a72343"
+              component="a"
+              href={(remExistBetweenPair ? "/editRem/" : "/writeRem/") + id}
+            >
               {remExistBetweenPair ? "Edit Rem" : "Write Rem"}
             </Button>
           </Center>
@@ -171,45 +228,50 @@ const OtherUserProfile: React.FC = () => {
             </>
           )}
         </div>
-
       </div>
       {((otherUserDetails !== undefined && remDetailsForUser.length !== 0) ||
         remDetailsByUser.length !== 0) && (
-          <div className={style.background}>
-            <div className={style.dome}>
-              <div className={style.domeShape}></div>
-            </div>
-            <div className={style.cardBackground}>
-              {remDetailsForUser.length !== 0 && (
-                <Card
-                  remDetails={remDetailsForUser.slice(
-                    0,
-                    Math.min(remDetailsForUser.length, 6)
-                  )}
-                  head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
-                  head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
-                  writtenRems={false}
-                  isCurrentUser={false}
-                  id={id as string}
-                />
-              )}
-
-              {remDetailsByUser.length !== 0 && (
-                <Card
-                  remDetails={remDetailsByUser.slice(
-                    0,
-                    Math.min(remDetailsByUser.length, 6)
-                  )}
-                  head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
-                  head2={`Memories written by ${otherUserDetails?.user.name}`}
-                  writtenRems={true}
-                  isCurrentUser={false}
-                  id={id as string}
-                />
-              )}
-            </div>
+        <div className={style.background}>
+          <div className={style.dome}>
+            <div className={style.domeShape}></div>
           </div>
-        )}
+          <div className={style.cardBackground}>
+            {remDetailsForUser.length !== 0 && (
+              <Card
+                remDetails={remDetailsForUser.slice(
+                  0,
+                  Math.min(remDetailsForUser.length, 6)
+                )}
+                head1={`Here’s what ${otherUserDetails?.user.name}'s friends think`}
+                head2={`Thoughts from ${otherUserDetails?.user.name}'s friends`}
+                writtenRems={false}
+                isCurrentUser={false}
+                id={id as string}
+              />
+            )}
+
+            {remDetailsByUser.length !== 0 && (
+              <Card
+                remDetails={remDetailsByUser.slice(
+                  0,
+                  Math.min(remDetailsByUser.length, 6)
+                )}
+                head1={`Here’s what ${otherUserDetails?.user.name} think of others`}
+                head2={`Memories written by ${otherUserDetails?.user.name}`}
+                writtenRems={true}
+                isCurrentUser={false}
+                id={id as string}
+              />
+            )}
+          </div>
+        </div>
+      )}
+      <ImageModal
+        url={imgUrl}
+        close={close}
+        opened={opened}
+        setImgUrl={setImgUrl}
+      />
     </>
   );
 };
