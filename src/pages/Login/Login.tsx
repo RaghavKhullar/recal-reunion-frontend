@@ -35,10 +35,22 @@ const UserLogin: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          height: "80%",
+          flexDirection: "column",
+          height: "100%",
         }}
+        className="flex-col md:flex-row"
       >
-        <div style={{ textAlign: "center" }}>
+        <div className="flex justify-center items-center w-full h-1/2 md:w-1/2 md:h-full">
+          <img
+            className="h-full"
+            src="/assets/images/login-bg.png"
+            alt="poster"
+          />
+        </div>
+        <div
+          className="w-full h-1/2 md:w-1/2 md:h-full flex flex-col justify-center items-center"
+          style={{ textAlign: "center" }}
+        >
           <Title
             style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: "4rem" }}
           >
