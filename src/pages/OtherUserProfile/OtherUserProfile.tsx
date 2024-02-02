@@ -15,10 +15,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
-import { Button, Center, Modal } from "@mantine/core";
+import { Button, Center, Modal, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 // @ts-ignore
 import { MapInteractionCSS } from "react-map-interaction";
+import {
+  IconBrandFacebook,
+  IconBrandX,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+} from "@tabler/icons-react";
 const ImageModal = ({
   url,
   opened,
@@ -34,10 +40,12 @@ const ImageModal = ({
     <Modal
       centered
       opened={opened && url.length > 0}
+      size={"xl"}
       onClose={() => {
         setImgUrl("");
         close();
       }}
+      title="Zoom in or out image"
     >
       <MapInteractionCSS>
         <img src={url} />
@@ -136,6 +144,22 @@ const OtherUserProfile: React.FC = () => {
     getWrittenRemOfPair(id);
   }, [id]);
 
+  const getSocialIcon = (name: string) => {
+    switch (name) {
+      case "Facebook":
+        return <IconBrandFacebook color="black" size={40} />;
+
+      case "LinkedIn":
+        return <IconBrandLinkedin color="black" size={40} />;
+
+      case "X":
+        return <IconBrandX color="black" size={40} />;
+
+      case "Instagram":
+        return <IconBrandInstagram color="black" size={40} />;
+    }
+  };
+
   return (
     <>
       <div className={style.upper}>
@@ -221,6 +245,157 @@ const OtherUserProfile: React.FC = () => {
                 <img className={style.up} src={up} />
                 <div style={{ textAlign: "center" }}>
                   {otherUserDetails.oldRem.content}
+                </div>
+                <img className={style.dowm} src={down} />
+              </div>
+              <div style={{ fontSize: "6.5vw", color: "#411D76" }}>”</div>
+            </>
+          )}
+        </div>
+        <div className={style.quote} style={{ marginTop: "5vh" }}>
+          {otherUserDetails && otherUserDetails.user && (
+            <>
+              <div style={{ fontSize: "6.5vw", color: "#411D76" }}>“</div>
+              <div style={{ display: "flex", flexDirection: "column" }}>
+                <img className={style.up} src={up} />
+                <div className={style.userDetails}>
+                  <div>
+                    {otherUserDetails.user.name.length > 0 && (
+                      <Text truncate className="font-fira">
+                        <span
+                          style={{ color: "red", textTransform: "uppercase" }}
+                        >
+                          Name:{" "}
+                        </span>
+                        {otherUserDetails.user.name}
+                      </Text>
+                    )}
+                    {otherUserDetails.user.email.length > 0 && (
+                      <Text truncate className="font-fira">
+                        <span
+                          style={{ color: "red", textTransform: "uppercase" }}
+                        >
+                          Email:{" "}
+                        </span>
+                        {otherUserDetails.user.email}
+                      </Text>
+                    )}
+                    {otherUserDetails.user.department.length > 0 && (
+                      <Text truncate className="font-fira">
+                        <span
+                          style={{ color: "red", textTransform: "uppercase" }}
+                        >
+                          Department:{" "}
+                        </span>
+                        {otherUserDetails.user.department}
+                      </Text>
+                    )}
+
+                    {otherUserDetails.user.dateOfBirth.length > 0 && (
+                      <Text truncate className="font-fira">
+                        <span
+                          style={{ color: "red", textTransform: "uppercase" }}
+                        >
+                          DOB:{" "}
+                        </span>
+                        {otherUserDetails.user.dateOfBirth}
+                      </Text>
+                    )}
+                    <div className={style.socials}>
+                      {otherUserDetails.user.facebook &&
+                        otherUserDetails.user.facebook.length > 0 &&
+                        (otherUserDetails.user.facebook.includes(
+                          "facebook.com"
+                        ) ? (
+                          <a
+                            href={otherUserDetails.user.facebook}
+                            target="_blank"
+                          >
+                            {getSocialIcon("Facebook")}
+                          </a>
+                        ) : (
+                          <a
+                            href={
+                              "https://facebook.com/" +
+                              otherUserDetails.user.facebook
+                            }
+                            target="_blank"
+                          >
+                            {getSocialIcon("Facebook")}
+                          </a>
+                        ))}
+                      {otherUserDetails.user.linkedin &&
+                        otherUserDetails.user.linkedin.length > 0 &&
+                        (otherUserDetails.user.linkedin.includes(
+                          "linkedin.com"
+                        ) ? (
+                          <a
+                            href={otherUserDetails.user.linkedin}
+                            target="_blank"
+                          >
+                            {getSocialIcon("LinkedIn")}
+                          </a>
+                        ) : (
+                          <a
+                            href={
+                              "https://linkedin.com/in/" +
+                              otherUserDetails.user.linkedin
+                            }
+                            target="_blank"
+                          >
+                            {getSocialIcon("LinkedIn")}
+                          </a>
+                        ))}
+                      {otherUserDetails.user.x &&
+                        otherUserDetails.user.x.length > 0 &&
+                        (otherUserDetails.user.x.includes("twitter.com") ? (
+                          <a href={otherUserDetails.user.x} target="_blank">
+                            {getSocialIcon("X")}
+                          </a>
+                        ) : (
+                          <a
+                            href={
+                              "https://twitter.com/" + otherUserDetails.user.x
+                            }
+                            target="_blank"
+                          >
+                            {getSocialIcon("X")}
+                          </a>
+                        ))}
+                      {otherUserDetails.user.instagram &&
+                        otherUserDetails.user.instagram.length > 0 &&
+                        (otherUserDetails.user.instagram.includes(
+                          "instagram.com"
+                        ) ? (
+                          <a
+                            href={otherUserDetails.user.instagram}
+                            target="_blank"
+                          >
+                            {getSocialIcon("Instagram")}
+                          </a>
+                        ) : (
+                          <a
+                            href={
+                              "https://instagram.com/" +
+                              otherUserDetails.user.instagram
+                            }
+                            target="_blank"
+                          >
+                            {getSocialIcon("Instagram")}
+                          </a>
+                        ))}
+                    </div>
+                  </div>
+                  <div>
+                    <Text className="font-fira text-transform">
+                      <span
+                        style={{ color: "red", textTransform: "uppercase" }}
+                      >
+                        Bio:{" "}
+                      </span>
+                      {otherUserDetails.user.aboutMe}
+                    </Text>
+                  </div>
                 </div>
                 <img className={style.dowm} src={down} />
               </div>

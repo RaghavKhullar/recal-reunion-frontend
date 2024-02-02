@@ -33,12 +33,13 @@ const ImageModal = ({
   return (
     <Modal
       centered
-      size="xl"
       opened={opened && url.length > 0}
+      size={"xl"}
       onClose={() => {
         setImgUrl("");
         close();
       }}
+      title="Zoom in or out image"
     >
       <MapInteractionCSS>
         <img src={url} />

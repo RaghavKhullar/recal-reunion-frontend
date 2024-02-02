@@ -25,6 +25,7 @@ import { searchUser } from "../../redux/actions";
 import { BACKEND_URL } from "../../../config";
 import { showNotification } from "../../helpers/helpers";
 import { useMediaQuery } from "@mantine/hooks";
+import { useNavigate } from "react-router-dom";
 
 type Friend = {
   id: string;
@@ -48,7 +49,7 @@ const Search = () => {
   const [error, setError] = useState<string | null>(null);
   const [name, setName] = useState<string>("");
   const [visibleFriends, setVisibleFriends] = useState<Friend[]>([]);
-
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const fetchAllFriends = async (name: string) => {
@@ -72,7 +73,9 @@ const Search = () => {
     }
     setError(null);
     setLoading(true);
-    const searchUserDispatch = await dispatch(searchUser({ name: name, dept: filterDepartment || "" }));
+    const searchUserDispatch = await dispatch(
+      searchUser({ name: name, dept: filterDepartment || "" })
+    );
     if (searchUser.fulfilled.match(searchUserDispatch)) {
       if (searchUserDispatch.payload.status === 200) {
         const friends = searchUserDispatch.payload.data.data.map(
@@ -118,8 +121,16 @@ const Search = () => {
         );
         setFriends(friends);
         setVisibleFriends(friends);
+      } else if (searchUserDispatch.payload.status === 401) {
+        showNotification("Error", "User not logged in", "error");
+        navigate("/login");
+        return;
       } else {
-        showNotification("Error", searchUserDispatch.payload.data.message, "error");
+        showNotification(
+          "Error",
+          searchUserDispatch.payload.data.message,
+          "error"
+        );
       }
     } else {
       setError("Some error occured");
@@ -298,7 +309,9 @@ const Search = () => {
               <SimpleGrid cols={1}>
                 <Select
                   value={filterDepartment}
-                  onChange={(value) => setFilterDepartment((value == "None" ? null : value))}
+                  onChange={(value) =>
+                    setFilterDepartment(value == "None" ? null : value)
+                  }
                   classNames={{
                     wrapper: "rounded-full px-5 py-3 border-[2px] border-black",
                     input:
@@ -314,7 +327,19 @@ const Search = () => {
                     <IconTriangleInvertedFilled size={20} color="#000000" />
                   }
                   placeholder="Department"
-                  data={["None", "ARCH", "CHEM", "CIV", "CSE", "EEE", "ECE", "ICE", "MECH", "META", "PROD"]}
+                  data={[
+                    "None",
+                    "ARCH",
+                    "CHEM",
+                    "CIV",
+                    "CSE",
+                    "EEE",
+                    "ECE",
+                    "ICE",
+                    "MECH",
+                    "META",
+                    "PROD",
+                  ]}
                 />
               </SimpleGrid>
             </Tabs.Panel>
