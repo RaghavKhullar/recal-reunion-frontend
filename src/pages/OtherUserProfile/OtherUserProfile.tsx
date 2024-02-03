@@ -179,7 +179,7 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/memory/${
@@ -206,7 +206,7 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`

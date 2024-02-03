@@ -1,5 +1,6 @@
 .red {
   color: red;
+  cursor: pointer
 }
 
 .remheading {
@@ -14,9 +15,6 @@
 .remPinParent {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-
-  padding: 15px;
 
   @media screen and (max-width: 560px) {
     padding: 5px;
@@ -38,7 +36,6 @@
 .coverRem {
   display: flex;
   flex-direction: column;
-  gap: 50px;
 
   @media screen and (max-width: 1320px) {
     display: flex;
@@ -46,8 +43,7 @@
     height: 80vh;
   }
 
-  @media screen and (max-width: 560px) {
-  }
+  @media screen and (max-width: 560px) {}
 
   @media screen and (max-width: 560px) {
     display: flex;
@@ -98,7 +94,6 @@
   margin-top: 2rem;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.35);
   border: 0.2rem solid white;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,4 +141,9 @@
   @media screen and (max-width: 560px) {
     width: 45%;
   }
+}
+
+.remProfileImageDiv {
+  width: 35%;
+  display: flex;
 }
