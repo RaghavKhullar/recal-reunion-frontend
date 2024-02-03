@@ -24,4 +24,6 @@ export {
   getAdminDetails,
   logoutAdmin,
   deleteOldRem,
+  editOldRem,
+  getOldRem,
 } from "./Admin/AdminAction";

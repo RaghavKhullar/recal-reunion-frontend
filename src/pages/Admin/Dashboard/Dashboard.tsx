@@ -23,11 +23,13 @@ import {
   editEmail,
   addOldRem,
   deleteOldRem,
+  editOldRem,
+  getOldRem,
 } from "../../../redux/actions";
 import { showNotification } from "../../../helpers/helpers";
 import { useSelector } from "react-redux";
 import { adminSelector } from "../../../redux/reducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { IconEdit } from "@tabler/icons-react";
 function Dashboard() {
@@ -45,10 +47,12 @@ function Dashboard() {
     editEmailOfTheUserFormOpened,
     { toggle: toggleEditEmailOfTheUserForm },
   ] = useDisclosure(false);
+  const [editOldRemFormOpened, { toggle: toggleEditOldRemFormOpened }] =
+    useDisclosure(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const name = useSelector(adminSelector).name;
-
+  const [isFetched, setIsFetched] = useState<boolean>(false);
   const fetchAdminDetails = async () => {
     const loginDispatch = await dispatch(getAdminDetails());
     if (getAdminDetails.fulfilled.match(loginDispatch)) {
@@ -124,6 +128,17 @@ function Dashboard() {
       email: (value) =>
         /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) ? null : "Invalid email",
       newEmail: (value) =>
+        /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) ? null : "Invalid email",
+    },
+  });
+
+  const editOldRemForm = useForm<{ email: string; content: string }>({
+    initialValues: {
+      email: "",
+      content: "",
+    },
+    validate: {
+      email: (value) =>
         /^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(value) ? null : "Invalid email",
     },
   });
@@ -279,6 +294,73 @@ function Dashboard() {
     }
   };
 
+  const editOldRemSubmit = async () => {
+    const editOldRemDispatch = await dispatch(
+      editOldRem({
+        content: editOldRemForm.values.content,
+        email: editOldRemForm.values.email,
+      })
+    );
+    if (editOldRem.fulfilled.match(editOldRemDispatch)) {
+      if (editOldRemDispatch.payload.status === 200) {
+        showNotification(
+          "Success",
+          editOldRemDispatch.payload.data.message,
+          "success"
+        );
+        editOldRemForm.reset();
+        toggleEditOldRemFormOpened();
+        setIsFetched(false);
+        return;
+      } else {
+        setIsFetched(false);
+        showNotification(
+          "Error",
+          editOldRemDispatch.payload.data.message,
+          "error"
+        );
+        return;
+      }
+    } else if (editOldRem.rejected.match(editOldRemDispatch)) {
+      setIsFetched(false);
+      showNotification("Error", "Error occured", "error");
+      return;
+    }
+  };
+
+  const getOldRemSubmit = async () => {
+    const getOldRemDispatch = await dispatch(
+      getOldRem(editOldRemForm.values.email)
+    );
+    if (getOldRem.fulfilled.match(getOldRemDispatch)) {
+      if (getOldRemDispatch.payload.status === 200) {
+        showNotification(
+          "Success",
+          getOldRemDispatch.payload.data.message,
+          "success"
+        );
+        editOldRemForm.setFieldValue(
+          "content",
+          getOldRemDispatch.payload.data.data.content
+        );
+        setIsFetched(true);
+        return;
+      } else {
+        showNotification(
+          "Error",
+          getOldRemDispatch.payload.data.message,
+          "error"
+        );
+        setIsFetched(false);
+        return;
+      }
+    } else if (getOldRem.rejected.match(getOldRemDispatch)) {
+      setIsFetched(false);
+      showNotification("Error", "Error occured", "error");
+      return;
+    }
+  };
+
   const adminLogout = async () => {
     const logoutDispatch = await dispatch(logoutAdmin());
     if (logoutAdmin.fulfilled.match(logoutDispatch)) {
@@ -334,6 +416,7 @@ function Dashboard() {
                   toggleDeleteOldRemForUserForm();
                 if (editEmailOfTheUserFormOpened)
                   toggleEditEmailOfTheUserForm();
+                if (editOldRemForm) toggleEditOldRemFormOpened();
               }}
             >
               {addUserFormOpened ? "Close: " : ""}Add a new user
@@ -376,6 +459,7 @@ function Dashboard() {
                   toggleDeleteOldRemForUserForm();
                 if (editEmailOfTheUserFormOpened)
                   toggleEditEmailOfTheUserForm();
+                if (editOldRemForm) toggleEditOldRemFormOpened();
               }}
             >
               {addAdminFormOpened ? "Close: " : ""}Add a new admin
@@ -418,6 +502,7 @@ function Dashboard() {
                   toggleDeleteOldRemForUserForm();
                 if (editEmailOfTheUserFormOpened)
                   toggleEditEmailOfTheUserForm();
+                if (editOldRemForm) toggleEditOldRemFormOpened();
               }}
             >
               {addOldRemForUserFormOpened ? "Close: " : ""}Add a old rem for a
@@ -478,6 +563,7 @@ function Dashboard() {
                 if (addUserFormOpened) toggleAddUserForm();
                 if (editEmailOfTheUserFormOpened)
                   toggleEditEmailOfTheUserForm();
+                if (editOldRemForm) toggleEditOldRemFormOpened();
               }}
             >
               {deleteOldRemForUserFormOpened ? "Close: " : ""}Delete old rem of
@@ -513,6 +599,7 @@ function Dashboard() {
                 if (deleteOldRemForUserFormOpened)
                   toggleDeleteOldRemForUserForm();
                 if (addUserFormOpened) toggleAddUserForm();
+                if (editOldRemForm) toggleEditOldRemFormOpened();
               }}
             >
               {editEmailOfTheUserFormOpened ? "Close: " : ""}Edit email of the
@@ -537,6 +624,72 @@ function Dashboard() {
               <Group justify="center" mt="md">
                 <Button type="submit" onClick={editEmailSubmit}>
                   Submit
+                </Button>
+              </Group>
+            </Box>
+          </Collapse>
+        </Box>
+
+        <Box w={"60%"} mx="auto">
+          <Group justify="center" mt={"15vh"}>
+            <Button
+              mb={"20px"}
+              onClick={() => {
+                toggleEditOldRemFormOpened();
+                if (addOldRemForUserFormOpened) toggleAddOldRemForUserForm();
+                if (addAdminFormOpened) toggleAddAdminForm();
+                if (deleteOldRemForUserFormOpened)
+                  toggleDeleteOldRemForUserForm();
+                if (addUserFormOpened) toggleAddUserForm();
+                if (editEmailOfTheUserForm) toggleEditEmailOfTheUserForm();
+              }}
+            >
+              {editOldRemFormOpened ? "Close: " : ""}Edit oldrem of the user
+            </Button>
+          </Group>
+
+          <Collapse in={editOldRemFormOpened}>
+            <Box mx="auto">
+              <TextInput
+                withAsterisk
+                label="Add email of the user"
+                placeholder="yours@gmail.com"
+                {...editOldRemForm.getInputProps("email")}
+                disabled={isFetched}
+              />
+              <Textarea
+                withAsterisk
+                label="Add content of the old rem"
+                placeholder="Content"
+                styles={{
+                  input: {
+                    height: "20vh",
+                    fontFamily: "'Fira Sans', sans-serif",
+                    overflowY: "auto",
+                  },
+                }}
+                {...editOldRemForm.getInputProps("content")}
+                disabled={!isFetched}
+              />
+              <Group justify="space-between" mt="md">
+                {isFetched && (
+                  <Button type="submit" onClick={editOldRemSubmit}>
+                    Edit old rem
+                  </Button>
+                )}
+                {!isFetched && (
+                  <Button type="submit" onClick={getOldRemSubmit}>
+                    Get old rem
+                  </Button>
+                )}
+                <Button
+                  type="submit"
+                  onClick={() => {
+                    setIsFetched(false);
+                    editOldRemForm.reset();
+                  }}
+                >
+                  Reset form
                 </Button>
               </Group>
             </Box>
