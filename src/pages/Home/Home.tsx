@@ -15,6 +15,38 @@ import { useNavigate } from "react-router-dom";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
+import { useDisclosure } from "@mantine/hooks";
+import { Modal } from "@mantine/core";
+// @ts-ignore
+import { MapInteractionCSS } from "react-map-interaction";
+const ImageModal = ({
+  url,
+  opened,
+  close,
+  setImgUrl,
+}: {
+  url: string;
+  opened: boolean;
+  close: () => void;
+  setImgUrl: (url: string) => void;
+}) => {
+  return (
+    <Modal
+      centered
+      opened={opened && url.length > 0}
+      size={"xl"}
+      onClose={() => {
+        setImgUrl("");
+        close();
+      }}
+      title="Zoom in or out image"
+    >
+      <MapInteractionCSS>
+        <img src={url} />
+      </MapInteractionCSS>
+    </Modal>
+  );
+};
 
 const Home: React.FC = () => {
   const [remDetailsForMe, setRemDetailsForMe] = useState<Rem[]>([]);
@@ -23,7 +55,8 @@ const Home: React.FC = () => {
   const state = useSelector(userSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const [opened, { open, close }] = useDisclosure(false);
+  const [imgUrl, setImgUrl] = useState<string>("");
   const fetchWrittenRemsForMe = async () => {
     const getWrittenRemsByForDispatch = await dispatch(getRemsWrittenForMe());
     if (getRemsWrittenForMe.fulfilled.match(getWrittenRemsByForDispatch)) {
@@ -109,6 +142,17 @@ const Home: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/memory/${userDetails.oldRem.image}`}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setImgUrl(
+                            `${BACKEND_URL}/images/memory/${
+                              userDetails.oldRem
+                                ? userDetails.oldRem.image
+                                : "defaultImage.jpg"
+                            }`
+                          );
+                          open();
+                        }}
                       />
                     </div>
                   </div>
@@ -125,6 +169,13 @@ const Home: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/profiles/${userDetails.user.image}`}
+                        className="cursor-pointer"
+                        onClick={() => {
+                          setImgUrl(
+                            `${BACKEND_URL}/images/profiles/${userDetails.user.image}`
+                          );
+                          open();
+                        }}
                       />
                     </div>
                   </div>
@@ -181,6 +232,12 @@ const Home: React.FC = () => {
           </div>
         </div>
       )}
+      <ImageModal
+        url={imgUrl}
+        close={close}
+        opened={opened}
+        setImgUrl={setImgUrl}
+      />
     </>
   );
 };

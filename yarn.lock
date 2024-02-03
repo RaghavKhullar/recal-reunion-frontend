@@ -2622,6 +2622,11 @@ react-is@^18.0.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-map-interaction@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-map-interaction/-/react-map-interaction-2.1.0.tgz#fa76d42d27bf1124c65a5312c98c08922fedc208"
+  integrity sha512-bD6Gz2nuf60HF4WAYfBOjsqttrFlTd1u/TrCQSxdl3KITiTpTxr1vvLIr1k+NR2w3Jln+gux+oWDbjnh8Dhv7w==
+
 react-number-format@^5.2.2:
   version "5.3.1"
   resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-5.3.1.tgz#840c257da9cb4b248990d8db46e4d23e8bac67ff"

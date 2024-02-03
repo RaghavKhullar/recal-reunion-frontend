@@ -144,7 +144,7 @@ const ProfileSection = ({
                     <Text className="w-full mt-2 text-2xl font-bebus">
                       ABOUT ME
                     </Text>
-                    <Center className="w-full border-[3.78px] border-black font-fira rounded-md h-[70px]">
+                    <Center className="w-full items-start border-[3.78px] border-black font-fira rounded-md h-[40vh] overflow-y-auto pl-[7px]">
                       {state.currentUser.user?.aboutMe}
                     </Center>
                     <Center className="w-full mt-2 flex-col h-[20vh]">
