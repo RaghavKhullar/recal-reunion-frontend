@@ -44,9 +44,11 @@ const Header = ({
       }
     >
       <Center className="flex-row gap-3 max-h-[10vh]">
-        {loggedIn === true && <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
-          <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
-        </ActionIcon>}
+        {loggedIn === true && (
+          <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
+            <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
+          </ActionIcon>
+        )}
         <Link to="/home">
           <img
             src={logo}
