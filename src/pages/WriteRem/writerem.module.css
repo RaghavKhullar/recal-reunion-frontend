@@ -45,7 +45,8 @@
     height: 80vh;
   }
 
-  @media screen and (max-width: 560px) {}
+  @media screen and (max-width: 560px) {
+  }
 
   @media screen and (max-width: 560px) {
     display: flex;
