@@ -1,4 +1,4 @@
-import { Group, ActionIcon, Center } from "@mantine/core";
+import { Group, ActionIcon, Center, Text, Flex } from "@mantine/core";
 import {
   IconUserSearch,
   IconBell,
@@ -44,17 +44,23 @@ const Header = ({
       }
     >
       <Center className="flex-row gap-3 max-h-[10vh]">
-        {loggedIn === true && <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
-          <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
-        </ActionIcon>}
+        {loggedIn === true && (
+          <ActionIcon onClick={() => navigate(-1)} variant={"subtle"}>
+            <IconCircleArrowLeft color="black" size={isSmallMobile ? 25 : 40} />
+          </ActionIcon>
+        )}
         <Link to="/home">
-          <img
+          {/* <img
             src={logo}
             style={isSmallMobile ? { maxWidth: "90px" } : {}}
             className="max-h-[10vh]"
             alt=""
             draggable={false}
-          />
+          /> */}
+          <Flex className="flex-col">
+            <Text className="text-2xl font-extrabold font-fira">DigiRem</Text>
+            <Text className="text-xl font-medium font-fira">REConnect</Text>
+          </Flex>
         </Link>
       </Center>
       {loggedIn === true && (

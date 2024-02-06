@@ -24,7 +24,7 @@ const RemCard = ({ author, content, image, id }: Rem) => {
         borderRadius: "16px",
         background: "#EBD18D",
         boxShadow: "20px 20px 80px 0px rgba(0, 0, 0, 0.20)",
-        margin: "20px 20px"
+        margin: "20px 20px",
       }}
     >
       <Card.Section className="h-[19vh] sm:h-[30vh] overflow-hidden">
@@ -45,7 +45,10 @@ const RemCard = ({ author, content, image, id }: Rem) => {
                 src={author?.profilePicture}
                 alt={author?.name}
               />
-              <Text truncate="end" className=" font-bebus tracking-wider text-white">
+              <Text
+                truncate="end"
+                className=" font-bebus tracking-wider text-white"
+              >
                 {author?.name}
               </Text>
             </Center>

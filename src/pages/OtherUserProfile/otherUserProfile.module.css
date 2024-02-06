@@ -101,7 +101,7 @@
   justify-content: center;
 }
 
-.internal>div {
+.internal > div {
   border: 3px solid #fff;
   background: lightgray -46.95px 0px / 132.357% 100% no-repeat;
   background-size: cover;
@@ -135,9 +135,11 @@
 .background {
   display: block;
   position: relative;
-  background: linear-gradient(to bottom,
-      transparent 50%,
-      var(--Main-red, #a72343) 50%);
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    var(--Main-red, #a72343) 50%
+  );
 }
 
 .dome {
@@ -170,7 +172,7 @@
   justify-content: space-evenly;
 }
 
-.userDetails>div {
+.userDetails > div {
   padding-left: 10px;
   padding-right: 10px;
   width: 45%;
@@ -178,8 +180,8 @@
   flex-direction: column;
 }
 
-.socials{
-  display:flex;
+.socials {
+  display: flex;
   justify-content: space-evenly;
 }
 
@@ -193,10 +195,10 @@
   .cardBackground {
     flex-direction: column;
   }
-  .userDetails{
+  .userDetails {
     flex-direction: column;
   }
-  .userDetails>div{
+  .userDetails > div {
     width: 100%;
   }
 }

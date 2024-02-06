@@ -164,10 +164,10 @@ const OtherUserProfile: React.FC = () => {
     <>
       <div className={style.upper}>
         <div className={style.batch}>
-          <div className={style.batchName}>
+          {/* <div className={style.batchName}>
             Batch of ‘99
             <div className={style.strokeBatchName}>Batch of ‘99</div>
-          </div>
+          </div> */}
           <div className={style.frame}>
             {otherUserDetails &&
               otherUserDetails.oldRem &&
@@ -179,7 +179,7 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/memory/${
@@ -193,7 +193,7 @@ const OtherUserProfile: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>Before</p>
+                  <p className={style.textBefore}>Then</p>
                 </div>
               )}
             {otherUserDetails &&
@@ -206,7 +206,7 @@ const OtherUserProfile: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`
@@ -216,7 +216,7 @@ const OtherUserProfile: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>After</p>
+                  <p className={style.textBefore}>Now</p>
                 </div>
               )}
           </div>

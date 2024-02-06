@@ -35,7 +35,7 @@ export const getOtherUserFromId = createAsyncThunk<
 
 export const searchUser = createAsyncThunk<
   any,
-  { name: string, dept: string },
+  { name: string; dept: string },
   { rejectValue: APIError }
 >("user/search", async (body, { rejectWithValue }) => {
   try {

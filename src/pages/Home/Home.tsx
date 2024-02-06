@@ -16,9 +16,15 @@ import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Modal, Text } from "@mantine/core";
 // @ts-ignore
 import { MapInteractionCSS } from "react-map-interaction";
+import {
+  IconBrandFacebook,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconBrandX,
+} from "@tabler/icons-react";
 const ImageModal = ({
   url,
   opened,
@@ -122,15 +128,29 @@ const Home: React.FC = () => {
       fetchWrittenRemsByMe();
     }
   }, [state.loggedIn]);
+  const getSocialIcon = (name: string) => {
+    switch (name) {
+      case "Facebook":
+        return <IconBrandFacebook color="black" size={40} />;
 
+      case "LinkedIn":
+        return <IconBrandLinkedin color="black" size={40} />;
+
+      case "X":
+        return <IconBrandX color="black" size={40} />;
+
+      case "Instagram":
+        return <IconBrandInstagram color="black" size={40} />;
+    }
+  };
   return (
     <>
       <div className={style.upper}>
         <div className={style.batch}>
-          <div className={style.batchName}>
+          {/* <div className={style.batchName}>
             Batch of ‘99
             <div className={style.strokeBatchName}>Batch of ‘99</div>
-          </div>
+          </div> */}
           <div className={style.frame}>
             {userDetails &&
               userDetails.oldRem &&
@@ -142,7 +162,7 @@ const Home: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/memory/${userDetails.oldRem.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/memory/${
@@ -156,7 +176,7 @@ const Home: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>Before</p>
+                  <p className={style.textBefore}>Then</p>
                 </div>
               )}
             {userDetails &&
@@ -169,7 +189,7 @@ const Home: React.FC = () => {
                     <div>
                       <img
                         src={`${BACKEND_URL}/images/profiles/${userDetails.user.image}`}
-                        className="cursor-pointer"
+                        className="cursor-pointer object-contain "
                         onClick={() => {
                           setImgUrl(
                             `${BACKEND_URL}/images/profiles/${userDetails.user.image}`
@@ -179,7 +199,7 @@ const Home: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>After</p>
+                  <p className={style.textBefore}>Now</p>
                 </div>
               )}
           </div>
@@ -191,6 +211,135 @@ const Home: React.FC = () => {
               <img className={style.up} src={up} />
               <div style={{ textAlign: "center" }}>
                 {userDetails.oldRem.content}
+              </div>
+              <img className={style.dowm} src={down} />
+            </div>
+            <div style={{ fontSize: "6.5vw", color: "#411D76" }}>”</div>
+          </div>
+        )}
+        {userDetails && userDetails.user && (
+          <div className={style.quote} style={{ marginTop: "5vh" }}>
+            <div style={{ fontSize: "6.5vw", color: "#411D76" }}>“</div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <img className={style.up} src={up} />
+              <div className={style.userDetails}>
+                <div>
+                  {userDetails.user.name.length > 0 && (
+                    <Text truncate className="font-fira">
+                      <span
+                        style={{ color: "red", textTransform: "uppercase" }}
+                      >
+                        Name:{" "}
+                      </span>
+                      {userDetails.user.name}
+                    </Text>
+                  )}
+                  {userDetails.user.email.length > 0 && (
+                    <Text truncate className="font-fira">
+                      <span
+                        style={{ color: "red", textTransform: "uppercase" }}
+                      >
+                        Email:{" "}
+                      </span>
+                      {userDetails.user.email}
+                    </Text>
+                  )}
+                  {userDetails.user.department.length > 0 && (
+                    <Text truncate className="font-fira">
+                      <span
+                        style={{ color: "red", textTransform: "uppercase" }}
+                      >
+                        Department:{" "}
+                      </span>
+                      {userDetails.user.department}
+                    </Text>
+                  )}
+
+                  {userDetails.user.dateOfBirth.length > 0 && (
+                    <Text truncate className="font-fira">
+                      <span
+                        style={{ color: "red", textTransform: "uppercase" }}
+                      >
+                        DOB:{" "}
+                      </span>
+                      {userDetails.user.dateOfBirth}
+                    </Text>
+                  )}
+                  <div className={style.socials}>
+                    {userDetails.user.facebook &&
+                      userDetails.user.facebook.length > 0 &&
+                      (userDetails.user.facebook.includes("facebook.com") ? (
+                        <a href={userDetails.user.facebook} target="_blank">
+                          {getSocialIcon("Facebook")}
+                        </a>
+                      ) : (
+                        <a
+                          href={
+                            "https://facebook.com/" + userDetails.user.facebook
+                          }
+                          target="_blank"
+                        >
+                          {getSocialIcon("Facebook")}
+                        </a>
+                      ))}
+                    {userDetails.user.linkedin &&
+                      userDetails.user.linkedin.length > 0 &&
+                      (userDetails.user.linkedin.includes("linkedin.com") ? (
+                        <a href={userDetails.user.linkedin} target="_blank">
+                          {getSocialIcon("LinkedIn")}
+                        </a>
+                      ) : (
+                        <a
+                          href={
+                            "https://linkedin.com/in/" +
+                            userDetails.user.linkedin
+                          }
+                          target="_blank"
+                        >
+                          {getSocialIcon("LinkedIn")}
+                        </a>
+                      ))}
+                    {userDetails.user.x &&
+                      userDetails.user.x.length > 0 &&
+                      (userDetails.user.x.includes("twitter.com") ? (
+                        <a href={userDetails.user.x} target="_blank">
+                          {getSocialIcon("X")}
+                        </a>
+                      ) : (
+                        <a
+                          href={"https://twitter.com/" + userDetails.user.x}
+                          target="_blank"
+                        >
+                          {getSocialIcon("X")}
+                        </a>
+                      ))}
+                    {userDetails.user.instagram &&
+                      userDetails.user.instagram.length > 0 &&
+                      (userDetails.user.instagram.includes("instagram.com") ? (
+                        <a href={userDetails.user.instagram} target="_blank">
+                          {getSocialIcon("Instagram")}
+                        </a>
+                      ) : (
+                        <a
+                          href={
+                            "https://instagram.com/" +
+                            userDetails.user.instagram
+                          }
+                          target="_blank"
+                        >
+                          {getSocialIcon("Instagram")}
+                        </a>
+                      ))}
+                  </div>
+                </div>
+                <div>
+                  <Text className="font-fira text-transform">
+                    <span style={{ color: "red", textTransform: "uppercase" }}>
+                      Bio:{" "}
+                    </span>
+                    {userDetails.user.aboutMe}
+                  </Text>
+                </div>
               </div>
               <img className={style.dowm} src={down} />
             </div>

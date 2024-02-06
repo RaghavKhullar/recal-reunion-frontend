@@ -14,10 +14,6 @@
 .remPinParent {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-
-  padding: 15px;
-
   @media screen and (max-width: 560px) {
     padding: 5px;
   }
@@ -33,7 +29,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 25px;
+
   @media screen and (max-width: 1320px) {
     transform: scale(0.85);
   }
@@ -42,7 +38,6 @@
 .coverRem {
   display: flex;
   flex-direction: column;
-  gap: 50px;
 
   @media screen and (max-width: 1320px) {
     display: flex;
@@ -150,4 +145,9 @@
   @media screen and (max-width: 560px) {
     width: 45%;
   }
+}
+
+.remProfileImageDiv {
+  width: 35%;
+  display: flex;
 }

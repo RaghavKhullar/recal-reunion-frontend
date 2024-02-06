@@ -141,3 +141,44 @@ export const logoutAdmin = createAsyncThunk<
     return error.response;
   }
 });
+
+export const getOldRem = createAsyncThunk<
+  any,
+  string,
+  { rejectValue: APIError }
+>("admin/getOldRem", async (email, { rejectWithValue }) => {
+  try {
+    const response = await CustomAxios.post(
+      `/admin/getOldRem`,
+      { email: email },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+});
+
+export const editOldRem = createAsyncThunk<
+  any,
+  {
+    content: String;
+    email: String;
+  },
+  { rejectValue: APIError }
+>("admin/editOldRem", async (body, { rejectWithValue }) => {
+  try {
+    const response = await CustomAxios.post(
+      `/admin/editOldRem`,
+      { email: body.email, content: body.content },
+      {
+        withCredentials: true,
+      }
+    );
+    return response;
+  } catch (error: any) {
+    return error.response;
+  }
+});

@@ -22,6 +22,8 @@ const ViewRem = () => {
   const [image, setImage] = useState("");
   const [content, setContent] = useState<string>("");
   const dispatch = useAppDispatch();
+  const [fromUserId, setFromUserId] = useState<string>("");
+  const [toUserId, setToUserId] = useState<string>("");
 
   const getRemDetails = async () => {
     if (id === undefined) {
@@ -38,11 +40,13 @@ const ViewRem = () => {
             ? "You"
             : getRemFromIdDispatch.payload.data.from.name
         );
+        setFromUserId(getRemFromIdDispatch.payload.data.from._id);
         setToName(
           userId == getRemFromIdDispatch.payload.data.to._id
             ? "You"
             : getRemFromIdDispatch.payload.data.to.name
         );
+        setToUserId(getRemFromIdDispatch.payload.data.to._id);
         // This should be changed to default rem image or the existing rem image
         setImage(getRemFromIdDispatch.payload.data.rem.image);
         setContent(getRemFromIdDispatch.payload.data.rem.content);
@@ -84,11 +88,14 @@ const ViewRem = () => {
               }}
             />{" "}
             <h1 className={styles.remheading}>
-              VIEW A REM ABOUT <span className={styles.red}>{toName}</span>
+              VIEW A REM ABOUT{" "}
+              <a href={toUserId == userId ? "/home" : "/user/" + toUserId}>
+                <span className={styles.red}>{toName}</span>
+              </a>
             </h1>
           </div>
           <div className={styles.remPinParent}>
-            <div className={styles.remProfileImage}>
+            <div className={styles.remProfileImageDiv}>
               <div className={styles.remImage}>
                 <div className={styles.pinOverlay}>
                   <img src={remPin} className={styles.remPinImage} />
@@ -106,10 +113,16 @@ const ViewRem = () => {
               </div>
             </div>
             <img src={graphic} className={styles.arrow} />
-            <div style={{ textAlign: "center" }}>
+            <div style={{ textAlign: "center", width: "35%" }}>
               <h2 className={styles.textAreaHead}>
                 {" "}
-                A Few words from {fromName}
+                A Few words from{" "}
+                <a
+                  style={{ cursor: "pointer" }}
+                  href={fromUserId == userId ? "/home" : "/user/" + fromUserId}
+                >
+                  {fromName}
+                </a>
               </h2>
               <div className={styles.remContent}>{content}</div>
             </div>

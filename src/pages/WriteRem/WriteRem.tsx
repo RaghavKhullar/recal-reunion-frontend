@@ -148,7 +148,7 @@ const WriteRem = () => {
             </h1>
           </div>
           <div className={styles.remPinParent}>
-            <div className={styles.remProfileImage}>
+            <div className={styles.remProfileImageDiv}>
               <div className={styles.remImage}>
                 <div className={styles.pinOverlay}>
                   <img src={remPin} className={styles.remPinImage} />
