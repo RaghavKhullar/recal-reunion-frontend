@@ -163,81 +163,89 @@ const OtherUserProfile: React.FC = () => {
   return (
     <>
       <div className={style.upper}>
-        <div className={style.batch}>
-          {/* <div className={style.batchName}>
-            Batch of ‘99
-            <div className={style.strokeBatchName}>Batch of ‘99</div>
-          </div> */}
-          <div className={style.frame}>
-            {otherUserDetails &&
-              otherUserDetails.oldRem &&
-              otherUserDetails.oldRem.image &&
-              otherUserDetails.oldRem.image.length !== 0 && (
-                <div className={style.before}>
-                  <img className={style.anchorCircle} src={circle} />
-                  <div className={style.internal}>
-                    <div>
-                      <img
-                        src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
-                        className="cursor-pointer object-contain "
-                        onClick={() => {
-                          setImgUrl(
-                            `${BACKEND_URL}/images/memory/${
-                              otherUserDetails.oldRem
-                                ? otherUserDetails.oldRem.image
-                                : "default.jpg"
-                            }`
-                          );
-                          open();
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <p className={style.textBefore}>Then</p>
-                </div>
-              )}
-            {otherUserDetails &&
-              otherUserDetails.user &&
+        {otherUserDetails &&
+          ((otherUserDetails.oldRem &&
+            otherUserDetails.oldRem.image &&
+            otherUserDetails.oldRem.image.length !== 0) ||
+            (otherUserDetails.user &&
               otherUserDetails.user.image &&
-              otherUserDetails.user.image.length !== 0 && (
-                <div className={style.after}>
-                  <img className={style.anchorCircle} src={circle} />
-                  <div className={style.internal}>
-                    <div>
-                      <img
-                        src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
-                        className="cursor-pointer object-contain "
-                        onClick={() => {
-                          setImgUrl(
-                            `${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`
-                          );
-                          open();
-                        }}
-                      />
+              otherUserDetails.user.image.length !== 0)) && (
+            <div className={style.batch}>
+              {/* <div className={style.batchName}>
+              Batch of ‘99
+              <div className={style.strokeBatchName}>Batch of ‘99</div>
+            </div> */}
+              <div className={style.frame}>
+                {otherUserDetails &&
+                  otherUserDetails.oldRem &&
+                  otherUserDetails.oldRem.image &&
+                  otherUserDetails.oldRem.image.length !== 0 && (
+                    <div className={style.before}>
+                      <img className={style.anchorCircle} src={circle} />
+                      <div className={style.internal}>
+                        <div>
+                          <img
+                            src={`${BACKEND_URL}/images/memory/${otherUserDetails.oldRem.image}`}
+                            className="cursor-pointer object-contain "
+                            onClick={() => {
+                              setImgUrl(
+                                `${BACKEND_URL}/images/memory/${
+                                  otherUserDetails.oldRem
+                                    ? otherUserDetails.oldRem.image
+                                    : "default.jpg"
+                                }`
+                              );
+                              open();
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <p className={style.textBefore}>Then</p>
                     </div>
-                  </div>
-                  <p className={style.textBefore}>Now</p>
-                </div>
-              )}
-          </div>
-        </div>
+                  )}
+                {otherUserDetails &&
+                  otherUserDetails.user &&
+                  otherUserDetails.user.image &&
+                  otherUserDetails.user.image.length !== 0 && (
+                    <div className={style.after}>
+                      <img className={style.anchorCircle} src={circle} />
+                      <div className={style.internal}>
+                        <div>
+                          <img
+                            src={`${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`}
+                            className="cursor-pointer object-contain "
+                            onClick={() => {
+                              setImgUrl(
+                                `${BACKEND_URL}/images/profiles/${otherUserDetails.user.image}`
+                              );
+                              open();
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <p className={style.textBefore}>Now</p>
+                    </div>
+                  )}
+              </div>
+            </div>
+          )}
 
-        <div className={style.quote}>
-          <Center className="w-full absolute z-[5] justify-evenly -top-10">
-            {remExistBetweenPair && remId !== "" && (
-              <Button color="#a72343" component="a" href={"/viewRem/" + remId}>
-                View Rem
-              </Button>
-            )}
-
-            <Button
-              color="#a72343"
-              component="a"
-              href={(remExistBetweenPair ? "/editRem/" : "/writeRem/") + id}
-            >
-              {remExistBetweenPair ? "Edit Rem" : "Write Rem"}
+        <Center className="w-full z-[5] justify-evenly mb-[10px]">
+          {remExistBetweenPair && remId !== "" && (
+            <Button color="#a72343" component="a" href={"/viewRem/" + remId}>
+              View Rem
             </Button>
-          </Center>
+          )}
+
+          <Button
+            color="#a72343"
+            component="a"
+            href={(remExistBetweenPair ? "/editRem/" : "/writeRem/") + id}
+          >
+            {remExistBetweenPair ? "Edit Rem" : "Write Rem"}
+          </Button>
+        </Center>
+        <div className={style.quote}>
           {otherUserDetails && otherUserDetails.oldRem && (
             <>
               <div style={{ fontSize: "6.5vw", color: "#411D76" }}>“</div>

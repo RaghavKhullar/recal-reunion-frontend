@@ -146,64 +146,73 @@ const Home: React.FC = () => {
   return (
     <>
       <div className={style.upper}>
-        <div className={style.batch}>
-          {/* <div className={style.batchName}>
-            Batch of ‘99
-            <div className={style.strokeBatchName}>Batch of ‘99</div>
-          </div> */}
-          <div className={style.frame}>
-            {userDetails &&
-              userDetails.oldRem &&
-              userDetails.oldRem.image &&
-              userDetails.oldRem.image.length !== 0 && (
-                <div className={style.before}>
-                  <img className={style.anchorCircle} src={circle} />
-                  <div className={style.internal}>
-                    <div>
-                      <img
-                        src={`${BACKEND_URL}/images/memory/${userDetails.oldRem.image}`}
-                        className="cursor-pointer object-contain "
-                        onClick={() => {
-                          setImgUrl(
-                            `${BACKEND_URL}/images/memory/${
-                              userDetails.oldRem
-                                ? userDetails.oldRem.image
-                                : "defaultImage.jpg"
-                            }`
-                          );
-                          open();
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <p className={style.textBefore}>Then</p>
-                </div>
-              )}
-            {userDetails &&
-              userDetails.user &&
+        {userDetails &&
+          ((userDetails.oldRem &&
+            userDetails.oldRem.image &&
+            userDetails.oldRem.image.length !== 0) ||
+            (userDetails.user &&
               userDetails.user.image &&
-              userDetails.user.image.length !== 0 && (
-                <div className={style.after}>
-                  <img className={style.anchorCircle} src={circle} />
-                  <div className={style.internal}>
-                    <div>
-                      <img
-                        src={`${BACKEND_URL}/images/profiles/${userDetails.user.image}`}
-                        className="cursor-pointer object-contain "
-                        onClick={() => {
-                          setImgUrl(
-                            `${BACKEND_URL}/images/profiles/${userDetails.user.image}`
-                          );
-                          open();
-                        }}
-                      />
+              userDetails.user.image.length !== 0)) && (
+            <div className={style.batch}>
+              {/* <div className={style.batchName}>
+              Batch of ‘99
+              <div className={style.strokeBatchName}>Batch of ‘99</div>
+            </div> */}
+              <div className={style.frame}>
+                {userDetails &&
+                  userDetails.oldRem &&
+                  userDetails.oldRem.image &&
+                  userDetails.oldRem.image.length !== 0 && (
+                    <div className={style.before}>
+                      <img className={style.anchorCircle} src={circle} />
+                      <div className={style.internal}>
+                        <div>
+                          <img
+                            src={`${BACKEND_URL}/images/memory/${userDetails.oldRem.image}`}
+                            className="cursor-pointer object-contain "
+                            onClick={() => {
+                              setImgUrl(
+                                `${BACKEND_URL}/images/memory/${
+                                  userDetails.oldRem
+                                    ? userDetails.oldRem.image
+                                    : "defaultImage.jpg"
+                                }`
+                              );
+                              open();
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <p className={style.textBefore}>Then</p>
                     </div>
-                  </div>
-                  <p className={style.textBefore}>Now</p>
-                </div>
-              )}
-          </div>
-        </div>
+                  )}
+                {userDetails &&
+                  userDetails.user &&
+                  userDetails.user.image &&
+                  userDetails.user.image.length !== 0 && (
+                    <div className={style.after}>
+                      <img className={style.anchorCircle} src={circle} />
+                      <div className={style.internal}>
+                        <div>
+                          <img
+                            src={`${BACKEND_URL}/images/profiles/${userDetails.user.image}`}
+                            className="cursor-pointer object-contain "
+                            onClick={() => {
+                              setImgUrl(
+                                `${BACKEND_URL}/images/profiles/${userDetails.user.image}`
+                              );
+                              open();
+                            }}
+                          />
+                        </div>
+                      </div>
+                      <p className={style.textBefore}>Now</p>
+                    </div>
+                  )}
+              </div>
+            </div>
+          )}
+
         {userDetails && userDetails.oldRem && (
           <div className={style.quote}>
             <div style={{ fontSize: "6.5vw", color: "#411D76" }}>“</div>

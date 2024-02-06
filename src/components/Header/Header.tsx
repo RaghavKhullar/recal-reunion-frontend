@@ -40,7 +40,7 @@ const Header = ({
   return (
     <Group
       className={
-        "flex px-[5%] justify-between items-center w-full h-auto shadow-lg backdrop-blur-lg"
+        "flex px-[5%] h-[100%] justify-between items-center w-full h-auto shadow-lg backdrop-blur-lg"
       }
     >
       <Center className="flex-row gap-3 max-h-[10vh]">
