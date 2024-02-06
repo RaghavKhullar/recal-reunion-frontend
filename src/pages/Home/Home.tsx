@@ -176,7 +176,7 @@ const Home: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>Before</p>
+                  <p className={style.textBefore}>Then</p>
                 </div>
               )}
             {userDetails &&
@@ -199,7 +199,7 @@ const Home: React.FC = () => {
                       />
                     </div>
                   </div>
-                  <p className={style.textBefore}>After</p>
+                  <p className={style.textBefore}>Now</p>
                 </div>
               )}
           </div>
