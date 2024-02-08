@@ -13,7 +13,9 @@
 
 .remPinParent {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  width: 75%;
+
   @media screen and (max-width: 560px) {
     padding: 5px;
   }
@@ -39,17 +41,20 @@
   flex-direction: column;
 
 
-/* 
+  /* 
   @media screen and (max-width: 560px) {
     display: flex;
     flex-direction: column;
     gap: 10px;
   } */
 }
+
 @media screen and (max-width: 1000px) {
-  .coverRem{display: flex;
-  flex-direction: column;
-  height: 80vh;}
+  .coverRem {
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+  }
 }
 
 .textAreaHead {
@@ -109,7 +114,7 @@
   height: 55vh !important;
   width: 30vw !important;
   background-color: transparent !important;
-  border: 3px solid #411d76 !important  ;
+  border: 3px solid #411d76 !important;
   border-radius: 10px !important;
   font-family: "Fira Sans", sans-serif !important;
   font-size: 1.5rem !important;
@@ -163,6 +168,7 @@
 
   .remPinParent {
     padding: 5px;
+    width: 100%;
   }
 
   .parent {

@@ -13,7 +13,8 @@
 
 .remPinParent {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  width:75%;
 
   @media screen and (max-width: 560px) {
     padding: 5px;
@@ -171,6 +172,7 @@
 
   .remPinParent {
     padding: 5px;
+    width:100%;
   }
 
   .parent {
