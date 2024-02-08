@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import circle from "../../assets/circle.svg";
 import down from "../../assets/down.svg";
 import up from "../../assets/up.svg";
-import { Card } from "../../components";
+import { Card, ImageModal } from "../../components";
 import style from "./otherUserProfile.module.css";
 import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
@@ -15,44 +15,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
-import { Button, Center, Modal, Text } from "@mantine/core";
+import { Button, Center, Text } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-// @ts-ignore
-import { MapInteractionCSS } from "react-map-interaction";
 import {
   IconBrandFacebook,
   IconBrandX,
   IconBrandLinkedin,
   IconBrandInstagram,
 } from "@tabler/icons-react";
-const ImageModal = ({
-  url,
-  opened,
-  close,
-  setImgUrl,
-}: {
-  url: string;
-  opened: boolean;
-  close: () => void;
-  setImgUrl: (url: string) => void;
-}) => {
-  return (
-    <Modal
-      centered
-      opened={opened && url.length > 0}
-      size={"xl"}
-      onClose={() => {
-        setImgUrl("");
-        close();
-      }}
-      title="Zoom in or out image"
-    >
-      <MapInteractionCSS>
-        <img src={url} />
-      </MapInteractionCSS>
-    </Modal>
-  );
-};
+
 const OtherUserProfile: React.FC = () => {
   const [remDetailsForUser, setRemDetailsForUser] = useState<Rem[]>([]);
   const [remDetailsByUser, setRemDetailsByUser] = useState<Rem[]>([]);
@@ -230,7 +201,7 @@ const OtherUserProfile: React.FC = () => {
             </div>
           )}
 
-        <Center className="w-full z-[5] justify-evenly mb-[10px]">
+        <Center className="w-full z-[5] justify-evenly mb-[10px] relative z-10">
           {remExistBetweenPair && remId !== "" && (
             <Button color="#a72343" component="a" href={"/viewRem/" + remId}>
               View Rem

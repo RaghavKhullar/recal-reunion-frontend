@@ -113,7 +113,7 @@ const ViewRem = () => {
               </div>
             </div>
             <img src={graphic} className={styles.arrow} />
-            <div style={{ textAlign: "center", width: "35%" }}>
+            <div className={styles.remBox}>
               <h2 className={styles.textAreaHead}>
                 {" "}
                 A Few words from{" "}

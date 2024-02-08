@@ -6,19 +6,11 @@
 .remheading {
   font-family: "Bebas Neue", sans-serif;
   font-size: 4rem;
-
-  @media screen and (max-width: 560px) {
-    font-size: 2rem;
-  }
 }
 
 .remPinParent {
   display: flex;
   justify-content: space-between;
-
-  @media screen and (max-width: 560px) {
-    padding: 5px;
-  }
 
   @media screen and (max-width: 1320px) {
     display: flex;
@@ -41,15 +33,6 @@
     display: flex;
     flex-direction: column;
     height: 80vh;
-  }
-
-  @media screen and (max-width: 560px) {
-  }
-
-  @media screen and (max-width: 560px) {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
   }
 }
 
@@ -115,13 +98,7 @@
   font-size: 1.5rem;
   overflow-y: auto;
   text-align: left;
-
   padding: 10px;
-
-  @media screen and (max-width: 560px) {
-    width: 60vw;
-    font-size: 1.3rem;
-  }
 }
 
 .parent {
@@ -130,21 +107,56 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  @media screen and (max-width: 560px) {
-    overflow-y: scroll;
-  }
 }
 
 .arrow {
   width: 15%;
-
-  @media screen and (max-width: 560px) {
-    width: 45%;
-  }
 }
 
 .remProfileImageDiv {
   width: 35%;
   display: flex;
+}
+
+
+.remBox {
+  text-align: "center";
+  width: "35%";
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 560px) {
+  .remContent {
+    width: 85vw;
+    font-size: 1.3rem;
+  }
+
+  .coverRem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .remheading {
+    font-size: 2rem;
+  }
+
+  .remPinParent {
+    padding: 5px;
+  }
+
+  .parent {
+    overflow-y: scroll;
+  }
+
+  .arrow {
+    width: 45%;
+  }
+
+  .remProfileImageDiv,
+  .remBox {
+    width: 70%;
+  }
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import circle from "../../assets/circle.svg";
 import down from "../../assets/down.svg";
 import up from "../../assets/up.svg";
-import { Card } from "../../components";
+import { Card, ImageModal } from "../../components";
 import style from "./home.module.css";
 import { showNotification } from "../../helpers/helpers";
 import { useAppDispatch } from "../../redux/store/hooks";
@@ -16,44 +16,13 @@ import { userSelector } from "../../redux/reducer";
 import { useSelector } from "react-redux";
 import { BACKEND_URL } from "../../../config";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal, Text } from "@mantine/core";
-// @ts-ignore
-import { MapInteractionCSS } from "react-map-interaction";
+import { Text } from "@mantine/core";
 import {
   IconBrandFacebook,
   IconBrandInstagram,
   IconBrandLinkedin,
   IconBrandX,
 } from "@tabler/icons-react";
-const ImageModal = ({
-  url,
-  opened,
-  close,
-  setImgUrl,
-}: {
-  url: string;
-  opened: boolean;
-  close: () => void;
-  setImgUrl: (url: string) => void;
-}) => {
-  return (
-    <Modal
-      centered
-      opened={opened && url.length > 0}
-      size={"xl"}
-      onClose={() => {
-        setImgUrl("");
-        close();
-      }}
-      title="Zoom in or out image"
-    >
-      <MapInteractionCSS>
-        <img src={url} />
-      </MapInteractionCSS>
-    </Modal>
-  );
-};
-
 const Home: React.FC = () => {
   const [remDetailsForMe, setRemDetailsForMe] = useState<Rem[]>([]);
   const [remDetailsByMe, setRemDetailsByMe] = useState<Rem[]>([]);

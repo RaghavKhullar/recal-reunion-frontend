@@ -18,7 +18,7 @@
     padding: 5px;
   }
 
-  @media screen and (max-width: 1320px) {
+  @media screen and (max-width: 1000px) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,29 +29,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media screen and (max-width: 1320px) {
+  /* @media screen and (max-width: 1320px) {
     transform: scale(0.85);
-  }
+  } */
 }
 
 .coverRem {
   display: flex;
   flex-direction: column;
 
-  @media screen and (max-width: 1320px) {
-    display: flex;
-    flex-direction: column;
-    height: 80vh;
-  }
 
-  @media screen and (max-width: 560px) {
-  }
-
+/* 
   @media screen and (max-width: 560px) {
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
+  } */
+}
+@media screen and (max-width: 1000px) {
+  .coverRem{display: flex;
+  flex-direction: column;
+  height: 80vh;}
 }
 
 .textAreaHead {
@@ -119,11 +117,6 @@
   text-align: left;
 
   padding: 10px;
-
-  @media screen and (max-width: 560px) {
-    width: 60vw !important;
-    font-size: 1.3rem;
-  }
 }
 
 .parent {
@@ -149,4 +142,39 @@
 .remProfileImageDiv {
   width: 35%;
   display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 560px) {
+  .remContent {
+    width: 85vw !important;
+    font-size: 1.3rem;
+  }
+
+  .coverRem {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .remheading {
+    font-size: 2rem;
+  }
+
+  .remPinParent {
+    padding: 5px;
+  }
+
+  .parent {
+    overflow-y: scroll;
+  }
+
+  .arrow {
+    width: 45%;
+  }
+
+  .remProfileImageDiv,
+  .remBox {
+    width: 70%;
+  }
 }

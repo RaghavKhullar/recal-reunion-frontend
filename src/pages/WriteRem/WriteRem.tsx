@@ -166,18 +166,27 @@ const WriteRem = () => {
                   />
                 </div>
               </div>
-              <FileInput
-                accept="image/png,image/jpeg,image/jpg"
-                // @ts-ignore
-                onChange={(e) => setFile(e)}
-                // @ts-ignore
-                placeholder={<img src={uploadImage} />}
-                clearable
-                value={file}
-                styles={{
-                  input: { padding: 0 },
+              <div
+                style={{
+                  width: "fit-content",
+                  alignSelf: "center",
+                  display: "flex",
+                  marginTop: "7px",
                 }}
-              />
+              >
+                <FileInput
+                  accept="image/png,image/jpeg,image/jpg"
+                  // @ts-ignore
+                  onChange={(e) => setFile(e)}
+                  // @ts-ignore
+                  placeholder={<img src={uploadImage} />}
+                  clearable
+                  value={file}
+                  styles={{
+                    input: { padding: 0 },
+                  }}
+                />
+              </div>
             </div>
             <img src={graphic} className={styles.arrow} />
             <div

@@ -197,24 +197,33 @@ const EditRem = () => {
                   />
                 </div>
               </div>
-              <FileInput
-                accept="image/png,image/jpeg,image/jpg"
-                // @ts-ignore
-                onChange={(e) => {
-                  setFile(e === null ? undefined : e);
-                  if (!isFileUpdated) {
-                    // Send the file only when file is updated
-                    setIsFileUpdated(true);
-                  }
+              <div
+                style={{
+                  width: "fit-content",
+                  alignSelf: "center",
+                  display: "flex",
+                  marginTop: "7px",
                 }}
-                // @ts-ignore
-                placeholder={<img src={uploadImage} />}
-                clearable
-                value={file}
-                styles={{
-                  input: { padding: 0 },
-                }}
-              />
+              >
+                <FileInput
+                  accept="image/png,image/jpeg,image/jpg"
+                  // @ts-ignore
+                  onChange={(e) => {
+                    setFile(e === null ? undefined : e);
+                    if (!isFileUpdated) {
+                      // Send the file only when file is updated
+                      setIsFileUpdated(true);
+                    }
+                  }}
+                  // @ts-ignore
+                  placeholder={<img src={uploadImage} />}
+                  clearable
+                  value={file}
+                  styles={{
+                    input: { padding: 0 },
+                  }}
+                />
+              </div>
             </div>
             <img src={graphic} className={styles.arrow} />
             <div
